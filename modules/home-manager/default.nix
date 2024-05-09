@@ -7,6 +7,7 @@
     soundsource
     # Commands
     rustup
+    wget
   ];
   #todo: spotify player
 

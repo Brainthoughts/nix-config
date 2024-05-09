@@ -11,7 +11,10 @@
   homebrew = {
     enable = true;
     taps = [ "koekeishiya/formulae" ];
-    brews = [ "yabai" ];
+    brews = [ 
+    "yabai" 
+    "sqlite" #needed for nvim yanky
+    ];
     casks = [ ];
   };
 
