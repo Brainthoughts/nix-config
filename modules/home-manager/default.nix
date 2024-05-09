@@ -100,11 +100,6 @@
     };
   };
 
-  services = {
-    flameshot = {
-      enable = true;
-    };
-  };
 
   #  targets = {
   #   darwin = {
