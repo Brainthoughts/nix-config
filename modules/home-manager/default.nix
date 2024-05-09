@@ -6,7 +6,6 @@
     discord
     spotify
     # Commands
-    neovim
     rustup
   ];
   #todo: spotify player
