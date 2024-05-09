@@ -1,10 +1,10 @@
 { pkgs, ... }: {
   home.packages = with pkgs; [
     # Apps
-    kitty
     raycast
     discord
     spotify
+    soundsource
     # Commands
     rustup
   ];
@@ -44,8 +44,7 @@
     fish = {
       enable = true;
       shellAbbrs = {
-        l = "ls -alt";
-        nvnix = "nvim ~/.config/nix";
+        nvnix = "nvim ~/.config/nix/**.nix";
         ndrb = "darwin-rebuild switch --flake ~/.config/nix";
       };
     };
@@ -60,6 +59,7 @@
       enable = true;
     };
     kitty = {
+      enable = true;
       environment = {
         VISUAL = "nvim";
         EDITOR = "nvim";
@@ -69,11 +69,11 @@
         size = 14;
       };
       settings = {
-        shell = /etc/profiles/per-user/alexn/bin/fish;
+        shell = "/etc/profiles/per-user/alexn/bin/fish";
         window_margin_width = 3;
         tab_bar_align = "center";
         macos_option_as_alt = "yes";
-        #hide_window_decorations = "titlebar-only";
+        hide_window_decorations = "titlebar-only";
         #macos_show_window_title_in = "menubar";
         macos_colorspace = "default";
       };
