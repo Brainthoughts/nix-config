@@ -10,25 +10,15 @@
   # ];
   home.packages = with pkgs; [
     # Apps
-    raycast
-    spotify
-    soundsource
-    iina
-    prismlauncher
     # Commands
     rustup
     wget
     nodejs
     _1password
-    zulu17
     pdm
-    opam
-    btop
     gcc
     pre-commit
   ];
-  #todo: spotify player
-
 
   # this is internal compatibility configuration 
   # for home-manager, don't change this!
@@ -44,12 +34,12 @@
     bat = {
       enable = true;
     };
-    #   btop = {
-    #     enable = true;
-    #     settings = {
-    #       vim_keys = true;
-    #     };
-    #   };
+    btop = {
+      enable = true;
+      settings = {
+        vim_keys = true;
+      };
+    };
     eza = {
       enable = true;
     };
@@ -62,10 +52,6 @@
     };
     fish = {
       enable = true;
-      shellAbbrs = {
-        nvnix = "nvim ~/.config/nix/**.nix";
-        ndrb = "darwin-rebuild switch --flake ~/.config/nix";
-      };
       plugins = [
         {
           name = "tide";
@@ -80,7 +66,8 @@
     };
     git = {
       enable = true;
-
+      userEmail = "acniedner@gmail.com";
+      userName = "Alexander Niedner";
     };
     home-manager = {
       enable = true;
@@ -93,16 +80,6 @@
       font = {
         name = "JetBrainsMono Nerd Font";
         size = 14;
-      };
-      settings = {
-        shell = "/etc/profiles/per-user/alexn/bin/fish";
-        editor = "/etc/profiles/per-user/alexn/bin/nvim";
-        window_margin_width = 3;
-        tab_bar_align = "center";
-        macos_option_as_alt = "yes";
-        hide_window_decorations = "titlebar-only";
-        macos_show_window_title_in = "menubar";
-        macos_colorspace = "default";
       };
       theme = "Tokyo Night";
     };
@@ -121,25 +98,12 @@
     ripgrep = {
       enable = true;
     };
-    #   starship = {
-    #     enable = true;
-    #     };
     tealdeer = {
       enable = true;
     };
-
     zoxide = {
       enable = true;
     };
   };
-
-
-  #  targets = {
-  #   darwin = {
-  #     defaults = {
-
-  #       };
-  #     };
-  #   };
 }
 

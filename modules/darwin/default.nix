@@ -3,6 +3,7 @@
   environment = {
     systemPath = [ "/opt/homebrew/bin" ];
   };
+
   fonts = {
     packages = [ (pkgs.nerdfonts.override { fonts = [ "JetBrainsMono" ]; }) ];
   };
