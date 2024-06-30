@@ -18,7 +18,7 @@
     casks = [
       "lulu" #not on nixpkgs
       "surfshark" #not on nixpkgs
-      # "prismlauncher" #nixpkgs doesn't support darwin
+      "citrix-workspace" #broken dep on macos
     ];
   };
 
