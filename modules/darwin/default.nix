@@ -4,31 +4,45 @@
     systemPath = [ "/opt/homebrew/bin" ];
   };
   fonts = {
-    fontDir.enable = true;
-    fonts = [ (pkgs.nerdfonts.override { fonts = [ "JetBrainsMono" ]; }) ];
+    packages = [ (pkgs.nerdfonts.override { fonts = [ "JetBrainsMono" ]; }) ];
   };
 
   homebrew = {
     enable = true;
     taps = [ "koekeishiya/formulae" ];
-    brews = [ 
-    "yabai" 
-    "sqlite" #needed for nvim yanky
+    brews = [
+      "yabai" #not on nixpkgs
+      "skhd" #not on nixpkgs
+      "sqlite" #needed for nvim yanky, doesn't accept nix version
     ];
-    casks = [ ];
+    casks = [
+      "lulu" #not on nixpkgs
+      "surfshark" #not on nixpkgs
+      # "prismlauncher" #nixpkgs doesn't support darwin
+    ];
   };
 
   # Necessary for using flakes on this system.
   nix.settings.experimental-features = "nix-command flakes";
 
   nixpkgs = {
-  # The platform the configuration will be used on.
-  # If you're on an Intel system, replace with "x86_64-darwin"
+    # The platform the configuration will be used on.
+    # If you're on an Intel system, replace with "x86_64-darwin"
     hostPlatform = "aarch64-darwin";
+    # overlays = [
+    #   (self: super: {
+    #     extra-cmake-modules = super.extra-cmake-modules.overrideAttrs (oldAttrs: rec {
+    #       meta = oldAttrs.meta {
+    #         platforms = super.lib.platforms.all; # Allow all platforms
+    #       };
+    #     });
+    #   })
+    # ];
     config = {
-        allowUnfree = true;
-      };
+      allowUnfree = true;
+      allowUnsupportedSystem = true;
     };
+  };
 
   programs.zsh.enable = true;
   programs.fish.enable = true;
