@@ -7,8 +7,8 @@
   programs = {
     fish = {
       shellAbbrs = {
-        # nvnix = "nvim ~/.config/nix/**.nix";
-        # ndrb = "darwin-rebuild switch --flake ~/.config/nix";
+        nvnix = "nvim ~/.config/nix/**.nix";
+        norb = "sudo nixos-rebuild switch";
       };
     };
     kitty = {
