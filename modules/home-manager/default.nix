@@ -28,7 +28,6 @@
 
   home.sessionVariables = {
     VISUAL = "nvim";
-    EDITOR = "nvim";
   };
 
   programs = {
@@ -95,6 +94,7 @@
     };
     neovim = {
       enable = true;
+      defaultEditor = true;
     };
     ripgrep = {
       enable = true;

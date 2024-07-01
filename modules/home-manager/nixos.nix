@@ -29,6 +29,9 @@
         "github.com" = {
           identityFile = "~/.ssh/gh";
         };
+        "artemis.cit.tum.de" = {
+          identityFile = "~/.ssh/artemis";
+        };
       };
     };
   };
