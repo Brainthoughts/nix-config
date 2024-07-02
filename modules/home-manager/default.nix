@@ -1,4 +1,5 @@
-{ pkgs, ... }: {
+{ pkgs, ... }:
+{
   # nixpkgs.overlays = [
   #   (self: super: {
   #     extra-cmake-modules = super.extra-cmake-modules.overrideAttrs (oldAttrs: rec {
@@ -24,7 +25,6 @@
   # this is internal compatibility configuration 
   # for home-manager, don't change this!
   home.stateVersion = "23.11";
-
 
   home.sessionVariables = {
     VISUAL = "nvim";
@@ -107,4 +107,3 @@
     };
   };
 }
-

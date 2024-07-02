@@ -1,4 +1,9 @@
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 
 {
   programs.neovim = {
@@ -12,11 +17,12 @@
       clang-tools
       gnumake
       bear
+      # nix
+      nixd
+      nixfmt-rfc-style
     ];
 
-    plugins = with pkgs.vimPlugins; [
-      lazy-nvim
-    ];
+    plugins = with pkgs.vimPlugins; [ lazy-nvim ];
 
     extraLuaConfig =
       let
@@ -62,18 +68,46 @@
           vim-illuminate
           vim-startuptime
           which-key-nvim
-          { name = "LuaSnip"; path = luasnip; }
-          { name = "catppuccin"; path = catppuccin-nvim; }
-          { name = "mini.ai"; path = mini-nvim; }
-          { name = "mini.bufremove"; path = mini-nvim; }
-          { name = "mini.comment"; path = mini-nvim; }
-          { name = "mini.indentscope"; path = mini-nvim; }
-          { name = "mini.pairs"; path = mini-nvim; }
-          { name = "mini.surround"; path = mini-nvim; }
+          {
+            name = "LuaSnip";
+            path = luasnip;
+          }
+          {
+            name = "catppuccin";
+            path = catppuccin-nvim;
+          }
+          {
+            name = "mini.ai";
+            path = mini-nvim;
+          }
+          {
+            name = "mini.bufremove";
+            path = mini-nvim;
+          }
+          {
+            name = "mini.comment";
+            path = mini-nvim;
+          }
+          {
+            name = "mini.indentscope";
+            path = mini-nvim;
+          }
+          {
+            name = "mini.pairs";
+            path = mini-nvim;
+          }
+          {
+            name = "mini.surround";
+            path = mini-nvim;
+          }
         ];
-        mkEntryFromDrv = drv:
+        mkEntryFromDrv =
+          drv:
           if lib.isDerivation drv then
-            { name = "${lib.getName drv}"; path = drv; }
+            {
+              name = "${lib.getName drv}";
+              path = drv;
+            }
           else
             drv;
         lazyPath = pkgs.linkFarm "lazy-plugins" (builtins.map mkEntryFromDrv plugins);
@@ -112,10 +146,16 @@
     let
       parsers = pkgs.symlinkJoin {
         name = "treesitter-parsers";
-        paths = (pkgs.vimPlugins.nvim-treesitter.withPlugins (plugins: with plugins; [
-          c
-          lua
-        ])).dependencies;
+        paths =
+          (pkgs.vimPlugins.nvim-treesitter.withPlugins (
+            plugins: with plugins; [
+              c
+              nix
+              make
+              json
+              lua
+            ]
+          )).dependencies;
       };
     in
     "${parsers}/parser";

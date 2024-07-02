@@ -5,10 +5,10 @@
 { config, pkgs, ... }:
 
 {
-  imports =
-    [ # Include the results of the hardware scan.
-      ./hardware-configuration.nix
-    ];
+  imports = [
+    # Include the results of the hardware scan.
+    ./hardware-configuration.nix
+  ];
 
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
@@ -88,16 +88,22 @@
   services.logind.lidSwitchExternalPower = "ignore";
 
   #default enable these nix settings
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+  nix.settings.experimental-features = [
+    "nix-command"
+    "flakes"
+  ];
   services.tailscale.enable = true;
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.alexn = {
     isNormalUser = true;
     description = "Alexander N";
-    extraGroups = [ "networkmanager" "wheel" ];
+    extraGroups = [
+      "networkmanager"
+      "wheel"
+    ];
     packages = with pkgs; [
-    #  thunderbird
-    
+      #  thunderbird
+
     ];
   };
 
@@ -110,17 +116,15 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-  wget
-  neovim
-  kitty
-  git
-  gcc
-  fish
+    wget
+    neovim
+    kitty
+    git
+    gcc
+    fish
   ];
 
-  fonts.packages = with pkgs; [
-   (nerdfonts.override { fonts = [ "JetBrainsMono" ]; })
-  ]; 
+  fonts.packages = with pkgs; [ (nerdfonts.override { fonts = [ "JetBrainsMono" ]; }) ];
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
   # programs.mtr.enable = true;

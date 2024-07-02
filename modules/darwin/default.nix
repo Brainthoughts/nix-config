@@ -1,4 +1,5 @@
-{ pkgs, ... }: {
+{ pkgs, ... }:
+{
 
   environment = {
     systemPath = [ "/opt/homebrew/bin" ];
@@ -12,14 +13,14 @@
     enable = true;
     taps = [ "koekeishiya/formulae" ];
     brews = [
-      "yabai" #not on nixpkgs
-      "skhd" #not on nixpkgs
-      "sqlite" #needed for nvim yanky, doesn't accept nix version
+      "yabai" # not on nixpkgs
+      "skhd" # not on nixpkgs
+      "sqlite" # needed for nvim yanky, doesn't accept nix version
     ];
     casks = [
-      "lulu" #not on nixpkgs
-      "surfshark" #not on nixpkgs
-      "citrix-workspace" #broken dep on macos
+      "lulu" # not on nixpkgs
+      "surfshark" # not on nixpkgs
+      "citrix-workspace" # broken dep on macos
     ];
   };
 
@@ -61,4 +62,3 @@
   };
 
 }
-

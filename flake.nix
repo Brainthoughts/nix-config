@@ -17,36 +17,50 @@
     };
   };
 
-  outputs = inputs@{ self, nix-darwin, nixpkgs, home-manager }: {
-    darwinConfigurations = {
-      Sweet-16 = nix-darwin.lib.darwinSystem {
-        modules = [
-          ./modules/darwin
-          home-manager.darwinModules.home-manager
-          {
-            home-manager.useGlobalPkgs = true;
-            home-manager.useUserPackages = true;
-            home-manager.verbose = true;
-            home-manager.users.alexn.imports = [ ./modules/home-manager/default.nix ./modules/home-manager/darwin.nix ];
-          }
-        ];
+  outputs =
+    inputs@{
+      self,
+      nix-darwin,
+      nixpkgs,
+      home-manager,
+    }:
+    {
+      darwinConfigurations = {
+        Sweet-16 = nix-darwin.lib.darwinSystem {
+          modules = [
+            ./modules/darwin
+            home-manager.darwinModules.home-manager
+            {
+              home-manager.useGlobalPkgs = true;
+              home-manager.useUserPackages = true;
+              home-manager.verbose = true;
+              home-manager.users.alexn.imports = [
+                ./modules/home-manager/default.nix
+                ./modules/home-manager/darwin.nix
+              ];
+            }
+          ];
+        };
+      };
+      nixosConfigurations = {
+        nixos = nixpkgs.lib.nixosSystem {
+          system = "x86_64-linux";
+          modules = [
+            ./modules/nixos
+            home-manager.nixosModules.home-manager
+            {
+              home-manager.useGlobalPkgs = true;
+              home-manager.useUserPackages = true;
+              home-manager.verbose = true;
+              home-manager.backupFileExtension = "bak";
+              home-manager.users.alexn.imports = [
+                ./modules/home-manager/default.nix
+                ./modules/home-manager/nixos.nix
+                ./modules/home-manager/lazyvim
+              ];
+            }
+          ];
+        };
       };
     };
-    nixosConfigurations = {
-      nixos = nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
-        modules = [
-          ./modules/nixos
-          home-manager.nixosModules.home-manager
-          {
-            home-manager.useGlobalPkgs = true;
-            home-manager.useUserPackages = true;
-            home-manager.verbose = true;
-            home-manager.backupFileExtension = "bak";
-            home-manager.users.alexn.imports = [ ./modules/home-manager/default.nix ./modules/home-manager/nixos.nix ./modules/home-manager/lazyvim ];
-          }
-        ];
-      };
-    };
-  };
 }
