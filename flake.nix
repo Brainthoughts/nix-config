@@ -43,7 +43,7 @@
             home-manager.useUserPackages = true;
             home-manager.verbose = true;
             home-manager.backupFileExtension = "bak";
-            home-manager.users.alexn.imports = [ ./modules/home-manager/default.nix ./modules/home-manager/nixos.nix ];
+            home-manager.users.alexn.imports = [ ./modules/home-manager/default.nix ./modules/home-manager/nixos.nix ./modules/home-manager/lazyvim ];
           }
         ];
       };
