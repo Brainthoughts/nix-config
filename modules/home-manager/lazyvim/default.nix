@@ -16,6 +16,7 @@
       # Clang
       clang-tools
       gnumake
+      lldb
       bear
       # nix
       nixd
@@ -26,8 +27,7 @@
 
     extraLuaConfig =
       let
-        plugins = with pkgs.vimPlugins; [
-          # LazyVim
+        plugins = with pkgs.vimPlugins; [ # LazyVim
           LazyVim
           bufferline-nvim
           cmp-buffer
