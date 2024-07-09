@@ -1,5 +1,5 @@
 return {
-	{ import = "plugins.color" },
+	{ import = "plugins.ui" },
 	{ import = "plugins.lang" },
-	{ import = "plugins.other" },
+	{ import = "plugins.nix-compat" },
 }
