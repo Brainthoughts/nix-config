@@ -7,9 +7,14 @@
     soundsource
     iina
     prismlauncher
+    zoom-us
     # Commands
     zulu17
     opam
+    nmap
+    # Neovim (TODO: move to nix config)
+    nixd
+    nixfmt-rfc-style
   ];
 
   programs = {
@@ -29,6 +34,7 @@
         hide_window_decorations = "titlebar-only";
         macos_show_window_title_in = "menubar";
         macos_colorspace = "default";
+        include = "./current-theme.conf";
       };
     };
   };

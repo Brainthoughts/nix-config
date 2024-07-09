@@ -31,15 +31,6 @@
     # The platform the configuration will be used on.
     # If you're on an Intel system, replace with "x86_64-darwin"
     hostPlatform = "aarch64-darwin";
-    # overlays = [
-    #   (self: super: {
-    #     extra-cmake-modules = super.extra-cmake-modules.overrideAttrs (oldAttrs: rec {
-    #       meta = oldAttrs.meta {
-    #         platforms = super.lib.platforms.all; # Allow all platforms
-    #       };
-    #     });
-    #   })
-    # ];
     config = {
       allowUnfree = true;
       allowUnsupportedSystem = true;
