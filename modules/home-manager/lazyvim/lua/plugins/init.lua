@@ -1,5 +1,5 @@
 return {
-	{ import = "color" },
-	{ import = "lang" },
-	{ import = "other" },
+	{ import = "plugins.color" },
+	{ import = "plugins.lang" },
+	{ import = "plugins.other" },
 }
