@@ -16,10 +16,9 @@
     wget
     nodejs
     _1password
-    _1password-gui
     pdm
-    gcc
     pre-commit
+    fastfetch
   ];
 
   # this is internal compatibility configuration 

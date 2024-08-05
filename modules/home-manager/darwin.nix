@@ -12,6 +12,9 @@
     zulu17
     opam
     nmap
+    clang
+    clang-tools
+    clang-analyzer
     # Neovim (TODO: move to nix config)
     nixd
     nixfmt-rfc-style
