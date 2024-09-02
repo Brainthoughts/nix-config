@@ -7,15 +7,12 @@
 {
   imports = [
     # Include the results of the hardware scan.
-    ./hardware-configuration.nix
   ];
 
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
-  boot.initrd.luks.devices."luks-45a0bf70-f852-463a-a316-d57f958b0c1d".device = "/dev/disk/by-uuid/45a0bf70-f852-463a-a316-d57f958b0c1d";
-  networking.hostName = "nixos"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
   # Configure network proxy if necessary
@@ -65,7 +62,6 @@
   services.printing.enable = true;
 
   # Enable sound with pipewire.
-  sound.enable = true;
   hardware.pulseaudio.enable = false;
   security.rtkit.enable = true;
   services.pipewire = {
@@ -86,6 +82,12 @@
 
   # don't sleep on lid clone when on external power
   services.logind.lidSwitchExternalPower = "ignore";
+  systemd.sleep.extraConfig = ''
+    AllowSuspend=no
+    AllowHibernate=no
+    AllowHybridSleep=no
+    AllowSuspendThenHibernate=no
+  '';
 
   #default enable these nix settings
   nix.settings.experimental-features = [
@@ -121,6 +123,8 @@
     git
     gcc
     fish
+    samba
+    cifs-utils
   ];
 
   fonts.packages = with pkgs; [ (nerdfonts.override { fonts = [ "JetBrainsMono" ]; }) ];

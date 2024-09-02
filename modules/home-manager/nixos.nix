@@ -10,7 +10,7 @@
     fish = {
       shellAbbrs = {
         nvnix = "nvim ~/.config/nix/**.nix";
-        norb = "sudo nixos-rebuild switch";
+        norb = "sudo nixos-rebuild switch --flake ~/.config/nix/";
       };
     };
     kitty = {

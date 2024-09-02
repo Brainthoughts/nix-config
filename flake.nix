@@ -43,10 +43,10 @@
         };
       };
       nixosConfigurations = {
-        nixos = nixpkgs.lib.nixosSystem {
+        macnix = nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
           modules = [
-            ./modules/nixos
+            ./modules/nixos/macnix
             home-manager.nixosModules.home-manager
             {
               home-manager.useGlobalPkgs = true;
