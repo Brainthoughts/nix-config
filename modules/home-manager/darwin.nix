@@ -8,6 +8,8 @@
     iina
     prismlauncher
     zoom-us
+    # yabai # not working
+    # skhd
     # Commands
     zulu17
     opam
@@ -15,6 +17,7 @@
     clang
     clang-tools
     clang-analyzer
+    ffmpeg
     # Neovim (TODO: move to nix config)
     nixd
     nixfmt-rfc-style
