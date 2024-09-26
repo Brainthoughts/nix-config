@@ -4,7 +4,7 @@
     # Apps
     raycast
     spotify
-    soundsource
+    # soundsource # outdated, doesn't work on macos 15
     iina
     prismlauncher
     zoom-us
