@@ -12,6 +12,7 @@
   home.packages = with pkgs; [
     # Apps
     # Commands
+    openvpn
     rustup
     wget
     nodejs

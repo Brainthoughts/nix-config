@@ -8,7 +8,6 @@
     iina
     prismlauncher
     zoom-us
-    openvpn
     # yabai # not working
     # skhd
     # Commands
