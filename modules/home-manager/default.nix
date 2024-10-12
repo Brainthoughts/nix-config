@@ -20,6 +20,7 @@
     pdm
     pre-commit
     fastfetch
+    tmux
   ];
 
   # this is internal compatibility configuration 
