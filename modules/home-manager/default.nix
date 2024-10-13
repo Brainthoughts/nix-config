@@ -144,7 +144,7 @@
       clock24 = true;
       keyMode = "vi";
       mouse = true;
-      shell = "/etc/profiles/per-user/alexn/bin/fish";
+      shell = "${pkgs.fish}/bin/fish";
       plugins = with pkgs.tmuxPlugins; [ ];
       extraConfig = ''
         # Nightfox colors for Tmux
