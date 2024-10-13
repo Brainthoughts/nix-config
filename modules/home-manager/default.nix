@@ -147,6 +147,9 @@
       shell = "${pkgs.fish}/bin/fish";
       plugins = with pkgs.tmuxPlugins; [ ];
       extraConfig = ''
+        # undo the mac fix from sensible.tmux
+        set -g default-command ""
+
         # Nightfox colors for Tmux
         # Style: carbonfox
         # Upstream: https://github.com/edeneast/nightfox.nvim/raw/main/extra/carbonfox/carbonfox.tmux
