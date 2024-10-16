@@ -81,16 +81,16 @@
         set -g fish_pager_color_description $comment
       '';
       plugins = [
-        pkgs.fishPlugins.tide
-        # {
-        #   name = "tide";
-        #   src = pkgs.fetchFromGitHub {
-        #     owner = "IlanCosman";
-        #     repo = "tide";
-        #     rev = "v6.1.1";
-        #     hash = "sha256-ZyEk/WoxdX5Fr2kXRERQS1U1QHH3oVSyBQvlwYnEYyc=";
-        #   };
-        # }
+        # pkgs.fishPlugins.tide
+        {
+          name = "tide";
+          src = pkgs.fetchFromGitHub {
+            owner = "IlanCosman";
+            repo = "tide";
+            rev = "v6.1.1";
+            hash = "sha256-ZyEk/WoxdX5Fr2kXRERQS1U1QHH3oVSyBQvlwYnEYyc=";
+          };
+        }
       ];
     };
     git = {
