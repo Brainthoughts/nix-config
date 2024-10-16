@@ -74,7 +74,12 @@
         name = "JetBrainsMono Nerd Font";
         size = 14;
       };
-      # theme = "Tokyo Night";
+      settings = {
+        shell = "${pkgs.fish}/bin/fish";
+        editor = "${pkgs.neovim}/bin/nvim";
+        tab_bar_align = "center";
+        themeFile = "Carbonfox";
+      };
     };
     lazygit = {
       enable = true;
