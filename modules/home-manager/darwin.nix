@@ -18,9 +18,6 @@
     clang-tools
     clang-analyzer
     ffmpeg
-    # Neovim (TODO: move to nix config)
-    nixd
-    nixfmt-rfc-style
   ];
 
   programs = {

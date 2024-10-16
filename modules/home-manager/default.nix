@@ -1,5 +1,7 @@
 { pkgs, ... }:
 {
+  imports = [ ./nvim ];
+
   home.packages = with pkgs; [
     # Apps
     # Commands
@@ -89,10 +91,6 @@
     };
     navi = {
       enable = true;
-    };
-    neovim = {
-      enable = true;
-      defaultEditor = true;
     };
     ripgrep = {
       enable = true;

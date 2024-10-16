@@ -56,7 +56,6 @@
               home-manager.users.alexn.imports = [
                 ./modules/home-manager/default.nix
                 ./modules/home-manager/nixos.nix
-                ./modules/home-manager/nvim
               ];
             }
           ];
