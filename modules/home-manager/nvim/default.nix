@@ -19,8 +19,8 @@
       # Clang
       clang-tools
       gnumake
-      lldb
-      bear
+      ## lldb
+      ## bear
       # nix
       nixd
       nixfmt-rfc-style

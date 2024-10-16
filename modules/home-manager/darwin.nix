@@ -12,11 +12,7 @@
     # skhd
     # Commands
     zulu17
-    opam
     nmap
-    clang
-    clang-tools
-    clang-analyzer
     ffmpeg
   ];
 
