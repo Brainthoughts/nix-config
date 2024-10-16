@@ -1,25 +1,16 @@
 { pkgs, ... }:
 {
-  # nixpkgs.overlays = [
-  #   (self: super: {
-  #     extra-cmake-modules = super.extra-cmake-modules.overrideAttrs (oldAttrs: rec {
-  #       meta = oldAttrs.meta {
-  #         platforms = super.lib.platforms.all; # Allow all platforms
-  #       };
-  #     });
-  #   })
-  # ];
   home.packages = with pkgs; [
     # Apps
     # Commands
     openvpn
     rustup
-    wget
     nodejs
     _1password
+    fastfetch
+    # Python
     pdm
     pre-commit
-    fastfetch
   ];
 
   # this is internal compatibility configuration 
@@ -90,15 +81,16 @@
         set -g fish_pager_color_description $comment
       '';
       plugins = [
-        {
-          name = "tide";
-          src = pkgs.fetchFromGitHub {
-            owner = "IlanCosman";
-            repo = "tide";
-            rev = "v6.1.1";
-            hash = "sha256-ZyEk/WoxdX5Fr2kXRERQS1U1QHH3oVSyBQvlwYnEYyc=";
-          };
-        }
+        pkgs.fishPlugins.tide
+        # {
+        #   name = "tide";
+        #   src = pkgs.fetchFromGitHub {
+        #     owner = "IlanCosman";
+        #     repo = "tide";
+        #     rev = "v6.1.1";
+        #     hash = "sha256-ZyEk/WoxdX5Fr2kXRERQS1U1QHH3oVSyBQvlwYnEYyc=";
+        #   };
+        # }
       ];
     };
     git = {
@@ -142,6 +134,7 @@
     tmux = {
       enable = true;
       clock24 = true;
+      escapeTime = 0;
       keyMode = "vi";
       mouse = true;
       shell = "${pkgs.fish}/bin/fish";
