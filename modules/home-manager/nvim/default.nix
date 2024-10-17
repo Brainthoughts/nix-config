@@ -24,6 +24,10 @@
       # nix
       nixd
       nixfmt-rfc-style
+      # python
+      python3
+      ruff
+      pyright
     ];
 
     plugins = with pkgs.vimPlugins; [ lazy-nvim ];
@@ -31,6 +35,10 @@
     extraLuaConfig =
       let
         plugins = with pkgs.vimPlugins; [
+          # python 
+          neotest-python
+          nvim-dap-python
+
           # LazyVim
           LazyVim
           bufferline-nvim
@@ -52,6 +60,7 @@
           noice-nvim
           nui-nvim
           nvim-cmp
+          nvim-dap
           nvim-lint
           nvim-lspconfig
           nvim-notify
@@ -133,6 +142,8 @@
               make
               json
               lua
+              python
+              rst
             ]
           )).dependencies;
       };
