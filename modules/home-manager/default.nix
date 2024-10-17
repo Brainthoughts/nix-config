@@ -11,7 +11,7 @@
     _1password
     fastfetch
     # Python
-    python
+    python3
     pdm
     pre-commit
   ];
