@@ -15,6 +15,51 @@
     pkgs.docker-compose # for docker projects
   ];
 
+  power.ups = {
+    enable = true;
+
+    mode = "netserver";
+    openFirewall = true;
+
+    ups."ups" = {
+      driver = "usbhid-ups";
+      port = "auto";
+      directives =
+        [
+        ];
+    };
+
+    upsd = {
+      listen = [
+        { address = "0.0.0.0"; }
+      ];
+    };
+
+    upsmon = {
+      monitor = {
+        "ups" = {
+          user = "upsmon";
+          type = "primary";
+        };
+      };
+      settings = {
+        SHUTDOWNCMD = "“${pkgs.systemd}/bin/shutdown”";
+      };
+    };
+
+    users = {
+      upsmon = {
+        passwordFile = "/etc/ups/upsmon.passwd";
+        upsmon = "primary";
+      };
+
+      monuser = {
+        passwordFile = "/etc/ups/monuser.passwd"; # synology needs this
+        upsmon = "secondary";
+      };
+    };
+  };
+
   # mount synologynas
   fileSystems = {
     "/mnt/entertainment" = {
