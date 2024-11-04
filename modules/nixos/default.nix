@@ -40,23 +40,25 @@
     LC_TIME = "de_DE.UTF-8";
   };
 
+  programs.hyprland.enable = true;
+
   # Enable the X11 windowing system.
-  services.xserver.enable = true;
+  # services.xserver.enable = true;
 
   # Enable the GNOME Desktop Environment.
-  services.xserver.displayManager.gdm.enable = true;
-  services.xserver.desktopManager.gnome.enable = true;
+  # services.xserver.displayManager.gdm.enable = true;
+  # services.xserver.desktopManager.gnome.enable = true;
 
   # Configure keymap in X11
   services.xserver = {
-    xkb = {
-      layout = "de";
-      variant = "nodeadkeys";
-    };
+    # xkb = {
+    #   layout = "de";
+    #   variant = "nodeadkeys";
+    # };
   };
 
   # Configure console keymap
-  console.keyMap = "de-latin1-nodeadkeys";
+  console.keyMap = "us";
 
   # Enable CUPS to print documents.
   services.printing.enable = true;
