@@ -6,7 +6,7 @@
     spotify
     # soundsource # outdated, doesn't work on macos 15
     iina
-    prismlauncher
+    # prismlauncher
     zoom-us
     # yabai # not working
     # skhd
