@@ -8,7 +8,7 @@
     openvpn
     rustup
     nodejs
-    _1password
+    _1password-cli
     fastfetch
     # Python
     python3
