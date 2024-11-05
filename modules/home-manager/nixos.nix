@@ -33,6 +33,10 @@
         };
       };
     };
+
+    waybar = {
+      enable = true;
+    };
   };
 
   services = {
@@ -55,7 +59,16 @@
           [
             "${mainMod}, F, exec, ${pkgs.firefox}/bin/firefox"
             "${mainMod}, X, exec, ${pkgs.kitty}/bin/kitty"
-            "${mainMod}, C, killactive"
+            "${mainMod}, C, closewindow, activewindow"
+            "${mainMod}, H, movefocus, l"
+            "${mainMod}, J, movefocus, d"
+            "${mainMod}, K, movefocus, u"
+            "${mainMod}, L, movefocus, r"
+            "${mainMod} SHIFT, H, movewindow, l"
+            "${mainMod} SHIFT, J, movewindow, d"
+            "${mainMod} SHIFT, K, movewindow, u"
+            "${mainMod} SHIFT, L, movewindow, r"
+            "${mainMod}, Escape, togglespecialworkspace, magic"
             "${mainMod}, Q, exit"
           ]
           ++ (
@@ -74,6 +87,20 @@
               ) 9
             )
           );
+        general = {
+          border_size = 2;
+          "col.active_border" = "rgba(33ccffee) rgba(00ff99ee) 45deg";
+          "col.inactive_border" = "rgba(595959aa)";
+          resize_on_border = true;
+        };
+        decoration = {
+          rounding = 10;
+          inactive_opacity = 0.9;
+          drop_shadow = false;
+        };
+        input = {
+          follow_mouse = 2;
+        };
       };
     };
 }
