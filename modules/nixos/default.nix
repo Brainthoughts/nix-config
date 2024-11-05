@@ -75,10 +75,10 @@
       "networkmanager"
       "wheel"
     ];
-    packages =
-      with pkgs;
-      [
-      ];
+    packages = with pkgs; [
+      # hyprland
+      hyprpolkitagent
+    ];
   };
 
   # Install firefox.

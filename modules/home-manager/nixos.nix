@@ -35,6 +35,15 @@
     };
   };
 
+  services = {
+    # hyprpaper = {
+    #   enable = true;
+    # };
+    mako = {
+      enable = true;
+    };
+  };
+
   wayland.windowManager.hyprland =
     let
       mainMod = "SUPER";
