@@ -1,6 +1,10 @@
 { pkgs, ... }:
 {
 
+  imports = [
+    ./waybar
+  ];
+
   home.packages = with pkgs; [
     # Apps
     # Commands
@@ -34,9 +38,6 @@
       };
     };
 
-    waybar = {
-      enable = true;
-    };
   };
 
   services = {
@@ -55,6 +56,9 @@
     {
       enable = true;
       settings = {
+        exec-once = [
+          "waybar"
+        ];
         bind =
           [
             "${mainMod}, F, exec, ${pkgs.firefox}/bin/firefox"
@@ -98,6 +102,9 @@
           inactive_opacity = 0.9;
           drop_shadow = false;
         };
+        animation = [
+          "windows, 1, 8, default, popin"
+        ];
         input = {
           follow_mouse = 2;
         };
