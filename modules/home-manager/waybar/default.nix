@@ -56,6 +56,7 @@ in
           "network"
           "memory"
           "cpu"
+          "temperature"
           "clock"
         ];
 
@@ -86,6 +87,12 @@ in
           interval = update_interval;
           format = "{usage}% {icon}";
           format-icons = common_icon_colorscheme icons.cpu;
+        };
+
+        temperature = {
+          interval = update_interval;
+          format = "{temperatureC} {icon}";
+          format-icons = common_icon_colorscheme icons.thermometer;
         };
 
         clock = {
