@@ -35,7 +35,6 @@
               home-manager.useUserPackages = true;
               home-manager.verbose = true;
               home-manager.users.alexn.imports = [
-                ./modules/home-manager/default.nix
                 ./modules/home-manager/darwin.nix
               ];
             }
@@ -54,7 +53,22 @@
               home-manager.verbose = true;
               home-manager.backupFileExtension = "bak";
               home-manager.users.alexn.imports = [
-                ./modules/home-manager/default.nix
+                ./modules/home-manager/nixos.nix
+              ];
+            }
+          ];
+        };
+        pronix = nixpkgs.lib.nixosSystem {
+          system = "aarch64-linux";
+          modules = [
+            ./modules/nixos/pronix
+            home-manager.nixosModules.home-manager
+            {
+              home-manager.useGlobalPkgs = true;
+              home-manager.useUserPackages = true;
+              home-manager.verbose = true;
+              home-manager.backupFileExtension = "bak";
+              home-manager.users.alexn.imports = [
                 ./modules/home-manager/nixos.nix
               ];
             }
