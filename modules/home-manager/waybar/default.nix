@@ -14,7 +14,7 @@ let
 
     red = "#dd532e";
     orange = "#ff9977";
-    yellow = "#ffffa5";
+    yellow = "#fcfc53";
     green = "#69ff94";
     blue = "#2aa9ff";
   };
