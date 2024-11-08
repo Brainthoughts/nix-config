@@ -20,10 +20,12 @@ let
   };
 
   common_icon_colorscheme = icon: [
-    "<span color='${colors.green}'>${icon}</span>"
+    "<span color='${colors.white}'>${icon}</span>"
+    "<span color='${colors.white}'>${icon}</span>"
     "<span color='${colors.blue}'>${icon}</span>"
-    "<span color='${colors.white}'>${icon}</span>"
-    "<span color='${colors.white}'>${icon}</span>"
+    "<span color='${colors.blue}'>${icon}</span>"
+    "<span color='${colors.green}'>${icon}</span>"
+    "<span color='${colors.green}'>${icon}</span>"
     "<span color='${colors.yellow}'>${icon}</span>"
     "<span color='${colors.yellow}'>${icon}</span>"
     "<span color='${colors.orange}'>${icon}</span>"
