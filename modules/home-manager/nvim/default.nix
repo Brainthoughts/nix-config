@@ -28,6 +28,9 @@
       python3
       ruff
       pyright
+      # java
+      zulu17
+      jdt-language-server
     ];
 
     plugins = with pkgs.vimPlugins; [ lazy-nvim ];
@@ -61,6 +64,7 @@
           nui-nvim
           nvim-cmp
           nvim-dap
+          nvim-jdtls
           nvim-lint
           nvim-lspconfig
           nvim-notify
@@ -144,6 +148,7 @@
               lua
               python
               rst
+              java
             ]
           )).dependencies;
       };
