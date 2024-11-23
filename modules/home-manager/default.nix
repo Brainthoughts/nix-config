@@ -6,7 +6,6 @@
     # Apps
     # Commands
     openvpn
-    rustup
     nodejs
     _1password-cli
     fastfetch
@@ -14,6 +13,8 @@
     python3
     pdm
     pre-commit
+    # rust
+    rustc # needed for tide
   ];
 
   # this is internal compatibility configuration 

@@ -31,6 +31,12 @@
       # java
       zulu17
       jdt-language-server
+      # rust
+      rustc
+      rustfmt
+      cargo
+      clippy
+      rust-analyzer
     ];
 
     plugins = with pkgs.vimPlugins; [ lazy-nvim ];
@@ -38,9 +44,16 @@
     extraLuaConfig =
       let
         plugins = with pkgs.vimPlugins; [
+          # java
+          nvim-jdtls
+
           # python 
           neotest-python
           nvim-dap-python
+
+          # rust
+          crates-nvim
+          rustaceanvim
 
           # LazyVim
           LazyVim
@@ -64,7 +77,6 @@
           nui-nvim
           nvim-cmp
           nvim-dap
-          nvim-jdtls
           nvim-lint
           nvim-lspconfig
           nvim-notify
@@ -141,14 +153,23 @@
         paths =
           (pkgs.vimPlugins.nvim-treesitter.withPlugins (
             plugins: with plugins; [
+              # c
               c
-              nix
-              make
-              json
-              lua
-              python
-              rst
+              # java
               java
+              # json
+              json
+              # nix
+              nix
+              # lua
+              lua
+              # make
+              make
+              # python
+              python
+              # rust
+              rust
+              ron
             ]
           )).dependencies;
       };
