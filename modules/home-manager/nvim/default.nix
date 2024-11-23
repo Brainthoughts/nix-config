@@ -89,6 +89,7 @@
           nvim-web-devicons
           persistence-nvim
           plenary-nvim
+          snacks-nvim
           telescope-fzf-native-nvim
           telescope-nvim
           todo-comments-nvim
