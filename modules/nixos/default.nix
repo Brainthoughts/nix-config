@@ -97,6 +97,7 @@
     fish
     samba
     cifs-utils
+    man-pages
   ];
 
   fonts.packages = with pkgs; [ (nerdfonts.override { fonts = [ "JetBrainsMono" ]; }) ];
