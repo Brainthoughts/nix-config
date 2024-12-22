@@ -17,7 +17,7 @@
     rustc # needed for tide
   ];
 
-  # this is internal compatibility configuration 
+  # this is internal compatibility configuration
   # for home-manager, don't change this!
   home.stateVersion = "23.11";
 
@@ -75,7 +75,7 @@
     kitty = {
       enable = true;
       font = {
-        name = "JetBrainsMono Nerd Font";
+        name = "Hack Nerd Font Mono";
         size = 14;
       };
       settings = {
