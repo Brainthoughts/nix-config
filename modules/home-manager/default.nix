@@ -1,25 +1,36 @@
 { pkgs, ... }:
 {
+  # this is internal compatibility configuration
+  # for home-manager, don't change this!
+  home.stateVersion = "23.11";
+
   imports = [ ./nvim ];
 
   home.packages = with pkgs; [
     # Apps
-    # Commands
+
+    ## Commands
     openvpn
-    nodejs
     _1password-cli
     fastfetch
+
+    # javascript
+    nodejs
+
     # Python
     python3
     pdm
     pre-commit
+
     # rust
     rustc # needed for tide
-  ];
 
-  # this is internal compatibility configuration
-  # for home-manager, don't change this!
-  home.stateVersion = "23.11";
+    # clang
+    lldb
+
+    # low-level misc
+    gdb
+  ];
 
   home.sessionVariables = {
     VISUAL = "nvim";

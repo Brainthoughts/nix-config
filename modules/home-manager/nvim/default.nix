@@ -14,23 +14,29 @@
       # LazyVim
       lua-language-server
       stylua
+
       # Telescope
       ripgrep
+
       # Clang
       clang-tools
       gnumake
-      ## lldb
-      ## bear
+      lldb
+      bear
+
       # nix
       nixd
       nixfmt-rfc-style
+
       # python
       python3
       ruff
       pyright
+
       # java
       zulu17
       jdt-language-server
+
       # rust
       rustc
       rustfmt
@@ -44,10 +50,13 @@
     extraLuaConfig =
       let
         plugins = with pkgs.vimPlugins; [
+          # colorscheme
+          nightfox-nvim
+
           # java
           nvim-jdtls
 
-          # python 
+          # python
           neotest-python
           nvim-dap-python
 
@@ -55,9 +64,13 @@
           crates-nvim
           rustaceanvim
 
+          # c
+          clangd_extensions-nvim
+
           # LazyVim
           LazyVim
           bufferline-nvim
+          blink-cmp
           cmp-buffer
           cmp-nvim-lsp
           cmp-path
@@ -67,8 +80,10 @@
           dressing-nvim
           flash-nvim
           friendly-snippets
+          fzf-lua
           gitsigns-nvim
           indent-blankline-nvim
+          lazydev-nvim
           lualine-nvim
           neo-tree-nvim
           neoconf-nvim
@@ -95,6 +110,7 @@
           todo-comments-nvim
           tokyonight-nvim
           trouble-nvim
+          ts-comments-nvim
           undotree
           vim-illuminate
           vim-startuptime
