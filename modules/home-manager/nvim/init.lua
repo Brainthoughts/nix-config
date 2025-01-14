@@ -19,6 +19,12 @@ require("lazy").setup({
 		{ "williamboman/mason.nvim", enabled = false },
 		-- import/override with your plugins
 		{ import = "plugins" },
+
+		-- LazyVim Extras
+		{ import = "lazyvim.plugins.extras.lang.clangd" },
+		{ import = "lazyvim.plugins.extras.lang.rust" },
+		{ import = "lazyvim.plugins.extras.lang.markdown" },
+
 		-- treesitter handled by xdg.configFile."nvim/parser", put this line at the end of spec to clear ensure_installed
 		{
 			"nvim-treesitter/nvim-treesitter",
@@ -26,10 +32,5 @@ require("lazy").setup({
 				opts.ensure_installed = {}
 			end,
 		},
-
-		-- LazyVim Extras
-		{ import = "lazyvim.plugins.extras.lang.clangd" },
-		{ import = "lazyvim.plugins.extras.lang.rust" },
-		{ import = "lazyvim.plugins.extras.lang.markdown" },
 	},
 })
