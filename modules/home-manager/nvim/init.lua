@@ -26,5 +26,10 @@ require("lazy").setup({
 				opts.ensure_installed = {}
 			end,
 		},
+
+		-- LazyVim Extras
+		{ import = "lazyvim.plugins.extras.lang.clangd" },
+		{ import = "lazyvim.plugins.extras.lang.rust" },
+		{ import = "lazyvim.plugins.extras.lang.markdown" },
 	},
 })

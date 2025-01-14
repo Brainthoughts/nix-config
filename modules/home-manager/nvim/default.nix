@@ -18,6 +18,10 @@
       # Telescope
       ripgrep
 
+      # markdown
+      markdownlint-cli2
+      marksman
+
       # Clang
       clang-tools
       gnumake
@@ -53,6 +57,10 @@
           # colorscheme
           nightfox-nvim
 
+          # markdown
+          markdown-preview-nvim
+          render-markdown-nvim
+
           # java
           nvim-jdtls
 
@@ -66,6 +74,9 @@
 
           # c
           clangd_extensions-nvim
+
+          # ui
+          oil-nvim
 
           # LazyVim
           LazyVim
@@ -89,6 +100,7 @@
           neoconf-nvim
           neodev-nvim
           noice-nvim
+          none-ls-nvim
           nui-nvim
           nvim-cmp
           nvim-dap
@@ -178,6 +190,8 @@
               json
               # nix
               nix
+              # markdown
+              markdown
               # lua
               lua
               # make
