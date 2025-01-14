@@ -8,6 +8,7 @@
 
   home.packages = with pkgs; [
     # Apps
+    discord
     # Commands
   ];
 
@@ -101,7 +102,9 @@
         decoration = {
           rounding = 10;
           inactive_opacity = 0.9;
-          drop_shadow = false;
+          shadow = {
+            enabled = false;
+          };
         };
         animation = [
           "windows, 1, 8, default, popin"
