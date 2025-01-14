@@ -30,9 +30,8 @@
     ups."ups" = {
       driver = "usbhid-ups";
       port = "auto";
-      directives =
-        [
-        ];
+      directives = [
+      ];
     };
 
     upsd = {
@@ -100,4 +99,8 @@
       };
     };
   };
+
+  # virt
+  virtualisation.virtualbox.host.enable = true;
+  users.extraGroups.vboxusers.members = [ "alexn" ];
 }
