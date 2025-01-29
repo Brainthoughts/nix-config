@@ -59,6 +59,9 @@
     fish = {
       enable = true;
       interactiveShellInit = builtins.readFile ./fish/config.fish;
+      functions = {
+        fish_greeting = "fastfetch";
+      };
       plugins = [
         # pkgs.fishPlugins.tide
         {
