@@ -84,7 +84,7 @@
         shell = "${pkgs.fish}/bin/fish";
         editor = "${pkgs.neovim}/bin/nvim";
         tab_bar_align = "center";
-        themeFile = "Carbonfox";
+        include = "themes/carbonfox.conf";
       };
     };
     lazygit = {
