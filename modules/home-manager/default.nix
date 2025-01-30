@@ -62,6 +62,9 @@
       functions = {
         fish_greeting = "fastfetch";
       };
+      shellAliases = {
+        ff = "fastfetch";
+      };
     };
     git = {
       enable = true;
