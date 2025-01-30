@@ -62,18 +62,6 @@
       functions = {
         fish_greeting = "fastfetch";
       };
-      plugins = [
-        # pkgs.fishPlugins.tide
-        {
-          name = "tide";
-          src = pkgs.fetchFromGitHub {
-            owner = "IlanCosman";
-            repo = "tide";
-            rev = "v6.1.1";
-            hash = "sha256-ZyEk/WoxdX5Fr2kXRERQS1U1QHH3oVSyBQvlwYnEYyc=";
-          };
-        }
-      ];
     };
     git = {
       enable = true;
@@ -114,6 +102,10 @@
     };
     ripgrep = {
       enable = true;
+    };
+    starship = {
+      enable = true;
+      settings = builtins.fromTOML (builtins.readFile ./starship/starship.toml);
     };
     tealdeer = {
       enable = true;
