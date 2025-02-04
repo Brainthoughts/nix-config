@@ -14,7 +14,14 @@
 
   homebrew = {
     enable = true;
-    taps = [ "koekeishiya/formulae" ];
+    onActivation = {
+      autoUpdate = true;
+      cleanup = "zap";
+      upgrade = false;
+    };
+    taps = [
+      "koekeishiya/formulae"
+    ];
     brews = [
       "yabai" # not on nixpkgs
       "skhd" # not on nixpkgs
@@ -24,6 +31,7 @@
       "lulu" # not on nixpkgs
       "surfshark" # not on nixpkgs
       "citrix-workspace" # broken dep on macos
+      "ghostty" # nixpkgs doesn't support darwin yet
     ];
   };
 
