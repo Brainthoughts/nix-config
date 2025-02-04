@@ -71,54 +71,6 @@
       userEmail = "acniedner@gmail.com";
       userName = "Alexander Niedner";
     };
-    ghostty = {
-      enable = true;
-      enableFishIntegration = true;
-      package = if pkgs.stdenv.isDarwin then null else pkgs.ghostty;
-      themes = {
-        carbonfox = {
-          background = "#161616";
-          foreground = "#f2f4f8";
-          selection-background = "#2a2a2a";
-          selection-foreground = "#f2f4f8";
-          cursor-color = "#f2f4f8";
-
-          palette = [
-            # normal
-            "0=#282828"
-            "1=#ee5396"
-            "2=#25be6a"
-            "3=#08bdba"
-            "4=#78a9ff"
-            "5=#be95ff"
-            "6=#33b1ff"
-            "7=#dfdfe0"
-
-            # bright
-            "8=#484848"
-            "9=#f16da6"
-            "10=#46c880"
-            "11=#2dc7c4"
-            "12=#8cb6ff"
-            "13=#c8a5ff"
-            "14=#52bdff"
-            "15=#e4e4e5"
-
-            # extended colors
-            "16=#3ddbd9"
-          ];
-        };
-      };
-      settings = {
-        font-family = "Hack Nerd Font Mono";
-        font-size = 14;
-        theme = "carbonfox";
-
-        command = "${pkgs.fish}/bin/fish";
-        # macos-titlebar-style = "hidden";
-        macos-option-as-alt = true;
-      };
-    };
     home-manager = {
       enable = true;
     };

@@ -31,7 +31,6 @@
       "lulu" # not on nixpkgs
       "surfshark" # not on nixpkgs
       "citrix-workspace" # broken dep on macos
-      "ghostty" # nixpkgs doesn't support darwin yet
     ];
   };
 
