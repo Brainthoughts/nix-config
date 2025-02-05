@@ -14,7 +14,14 @@
 
   homebrew = {
     enable = true;
-    taps = [ "koekeishiya/formulae" ];
+    onActivation = {
+      autoUpdate = true;
+      cleanup = "zap";
+      upgrade = false;
+    };
+    taps = [
+      "koekeishiya/formulae"
+    ];
     brews = [
       "yabai" # not on nixpkgs
       "skhd" # not on nixpkgs

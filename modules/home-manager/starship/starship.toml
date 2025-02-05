@@ -8,6 +8,10 @@ vimcmd_visual_symbol = '[V](bold yellow)'
 [hostname]
 ssh_symbol = ''
 
+[shlvl]
+disabled = false
+symbol = ""
+
 # [metadata]
 # name = "carbonfox"
 # author = "wjohnsto"
