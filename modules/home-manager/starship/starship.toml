@@ -1,5 +1,9 @@
 palette = "carbonfox"
 
+[shlvl]
+disabled = false
+symbol = ""
+
 # [metadata]
 # name = "carbonfox"
 # author = "wjohnsto"
