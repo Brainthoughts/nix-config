@@ -9,8 +9,9 @@ vimcmd_visual_symbol = '[V](bold yellow)'
 ssh_symbol = ''
 
 [shlvl]
-disabled = false
+disabled = true
 symbol = ""
+threshold = 3
 
 # [metadata]
 # name = "carbonfox"
