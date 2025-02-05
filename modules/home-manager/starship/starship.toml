@@ -1,5 +1,13 @@
 palette = "carbonfox"
 
+[character]
+vimcmd_replace_one_symbol = '[r](bold green)'
+vimcmd_replace_symbol = '[R](bold green)'
+vimcmd_visual_symbol = '[V](bold yellow)'
+
+[hostname]
+ssh_symbol = ''
+
 # [metadata]
 # name = "carbonfox"
 # author = "wjohnsto"
