@@ -37,6 +37,9 @@
   # Necessary for using flakes on this system.
   nix.settings.experimental-features = "nix-command flakes";
 
+  # newer version wants 30000, cant read from stateVersion that it should be 350 for some reason
+  ids.gids.nixbld = 350;
+
   nixpkgs = {
     # The platform the configuration will be used on.
     # If you're on an Intel system, replace with "x86_64-darwin"
@@ -59,5 +62,4 @@
     name = "alexn";
     home = "/Users/alexn";
   };
-
 }
