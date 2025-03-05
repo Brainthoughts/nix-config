@@ -101,6 +101,6 @@
   };
 
   # virt
-  virtualisation.virtualbox.host.enable = true;
-  users.extraGroups.vboxusers.members = [ "alexn" ];
+  # virtualisation.virtualbox.host.enable = true;
+  # users.extraGroups.vboxusers.members = [ "alexn" ];
 }
