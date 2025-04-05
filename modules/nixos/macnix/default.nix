@@ -8,7 +8,11 @@
 
   networking.hostName = "macnix"; # Define your hostname.
 
-  virtualisation.docker.enable = true;
+  virtualisation.docker = {
+    enable = true;
+    # seems to hang on restart sometimes
+    liveRestore = false;
+  };
 
   environment.systemPackages = [
     pkgs.cifs-utils
@@ -77,6 +81,10 @@
         in
         [ "${automount_opts},credentials=/etc/nixos/smb-secrets,uid=1000,posixpaths" ];
     };
+    "/mnt/silver" = {
+      device = "/dev/md/silver";
+      options = [ "X-mount.owner=alexn" ];
+    };
   };
 
   services.samba = {
@@ -100,7 +108,12 @@
     };
   };
 
-  # virt
-  # virtualisation.virtualbox.host.enable = true;
-  # users.extraGroups.vboxusers.members = [ "alexn" ];
+  # thunderbolt
+  services.hardware.bolt.enable = true;
+
+  # raid support
+  boot.swraid = {
+    enable = true;
+    mdadmConf = "MAILADDR none";
+  };
 }
