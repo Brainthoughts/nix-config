@@ -83,7 +83,10 @@
     };
     "/mnt/silver" = {
       device = "/dev/md/silver";
-      options = [ "X-mount.owner=alexn" ];
+      options = [
+        "nofail" # needed to get past boot as bolt is not avaliable yet
+        "X-mount.owner=alexn"
+      ];
     };
   };
 
