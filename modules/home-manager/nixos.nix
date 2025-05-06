@@ -37,6 +37,9 @@
         "*.tum.de" = {
           identityFile = "~/.ssh/tum";
         };
+        "github.lrz.de" = {
+          identityFile = "~/.ssh/tum";
+        };
       };
     };
 
