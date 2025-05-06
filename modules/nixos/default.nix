@@ -70,6 +70,12 @@
     "flakes"
   ];
 
+  # automatically collect garbage
+  nix.gc = {
+    automatic = true;
+    options = "--delete-older-than 30d";
+  };
+
   services.tailscale.enable = true;
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
