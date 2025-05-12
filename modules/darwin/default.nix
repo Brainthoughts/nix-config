@@ -23,8 +23,6 @@
       "koekeishiya/formulae"
     ];
     brews = [
-      "yabai" # not on nixpkgs
-      "skhd" # not on nixpkgs
       "sqlite" # needed for nvim yanky, doesn't accept nix version
     ];
     casks = [
