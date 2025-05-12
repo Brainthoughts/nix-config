@@ -8,6 +8,7 @@
     # Apps
     raycast
     spotify
+    sketchybar
     # soundsource # outdated, doesn't work on macos 15
     iina
     prismlauncher
@@ -38,21 +39,27 @@
         mode.main.binding =
           let
             spaces = builtins.genList (x: x + 1) 9;
+            meta = "alt-ctrl-shift";
           in
           builtins.listToAttrs (
             builtins.map (n: {
-              name = "alt-${builtins.toString n}";
+              name = "${meta}-${builtins.toString n}";
               value = "workspace ${builtins.toString n}";
             }) spaces
           )
           // builtins.listToAttrs (
             builtins.map (n: {
-              name = "alt-shift-${builtins.toString n}";
+              name = "${meta}-cmd-${builtins.toString n}";
               value = "move-node-to-workspace ${builtins.toString n}";
             }) spaces
           )
           // {
-            alt-tab = "workspace-back-and-forth";
+            "${meta}-tab" = "workspace-back-and-forth";
+            "${meta}-a" = "workspace prev";
+            "${meta}-d" = "workspace next";
+            "${meta}-cmd-a" = "move-node-to-workspace prev";
+            "${meta}-cmd-d" = "move-node-to-workspace next";
+
           };
       };
     };
@@ -76,6 +83,9 @@
   services = {
     jankyborders = {
       enable = true;
+      settings = {
+        hidpi = "on";
+      };
     };
   };
 }
