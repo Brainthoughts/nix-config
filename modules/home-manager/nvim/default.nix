@@ -47,6 +47,10 @@
       cargo
       clippy
       rust-analyzer
+
+      # tex
+      texliveFull
+      texlab
     ];
 
     plugins = with pkgs.vimPlugins; [ lazy-nvim ];
@@ -74,6 +78,9 @@
 
           # c
           clangd_extensions-nvim
+
+          # tex
+          vimtex
 
           # ui
           oil-nvim
