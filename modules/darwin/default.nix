@@ -19,15 +19,12 @@
       upgrade = false;
     };
     taps = [
-      "koekeishiya/formulae"
     ];
     brews = [
       "sqlite" # needed for nvim yanky, doesn't accept nix version
     ];
     casks = [
       "lulu" # not on nixpkgs
-      "surfshark" # not on nixpkgs
-      "citrix-workspace" # broken dep on macos
       "crossover"
     ];
   };
