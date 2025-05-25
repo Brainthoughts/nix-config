@@ -14,9 +14,10 @@
     liveRestore = false;
   };
 
-  environment.systemPackages = [
-    pkgs.cifs-utils
-    pkgs.docker-compose # for docker projects
+  environment.systemPackages = with pkgs; [
+    samba
+    cifs-utils
+    docker-compose # for docker projects
   ];
 
   # Open ports in the firewall.

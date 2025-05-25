@@ -43,6 +43,8 @@
   # Enable CUPS to print documents.
   services.printing.enable = true;
 
+  # real-time scheduling for user processes
+  # used by pipewire
   security.rtkit.enable = true;
 
   # Enable sound with pipewire.
@@ -64,11 +66,18 @@
     AllowSuspendThenHibernate=no
   '';
 
-  #default enable these nix settings
+  # default enable these nix settings
   nix.settings.experimental-features = [
     "nix-command"
     "flakes"
   ];
+
+  # Allow unfree packages
+  nixpkgs = {
+    config = {
+      allowUnfree = true;
+    };
+  };
 
   # automatically collect garbage
   nix.gc = {
@@ -95,25 +104,19 @@
   # Install firefox.
   programs.firefox.enable = true;
 
-  # Allow unfree packages
-  nixpkgs.config.allowUnfree = true;
-
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-    wget
+    curl
     neovim
     git
     gcc
     fish
-    samba
-    cifs-utils
     man-pages
   ];
 
   fonts = {
     packages = with pkgs; [
-      nerd-fonts.jetbrains-mono
       nerd-fonts.hack
     ];
   };
