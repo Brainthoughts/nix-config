@@ -30,7 +30,10 @@
   };
 
   # Necessary for using flakes on this system.
-  nix.settings.experimental-features = "nix-command flakes";
+  nix.settings.experimental-features = [
+    "nix-command"
+    "flakes"
+  ];
 
   # newer version wants 30000, cant read from stateVersion that it should be 350 for some reason
   ids.gids.nixbld = 350;
@@ -41,6 +44,7 @@
     hostPlatform = "aarch64-darwin";
     config = {
       allowUnfree = true;
+      # it's probably fine, if not i'll find out
       allowUnsupportedSystem = true;
     };
   };

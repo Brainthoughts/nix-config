@@ -60,7 +60,7 @@
       enable = true;
       interactiveShellInit = builtins.readFile ./fish/config.fish;
       functions = {
-        fish_greeting = "fastfetch";
+        fish_greeting = pkgs.lib.getExe pkgs.fastfetch;
       };
       shellAliases = {
         ff = "fastfetch";
@@ -84,8 +84,8 @@
         size = 14;
       };
       settings = {
-        shell = "${pkgs.fish}/bin/fish";
-        editor = "${pkgs.neovim}/bin/nvim";
+        shell = pkgs.lib.getExe pkgs.fish;
+        editor = pkgs.lib.getExe pkgs.neovim;
         tab_bar_align = "center";
         include = "themes/carbonfox.conf";
       };
@@ -119,7 +119,7 @@
       escapeTime = 0;
       keyMode = "vi";
       mouse = true;
-      shell = "${pkgs.fish}/bin/fish";
+      shell = pkgs.lib.getExe pkgs.fish;
       plugins = with pkgs.tmuxPlugins; [ ];
       extraConfig = builtins.readFile ./tmux/tmux.conf;
     };
