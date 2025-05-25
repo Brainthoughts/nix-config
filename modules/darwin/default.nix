@@ -11,6 +11,9 @@
     ];
   };
 
+  # needed temporarily while migration to multi-user support ongoing
+  system.primaryUser = "alexn";
+
   homebrew = {
     enable = true;
     onActivation = {
