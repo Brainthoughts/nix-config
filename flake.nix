@@ -24,19 +24,23 @@
       nixpkgs,
       home-manager,
     }:
+    let
+      hm-common = {
+        home-manager.useGlobalPkgs = true;
+        home-manager.useUserPackages = true;
+        home-manager.verbose = true;
+        home-manager.backupFileExtension = "bak";
+      };
+    in
     {
       darwinConfigurations = {
         Sweet-16 = nix-darwin.lib.darwinSystem {
           modules = [
             ./modules/darwin
             home-manager.darwinModules.home-manager
+            hm-common
             {
-              home-manager.useGlobalPkgs = true;
-              home-manager.useUserPackages = true;
-              home-manager.verbose = true;
-              home-manager.users.alexn.imports = [
-                ./modules/home-manager/darwin.nix
-              ];
+              home-manager.users.alexn = ./modules/home-manager/darwin.nix;
             }
           ];
         };
@@ -47,14 +51,9 @@
           modules = [
             ./modules/nixos/macnix
             home-manager.nixosModules.home-manager
+            hm-common
             {
-              home-manager.useGlobalPkgs = true;
-              home-manager.useUserPackages = true;
-              home-manager.verbose = true;
-              home-manager.backupFileExtension = "bak";
-              home-manager.users.alexn.imports = [
-                ./modules/home-manager/nixos.nix
-              ];
+              home-manager.users.alexn = ./modules/home-manager/nixos.nix;
             }
           ];
         };
