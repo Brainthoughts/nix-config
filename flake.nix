@@ -1,5 +1,3 @@
-# ~/.config/nix/flake.nix
-
 {
   description = "My system configuration";
 
@@ -15,6 +13,10 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    nix-index-database = {
+      url = "github:nix-community/nix-index-database";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
@@ -23,13 +25,19 @@
       nix-darwin,
       nixpkgs,
       home-manager,
+      nix-index-database,
     }:
     let
       hm-common = {
-        home-manager.useGlobalPkgs = true;
-        home-manager.useUserPackages = true;
-        home-manager.verbose = true;
-        home-manager.backupFileExtension = "bak";
+        home-manager = {
+          useGlobalPkgs = true;
+          useUserPackages = true;
+          verbose = true;
+          backupFileExtension = "bak";
+          sharedModules = [
+            nix-index-database.hmModules.nix-index
+          ];
+        };
       };
     in
     {
