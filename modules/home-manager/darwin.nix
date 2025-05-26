@@ -35,7 +35,6 @@
             vertical = 12;
           };
         };
-
         mode.main.binding =
           let
             spaces = builtins.genList (x: x + 1) 9;
@@ -59,14 +58,13 @@
             "${meta}-d" = "workspace next";
             "${meta}-cmd-a" = "move-node-to-workspace prev";
             "${meta}-cmd-d" = "move-node-to-workspace next";
-
           };
       };
     };
     fish = {
       shellAbbrs = {
         nvnix = "nvim ~/.config/nix/**.nix";
-        ndrb = "darwin-rebuild switch --flake ~/.config/nix";
+        ndrb = "sudo darwin-rebuild switch --flake ~/.config/nix";
       };
     };
     kitty = {

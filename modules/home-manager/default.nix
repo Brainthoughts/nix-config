@@ -10,9 +10,7 @@
     # Apps
 
     ## Commands
-    openvpn
     _1password-cli
-    fastfetch
 
     # javascript
     nodejs
@@ -48,6 +46,39 @@
     };
     eza = {
       enable = true;
+    };
+    fastfetch = {
+      enable = true;
+      settings = {
+        display = {
+          # stat = true;
+        };
+        modules = [
+          "title"
+          "separator"
+          "os"
+          "host"
+          "kernel"
+          "datetime"
+          "uptime"
+          "shell"
+          "display"
+          "terminal"
+          "editor"
+          {
+            type = "cpu";
+            temp = true;
+          }
+          "gpu"
+          "memory"
+          "swap"
+          "disk"
+          "localip"
+          "locale"
+          "break"
+          "colors"
+        ];
+      };
     };
     fd = {
       enable = true;
