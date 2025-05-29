@@ -85,6 +85,9 @@
           # ui
           oil-nvim
 
+          # dictionary
+          blink-cmp-dictionary
+
           # LazyVim
           LazyVim
           bufferline-nvim
