@@ -7,7 +7,6 @@
   home.packages = with pkgs; [
     # Apps
     raycast
-    spotify
     sketchybar
     # soundsource # outdated, doesn't work on macos 15
     iina

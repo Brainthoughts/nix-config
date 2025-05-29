@@ -8,7 +8,6 @@
 
   home.packages = with pkgs; [
     # Apps
-    discord
     # Commands
   ];
 
