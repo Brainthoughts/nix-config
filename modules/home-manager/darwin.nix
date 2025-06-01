@@ -8,7 +8,7 @@
     # Apps
     raycast
     sketchybar
-    # soundsource # outdated, doesn't work on macos 15
+    soundsource # outdated, doesn't work on macos 15
     iina
     prismlauncher
     # Commands
