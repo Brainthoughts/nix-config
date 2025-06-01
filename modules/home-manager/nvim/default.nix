@@ -41,6 +41,9 @@
       zulu17
       jdt-language-server
 
+      # typescript
+      vtsls
+
       # rust
       rustc
       rustfmt
@@ -51,6 +54,7 @@
       # tex
       texliveFull
       texlab
+
     ];
 
     plugins = with pkgs.vimPlugins; [ lazy-nvim ];
