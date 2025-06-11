@@ -72,6 +72,8 @@
           # java
           nvim-jdtls
 
+          # javascript
+
           # python
           neotest-python
           nvim-dap-python
@@ -91,6 +93,12 @@
 
           # dictionary
           blink-cmp-dictionary
+
+          # dap
+          nvim-nio
+          nvim-dap
+          nvim-dap-ui
+          nvim-dap-virtual-text
 
           # LazyVim
           LazyVim
@@ -117,7 +125,6 @@
           none-ls-nvim
           nui-nvim
           nvim-cmp
-          nvim-dap
           nvim-lint
           nvim-lspconfig
           nvim-notify
@@ -198,6 +205,7 @@
             plugins: with plugins; [
               # c
               c
+              cpp
               # java
               java
               # json
