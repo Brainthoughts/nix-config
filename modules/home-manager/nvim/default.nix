@@ -18,15 +18,20 @@
       # Telescope
       ripgrep
 
-      # markdown
-      markdownlint-cli2
-      marksman
-
+      ## Langs
       # Clang
       clang-tools
       gnumake
       lldb
       bear
+
+      # java
+      zulu17
+      jdt-language-server
+
+      # markdown
+      markdownlint-cli2
+      marksman
 
       # nix
       nixd
@@ -37,13 +42,6 @@
       ruff
       pyright
 
-      # java
-      zulu17
-      jdt-language-server
-
-      # typescript
-      vtsls
-
       # rust
       rustc
       rustfmt
@@ -51,10 +49,15 @@
       clippy
       rust-analyzer
 
+      # svelte
+      svelte-language-server
+
       # tex
       texliveFull
       texlab
 
+      # typescript
+      vtsls
     ];
 
     plugins = with pkgs.vimPlugins; [ lazy-nvim ];
@@ -212,10 +215,10 @@
               json
               # nix
               nix
-              # markdown
-              markdown
               # lua
               lua
+              # markdown
+              markdown
               # make
               make
               # python
@@ -223,6 +226,8 @@
               # rust
               rust
               ron
+              # svelte
+              svelte
             ]
           )).dependencies;
       };
