@@ -58,6 +58,9 @@
 
       # typescript
       vtsls
+
+      # web
+      vscode-langservers-extracted
     ];
 
     plugins = with pkgs.vimPlugins; [ lazy-nvim ];
