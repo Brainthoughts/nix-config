@@ -226,7 +226,11 @@
               # rust
               rust
               ron
-              # svelte
+              # web
+              html
+              javascript
+              css
+              typescript
               svelte
             ]
           )).dependencies;
