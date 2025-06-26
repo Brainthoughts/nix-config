@@ -106,6 +106,9 @@
           nvim-dap-ui
           nvim-dap-virtual-text
 
+          # color highlighting
+          mini-hipatterns
+
           # LazyVim
           LazyVim
           bufferline-nvim
