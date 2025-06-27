@@ -11,7 +11,6 @@
     soundsource # outdated, doesn't work on macos 15
     iina
     prismlauncher
-    vesktop
     # Commands
     zulu17
     nmap
