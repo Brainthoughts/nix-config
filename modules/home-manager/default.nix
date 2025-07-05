@@ -29,6 +29,7 @@
     # low-level misc
     gdb
     tshark
+    ghidra
   ];
 
   home.sessionVariables = {
@@ -155,6 +156,9 @@
       shell = pkgs.lib.getExe pkgs.fish;
       plugins = with pkgs.tmuxPlugins; [ ];
       extraConfig = builtins.readFile ./tmux/tmux.conf;
+    };
+    uv = {
+      enable = true;
     };
     zoxide = {
       enable = true;
