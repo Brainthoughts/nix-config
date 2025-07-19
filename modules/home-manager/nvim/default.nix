@@ -25,6 +25,9 @@
       lldb
       bear
 
+      # english
+      ltex-ls-plus
+
       # java
       zulu17
       jdt-language-server
