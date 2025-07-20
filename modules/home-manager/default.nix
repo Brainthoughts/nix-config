@@ -29,7 +29,6 @@
     # low-level misc
     gdb
     tshark
-    ghidra
   ];
 
   home.sessionVariables = {

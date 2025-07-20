@@ -15,6 +15,7 @@
     zulu17
     nmap
     ffmpeg
+    ghidra
   ];
 
   programs = {
