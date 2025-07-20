@@ -29,6 +29,7 @@
     casks = [
       "lulu" # not on nixpkgs
       "crossover"
+      "anki" # broken on nixpkgs
     ];
   };
 
