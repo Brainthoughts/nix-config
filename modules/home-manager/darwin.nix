@@ -7,7 +7,6 @@
   home.packages = with pkgs; [
     # Apps
     raycast
-    sketchybar
     soundsource # outdated, doesn't work on macos 15
     iina
     prismlauncher
@@ -21,13 +20,25 @@
   programs = {
     aerospace = {
       enable = true;
+      launchd = {
+        enable = true;
+      };
       userSettings = {
-        start-at-login = true;
+        # after-startup-command = [ "exec-and-forget sketchybar" ];
+        on-focus-changed = [ "exec-and-forget sketchybar --trigger aerospace_focus_changed" ];
+        exec-on-workspace-change = [
+          "/bin/bash"
+          "-c"
+          "sketchybar --trigger aerospace_workspace_change FOCUSED=$AEROSPACE_FOCUSED_WORKSPACE"
+        ];
         gaps = {
           outer = {
             left = 12;
             right = 12;
-            top = 12;
+            top = [
+              { monitor."built-in" = 12; }
+              38
+            ];
             bottom = 12;
           };
           inner = {
@@ -49,15 +60,15 @@
           // builtins.listToAttrs (
             builtins.map (n: {
               name = "${meta}-cmd-${builtins.toString n}";
-              value = "move-node-to-workspace ${builtins.toString n}";
+              value = "move-node-to-workspace ${builtins.toString n} --focus-follows-window";
             }) spaces
           )
           // {
             "${meta}-tab" = "workspace-back-and-forth";
             "${meta}-a" = "workspace prev";
             "${meta}-d" = "workspace next";
-            "${meta}-cmd-a" = "move-node-to-workspace prev";
-            "${meta}-cmd-d" = "move-node-to-workspace next";
+            "${meta}-cmd-a" = "move-node-to-workspace prev --focus-follows-window";
+            "${meta}-cmd-d" = "move-node-to-workspace next --focus-follows-window";
           };
       };
     };
