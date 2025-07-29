@@ -22,14 +22,19 @@
       upgrade = false;
     };
     taps = [
+      "FelixKratz/formulae" # sketchybar
     ];
     brews = [
       "sqlite" # needed for nvim yanky, doesn't accept nix version
+      "sketchybar" # needs to be in global path so aerospace can find it
     ];
     casks = [
       "lulu" # not on nixpkgs
       "crossover"
       "anki" # broken on nixpkgs
+      "font-sf-pro"
+      "font-sf-mono"
+      "sf-symbols"
     ];
   };
 
