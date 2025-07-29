@@ -63,38 +63,37 @@
         exec-once = [
           "waybar"
         ];
-        bind =
-          [
-            "${mainMod}, F, exec, ${pkgs.firefox}/bin/firefox"
-            "${mainMod}, X, exec, ${pkgs.kitty}/bin/kitty"
-            "${mainMod}, C, closewindow, activewindow"
-            "${mainMod}, H, movefocus, l"
-            "${mainMod}, J, movefocus, d"
-            "${mainMod}, K, movefocus, u"
-            "${mainMod}, L, movefocus, r"
-            "${mainMod} SHIFT, H, movewindow, l"
-            "${mainMod} SHIFT, J, movewindow, d"
-            "${mainMod} SHIFT, K, movewindow, u"
-            "${mainMod} SHIFT, L, movewindow, r"
-            "${mainMod}, Escape, togglespecialworkspace, magic"
-            "${mainMod}, Q, exit"
-          ]
-          ++ (
-            # workspaces
-            # binds $mod + [shift +] {1..9} to [move to] workspace {1..9}
-            builtins.concatLists (
-              builtins.genList (
-                i:
-                let
-                  ws = i + 1;
-                in
-                [
-                  "${mainMod}, code:1${toString i}, workspace, ${toString ws}"
-                  "${mainMod} SHIFT, code:1${toString i}, movetoworkspace, ${toString ws}"
-                ]
-              ) 9
-            )
-          );
+        bind = [
+          "${mainMod}, F, exec, ${pkgs.lib.getExe pkgs.firefox}"
+          "${mainMod}, X, exec, ${pkgs.lib.getExe pkgs.kitty}"
+          "${mainMod}, C, closewindow, activewindow"
+          "${mainMod}, H, movefocus, l"
+          "${mainMod}, J, movefocus, d"
+          "${mainMod}, K, movefocus, u"
+          "${mainMod}, L, movefocus, r"
+          "${mainMod} SHIFT, H, movewindow, l"
+          "${mainMod} SHIFT, J, movewindow, d"
+          "${mainMod} SHIFT, K, movewindow, u"
+          "${mainMod} SHIFT, L, movewindow, r"
+          "${mainMod}, Escape, togglespecialworkspace, magic"
+          "${mainMod}, Q, exit"
+        ]
+        ++ (
+          # workspaces
+          # binds $mod + [shift +] {1..9} to [move to] workspace {1..9}
+          builtins.concatLists (
+            builtins.genList (
+              i:
+              let
+                ws = i + 1;
+              in
+              [
+                "${mainMod}, code:1${toString i}, workspace, ${toString ws}"
+                "${mainMod} SHIFT, code:1${toString i}, movetoworkspace, ${toString ws}"
+              ]
+            ) 9
+          )
+        );
         general = {
           border_size = 2;
           "col.active_border" = "rgba(33ccffee) rgba(00ff99ee) 45deg";

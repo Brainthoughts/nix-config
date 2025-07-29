@@ -56,7 +56,7 @@
         };
       };
       settings = {
-        SHUTDOWNCMD = "“${pkgs.systemd}/bin/shutdown”";
+        SHUTDOWNCMD = "“${pkgs.lib.getExe' pkgs.systemd "shutdown"}”";
       };
     };
 
