@@ -3,6 +3,12 @@
 
   environment = {
     systemPath = [ "/opt/homebrew/bin" ];
+    # for sketchybar
+    systemPackages = [
+      pkgs.sketchybar
+      pkgs.sbarlua
+      pkgs.lua5_4_compat
+    ];
   };
 
   fonts = {
@@ -26,7 +32,7 @@
     ];
     brews = [
       "sqlite" # needed for nvim yanky, doesn't accept nix version
-      "sketchybar" # needs to be in global path so aerospace can find it
+      # "sketchybar" # needs to be in global path so aerospace can find it
     ];
     casks = [
       "lulu" # not on nixpkgs
