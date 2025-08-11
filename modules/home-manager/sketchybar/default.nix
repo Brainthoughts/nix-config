@@ -1,6 +1,11 @@
 { pkgs, lib, ... }:
 
 {
+  home.packages = with pkgs; [
+    sbarlua
+    lua5_4_compat
+  ];
+
   programs.aerospace.userSettings = {
     after-startup-command = [ "exec-and-forget sketchybar" ];
     on-focus-changed = [ "exec-and-forget sketchybar --trigger aerospace_focus_changed" ];
@@ -11,7 +16,7 @@
     ];
     gaps = {
       outer = {
-        top = [
+        top = lib.mkForce [
           { monitor."built-in" = 12; }
           38
         ];
@@ -19,8 +24,16 @@
     };
   };
 
-  xdg.configFile."sketchybar".source = pkgs.replaceVars ./config {
-    sbarlua-path = pkgs.sbarlua.outPath;
+  xdg.configFile."sketchybar".source = pkgs.stdenv.mkDerivation {
+    name = "sketchybar-config";
+    src = ./config;
+    buildPhase = ''
+      substituteInPlace init.lua --subst-var-by sbarlua-path ${pkgs.sbarlua}
+      substituteInPlace sketchybarrc --subst-var-by lua5_4_compat ${lib.getExe pkgs.lua5_4_compat}
+      make
+    '';
+    installPhase = ''
+      cp -r . $out
+    '';
   };
-  # xdg.configFile."sketchybar".source = ./config;
 }

@@ -1,6 +1,9 @@
+print(_VERSION)
+-- Add the sketchybar module to the package cpath
+package.cpath = package.cpath .. ";@sbarlua-path@/lib/lua/5.4/?.so"
+
 -- Require the sketchybar module
 sbar = require("sketchybar")
-
 -- Set the bar name, if you are using another bar instance than sketchybar
 -- sbar.set_bar_name("bottom_bar")
 

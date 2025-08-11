@@ -1,4 +1,9 @@
-{ pkgs, lib, ... }:
+{
+  pkgs,
+  lib,
+  options,
+  ...
+}:
 {
   imports = [
     ./default.nix
@@ -24,7 +29,7 @@
       launchd = {
         enable = true;
       };
-      userSettings = lib.mkDefault {
+      userSettings = {
         gaps = {
           outer = {
             left = 12;
