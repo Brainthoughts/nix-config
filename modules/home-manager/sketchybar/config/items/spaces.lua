@@ -6,8 +6,8 @@ local aerospace = require("helpers.aerospace")
 local MAX_POPUP_ITEMS = 10
 
 -- popen fine here since only initial setup
-local initial_focused_workspace = io.popen("aerospace list-workspaces --focused"):read()
-for i in io.popen("aerospace list-workspaces --all"):lines() do
+local initial_focused_workspace = io.popen(aerospace.cmd .. " list-workspaces --focused"):read()
+for i in io.popen(aerospace.cmd .. " list-workspaces --all"):lines() do
 	local space = sbar.add("item", "space." .. i, {
 		drawing = true,
 		icon = {
@@ -59,15 +59,15 @@ for i in io.popen("aerospace list-workspaces --all"):lines() do
 
 	space:subscribe("mouse.clicked", function(env)
 		if env.BUTTON == "left" then
-			sbar.exec("aerospace workspace " .. i)
+			sbar.exec(aerospace.cmd .. " workspace " .. i)
 		end
 	end)
 
 	-- TODO: make last focused space have color as well
 	space:subscribe("mouse.entered", function(_)
-		sbar.exec("aerospace list-windows --workspace " .. i, function(result, code)
+		sbar.exec(aerospace.cmd .. " list-windows --workspace " .. i, function(result, code)
 			local apps = aerospace.parse_windows(result)
-			sbar.exec("aerospace list-windows --focused ", function(result, code)
+			sbar.exec(aerospace.cmd .. " list-windows --focused ", function(result, code)
 				local focused_app = aerospace.parse_windows(result)[1]
 				for j, item in pairs(popup_slots) do
 					local app = apps[j]

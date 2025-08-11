@@ -17,4 +17,5 @@ end
 return {
 	parse_window = parse_window,
 	parse_windows = parse_windows,
+	cmd = "@aerospace@",
 }
