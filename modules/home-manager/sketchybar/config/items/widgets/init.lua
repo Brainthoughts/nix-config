@@ -1,0 +1,5 @@
+require("items.widgets.battery")
+require("items.widgets.volume")
+require("items.widgets.focus")
+require("items.widgets.wifi")
+require("items.widgets.cpu")

@@ -1,7 +1,13 @@
-{ pkgs, ... }:
+{
+  pkgs,
+  lib,
+  options,
+  ...
+}:
 {
   imports = [
     ./default.nix
+    ./sketchybar
   ];
 
   home.packages = with pkgs; [
@@ -24,21 +30,11 @@
         enable = true;
       };
       userSettings = {
-        # after-startup-command = [ "exec-and-forget sketchybar" ];
-        on-focus-changed = [ "exec-and-forget sketchybar --trigger aerospace_focus_changed" ];
-        exec-on-workspace-change = [
-          "/bin/bash"
-          "-c"
-          "sketchybar --trigger aerospace_workspace_change FOCUSED=$AEROSPACE_FOCUSED_WORKSPACE"
-        ];
         gaps = {
           outer = {
             left = 12;
             right = 12;
-            top = [
-              { monitor."built-in" = 12; }
-              38
-            ];
+            top = 12;
             bottom = 12;
           };
           inner = {
