@@ -73,6 +73,11 @@
     };
   };
 
+  # zfs support
+  boot.supportedFilesystems = [ "zfs" ];
+  boot.zfs.forceImportRoot = false;
+  networking.hostId = "b86edab7";
+
   # mount synologynas
   fileSystems = {
     "/mnt/entertainment" = {
@@ -85,13 +90,13 @@
         in
         [ "${automount_opts},credentials=/etc/nixos/smb-secrets,uid=1000,posixpaths" ];
     };
-    "/mnt/silver" = {
-      device = "/dev/md/silver";
-      options = [
-        "nofail" # needed to get past boot as bolt is not avaliable yet
-        "X-mount.owner=alexn"
-      ];
-    };
+    # "/mnt/silver" = {
+    #   device = "/dev/md/silver";
+    #   options = [
+    #     "nofail" # needed to get past boot as bolt is not avaliable yet
+    #     "X-mount.owner=alexn"
+    #   ];
+    # };
   };
 
   services.samba = {
@@ -117,10 +122,4 @@
 
   # thunderbolt
   services.hardware.bolt.enable = true;
-
-  # raid support
-  boot.swraid = {
-    enable = true;
-    mdadmConf = "MAILADDR none";
-  };
 }
