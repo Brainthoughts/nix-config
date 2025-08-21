@@ -28,6 +28,15 @@
       # english
       ltex-ls-plus
 
+      # go
+      go
+      gopls
+      delve
+      gomodifytags
+      impl
+      gotools
+      gofumpt
+
       # java
       zulu17
       jdt-language-server
@@ -74,14 +83,28 @@
           # colorscheme
           nightfox-nvim
 
-          # markdown
-          markdown-preview-nvim
-          render-markdown-nvim
+          # color highlighting
+          mini-hipatterns
+
+          # dap
+          nvim-nio
+          nvim-dap
+          nvim-dap-ui
+          nvim-dap-virtual-text
+
+          # dictionary
+          blink-cmp-dictionary
+
+          ## lang
+          # c
+          clangd_extensions-nvim
 
           # java
           nvim-jdtls
 
-          # javascript
+          # markdown
+          markdown-preview-nvim
+          render-markdown-nvim
 
           # python
           neotest-python
@@ -91,26 +114,11 @@
           crates-nvim
           rustaceanvim
 
-          # c
-          clangd_extensions-nvim
-
           # tex
           vimtex
 
           # ui
           oil-nvim
-
-          # dictionary
-          blink-cmp-dictionary
-
-          # dap
-          nvim-nio
-          nvim-dap
-          nvim-dap-ui
-          nvim-dap-virtual-text
-
-          # color highlighting
-          mini-hipatterns
 
           # LazyVim
           LazyVim
@@ -218,6 +226,11 @@
               # c
               c
               cpp
+              #go
+              go
+              gomod
+              gowork
+              gosum
               # java
               java
               # json
