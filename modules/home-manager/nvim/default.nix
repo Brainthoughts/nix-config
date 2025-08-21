@@ -99,6 +99,9 @@
           # c
           clangd_extensions-nvim
 
+          # go
+          nvim-dap-go
+
           # java
           nvim-jdtls
 
