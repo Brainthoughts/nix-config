@@ -77,23 +77,16 @@
   boot.supportedFilesystems = [ "zfs" ];
   boot.zfs.forceImportRoot = false;
   networking.hostId = "b86edab7";
+  services.zfs.autoScrub.enable = true;
 
-  # mount synologynas
   fileSystems = {
-    "/mnt/entertainment" = {
-      device = "//synologynas.fritz.box/entertainment";
-      fsType = "cifs";
-      options =
-        let
-          # this line prevents hanging on network split
-          automount_opts = "x-systemd.automount,x-systemd.device-timeout=5s,x-systemd.mount-timeout=5s";
-        in
-        [ "${automount_opts},credentials=/etc/nixos/smb-secrets,uid=1000,posixpaths" ];
-    };
-    # "/mnt/silver" = {
-    #   device = "/dev/md/silver";
+    # don't have a good method for this yet so it will stay manual for now
+    # "/mnt/media" = {
+    #   device = "silver/media";
+    #   fsType = "zfs";
     #   options = [
     #     "nofail" # needed to get past boot as bolt is not avaliable yet
+    #     "noauto"
     #     "X-mount.owner=alexn"
     #   ];
     # };
