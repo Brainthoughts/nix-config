@@ -101,6 +101,7 @@
 
           # go
           nvim-dap-go
+          go-nvim
 
           # java
           nvim-jdtls
@@ -234,6 +235,7 @@
               gomod
               gowork
               gosum
+              gotmpl
               # java
               java
               # json
@@ -265,4 +267,5 @@
 
   # Normal LazyVim config here, see https://github.com/LazyVim/starter/tree/main/lua
   xdg.configFile."nvim/lua".source = ./lua;
+  xdg.configFile."nvim/queries".source = ./queries;
 }
