@@ -13,7 +13,6 @@
   home.packages = with pkgs; [
     # Apps
     raycast
-    soundsource # outdated, doesn't work on macos 15
     iina
     prismlauncher
     # Commands
