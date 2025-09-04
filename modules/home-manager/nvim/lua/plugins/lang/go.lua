@@ -51,7 +51,7 @@ return {
 						-- for hugo templates
 						-- TODO: make sure file overrides highlight propperly
 						pattern = {
-							[".*/themes/.*%.html"] = { "gotmpl", priority = 1 }, -- need to override some other match
+							[".*/layouts/.*%.html"] = { "gotmpl", priority = 1 }, -- need to override some other match
 						},
 					})
 					-- workaround for gopls not supporting semanticTokensProvider
