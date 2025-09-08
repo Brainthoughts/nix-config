@@ -42,6 +42,12 @@
     "flakes"
   ];
 
+  # automatically collect garbage
+  nix.gc = {
+    automatic = true;
+    options = "--delete-older-than 30d";
+  };
+
   # newer version wants 30000, cant read from stateVersion that it should be 350 for some reason
   ids.gids.nixbld = 350;
 
