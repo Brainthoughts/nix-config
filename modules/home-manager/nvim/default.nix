@@ -49,6 +49,11 @@
       nixd
       nixfmt-rfc-style
 
+      # php
+      php84Packages.php-codesniffer
+      php84Packages.php-cs-fixer
+      phpactor
+
       # python
       python3
       ruff
@@ -248,6 +253,8 @@
               markdown
               # make
               make
+              # php
+              php
               # python
               python
               # rust
