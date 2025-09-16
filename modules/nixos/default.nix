@@ -57,15 +57,6 @@
     #jack.enable = true;
   };
 
-  # don't sleep on lid clone when on external power
-  services.logind.lidSwitchExternalPower = "ignore";
-  systemd.sleep.extraConfig = ''
-    AllowSuspend=no
-    AllowHibernate=no
-    AllowHybridSleep=no
-    AllowSuspendThenHibernate=no
-  '';
-
   # default enable these nix settings
   nix.settings.experimental-features = [
     "nix-command"

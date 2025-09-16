@@ -29,6 +29,7 @@
     };
     ssh = {
       enable = true;
+      enableDefaultConfig = false;
       matchBlocks = {
         "github.com" = {
           identityFile = "~/.ssh/gh";
