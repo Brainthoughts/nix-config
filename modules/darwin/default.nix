@@ -28,6 +28,7 @@
     ];
     casks = [
       "lulu" # not on nixpkgs
+      "knockknock" # not on nixpkgs
       "crossover"
       "anki" # broken on nixpkgs
       "font-sf-pro"
