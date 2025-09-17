@@ -17,8 +17,6 @@ local front_app = sbar.add("item", "front_app", {
 -- this double triggers when switching, there is probably a better solution
 front_app:subscribe({ "aerospace_focus_changed", "front_app_switched", "routine" }, function(env)
 	sbar.exec(aerospace.cmd .. " list-windows --focused ", function(result, code)
-		print(code)
-		print(result)
 		if code == 0 then
 			local apps = aerospace.parse_windows(result)
 			front_app:set({ icon = { string = apps[1][2] }, label = { drawing = true, string = apps[1][3] } })
