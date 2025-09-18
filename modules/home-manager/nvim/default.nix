@@ -144,9 +144,11 @@
           friendly-snippets
           fzf-lua
           gitsigns-nvim
+          grug-far-nvim
           indent-blankline-nvim
           lazydev-nvim
           lualine-nvim
+          mini-icons
           neo-tree-nvim
           neoconf-nvim
           neodev-nvim
