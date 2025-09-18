@@ -57,7 +57,7 @@
       # python
       python3
       ruff
-      pyright
+      basedpyright
 
       # rust
       rustc
