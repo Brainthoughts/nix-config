@@ -7,7 +7,7 @@ return {
 					settings = {
 						basedpyright = {
 							analysis = {
-								diagnosticMode = "workspace", -- analyze all files in workspace
+								-- diagnosticMode = "workspace", -- analyze all files in workspace
 							},
 						},
 					},
