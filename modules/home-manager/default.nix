@@ -153,6 +153,7 @@
       enable = true;
       clock24 = true;
       escapeTime = 0;
+      historyLimit = 10000;
       keyMode = "vi";
       mouse = true;
       shell = pkgs.lib.getExe pkgs.fish;
