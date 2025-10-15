@@ -29,8 +29,9 @@
       ltex-ls-plus
 
       # java
-      zulu17
+      jdk
       jdt-language-server
+      lombok
 
       # markdown
       markdownlint-cli2
