@@ -49,6 +49,7 @@
       python3
       ruff
       basedpyright
+      python313Packages.debugpy
 
       # rust
       rustc
