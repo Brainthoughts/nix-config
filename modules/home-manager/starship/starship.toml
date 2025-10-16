@@ -8,6 +8,7 @@ $shlvl\
 $singularity\
 $kubernetes\
 $directory\
+$nix_shell\
 $vcsh\
 $fossil_branch\
 $fossil_metrics\
@@ -66,7 +67,6 @@ $vlang\
 $vagrant\
 $zig\
 $buf\
-$nix_shell\
 $conda\
 $meson\
 $spack\
@@ -108,6 +108,10 @@ threshold = 3
 [time]
 disabled = false
 
+[nix_shell]
+heuristic = true
+format = 'in [$symbol]($style) '
+symbol = '❄️'
 # [metadata]
 # name = "carbonfox"
 # author = "wjohnsto"
