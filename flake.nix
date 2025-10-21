@@ -17,7 +17,14 @@
       url = "github:nix-community/nix-index-database";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    nvim-treesitter-main.url = "github:iofq/nvim-treesitter-main";
+    nvim-treesitter-main = {
+      url = "github:iofq/nvim-treesitter-main";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    nixos-apple-silicon = {
+      url = "github:nix-community/nixos-apple-silicon";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
@@ -28,6 +35,7 @@
       home-manager,
       nix-index-database,
       nvim-treesitter-main,
+      nixos-apple-silicon
     }:
     let
       hm-common = {
@@ -67,6 +75,19 @@
           modules = [
             ts-main-overlay
             ./modules/nixos/macnix
+            home-manager.nixosModules.home-manager
+            hm-common
+            {
+              home-manager.users.alexn = ./modules/home-manager/nixos.nix;
+            }
+          ];
+        };
+        pronix = nixpkgs.lib.nixosSystem {
+          system = "aarch64-linux";
+          modules = [
+	    nixos-apple-silicon.nixosModules.default
+            ts-main-overlay
+            ./modules/nixos/pronix
             home-manager.nixosModules.home-manager
             hm-common
             {

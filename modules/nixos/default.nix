@@ -10,7 +10,14 @@
   boot.loader.efi.canTouchEfiVariables = true;
 
   # Enable networking
-  networking.networkmanager.enable = true;
+  networking.wireless.iwd = {
+    enable = true;
+    settings.General.EnableNetworkConfiguration = true;
+  };
+  networking.networkmanager = {
+    enable = true;
+    wifi.backend = "iwd";
+  };
 
   # Set your time zone.
   time.timeZone = "Europe/Berlin";
@@ -87,8 +94,6 @@
       "wheel"
     ];
     packages = with pkgs; [
-      # hyprland
-      hyprpolkitagent
     ];
   };
 
