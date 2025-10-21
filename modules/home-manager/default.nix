@@ -100,8 +100,12 @@
     };
     git = {
       enable = true;
-      userEmail = "acniedner@gmail.com";
-      userName = "Alexander Niedner";
+      settings = {
+        user = {
+          email = "acniedner@gmail.com";
+          name = "Alexander Niedner";
+        };
+      };
     };
     home-manager = {
       enable = true;
