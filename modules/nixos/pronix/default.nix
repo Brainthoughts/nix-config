@@ -1,26 +1,29 @@
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 
 {
-  imports =
-    [ # Include the results of the hardware scan.
-      ./hardware-configuration.nix
-      ../default.nix
-    ];
+  imports = [
+    # Include the results of the hardware scan.
+    ./hardware-configuration.nix
+    ../default.nix
+  ];
 
   nixpkgs.overlays = [
-    ( final: prev: {
-        vimPlugins = prev.vimPlugins.extend (
-	  final': prev': {
-	    neotest = (
-	      prev'.neotest.overrideAttrs ( old: {
-	        doCheck = false;
-	      }
-	    )
-	  );
+    (final: prev: {
+      vimPlugins = prev.vimPlugins.extend (
+        final': prev': {
+          neotest = (
+            prev'.neotest.overrideAttrs (old: {
+              doCheck = false;
+            })
+          );
         }
       );
-    }
-    )
+    })
   ];
 
   # Use the systemd-boot EFI boot loader.
@@ -32,8 +35,16 @@
   hardware.asahi.peripheralFirmwareDirectory = ./firmware;
 
   fileSystems = {
-    "/".options = [ "compress=zstd" "noatime" ];
-    "/nix".options = [ "compress=zstd" "noatime" ];
-  };   
-}
+    "/".options = [
+      "compress=zstd"
+      "noatime"
+    ];
+    "/nix".options = [
+      "compress=zstd"
+      "noatime"
+    ];
+  };
 
+  services.tlp.enable = true;
+  services.upower.enable = true;
+}

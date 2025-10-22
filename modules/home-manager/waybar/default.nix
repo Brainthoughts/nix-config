@@ -57,6 +57,10 @@ in
           "memory"
           "cpu"
           "temperature"
+        ]
+        # TODO: only include on devices with battery
+        ++ lib.lists.optional (true) "battery"
+        ++ [
           "clock"
         ];
 
@@ -67,6 +71,17 @@ in
 
         bluetooth = {
 
+        };
+
+        battery = {
+          interval = update_interval;
+          states = {
+            warning = 30;
+            critical = 10;
+          };
+          format = "{capacity}% {icon}";
+          format-icons = icons.battery;
+          tooltip-format = "{power}\n{timeTo}";
         };
 
         network = {

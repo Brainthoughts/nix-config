@@ -35,7 +35,7 @@
       home-manager,
       nix-index-database,
       nvim-treesitter-main,
-      nixos-apple-silicon
+      nixos-apple-silicon,
     }:
     let
       hm-common = {
@@ -85,7 +85,7 @@
         pronix = nixpkgs.lib.nixosSystem {
           system = "aarch64-linux";
           modules = [
-	    nixos-apple-silicon.nixosModules.default
+            nixos-apple-silicon.nixosModules.default
             ts-main-overlay
             ./modules/nixos/pronix
             home-manager.nixosModules.home-manager
