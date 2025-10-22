@@ -8,6 +8,7 @@
 
   home.packages = with pkgs; [
     # Apps
+    kdePackages.dolphin
     # Commands
   ];
 
@@ -67,6 +68,7 @@
         bind = [
           "${mainMod}, F, exec, ${pkgs.lib.getExe pkgs.firefox}"
           "${mainMod}, X, exec, ${pkgs.lib.getExe pkgs.kitty}"
+          "${mainMod}, D, exec, ${pkgs.lib.getExe pkgs.kdePackages.dolphin}"
           "${mainMod}, C, closewindow, activewindow"
           "${mainMod}, H, movefocus, l"
           "${mainMod}, J, movefocus, d"
