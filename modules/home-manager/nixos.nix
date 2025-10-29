@@ -132,7 +132,7 @@
         gesture = [ "3, horizontal, workspace" ];
         general = {
           border_size = 2;
-          "col.active_border" = "rgba(33ccffee) rgba(00ff99ee) 45deg";
+          "col.active_border" = "rgba(be95ffee) rgba(78a9ffee) 45deg";
           "col.inactive_border" = "rgba(595959aa)";
           resize_on_border = true;
         };
