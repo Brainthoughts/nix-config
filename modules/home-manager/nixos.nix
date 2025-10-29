@@ -19,6 +19,15 @@
         norb = "sudo nixos-rebuild switch --flake ~/.config/nix/";
       };
     };
+    hyprlock = {
+      enable = true;
+      # settings = {
+      #   general = {
+      #     hide_cursor = true;
+      #     ignore_empty_input = true;
+      #   };
+      # };
+    };
     kitty = {
       settings = {
         # window_margin_width = 3;
@@ -65,10 +74,14 @@
         exec-once = [
           "waybar"
         ];
+        monitor = [
+          "eDP-1, 3456x2160@60, 0x0, 2"
+          "HDMI-A-1, 3840x2160@60, 1728x-1080, 1.5"
+        ];
         bind = [
           "${mainMod}, F, exec, ${pkgs.lib.getExe pkgs.firefox}"
           "${mainMod}, X, exec, ${pkgs.lib.getExe pkgs.kitty}"
-          "${mainMod}, D, exec, ${pkgs.lib.getExe pkgs.kdePackages.dolphin}"
+          "${mainMod}, D, exec, ${pkgs.lib.getExe' pkgs.kdePackages.dolphin "dolphin"}"
           "${mainMod}, C, closewindow, activewindow"
           "${mainMod}, H, movefocus, l"
           "${mainMod}, J, movefocus, d"
@@ -78,7 +91,8 @@
           "${mainMod} SHIFT, J, movewindow, d"
           "${mainMod} SHIFT, K, movewindow, u"
           "${mainMod} SHIFT, L, movewindow, r"
-          "${mainMod}, Escape, togglespecialworkspace, magic"
+          # "${mainMod}, `, togglespecialworkspace, magic"
+          "${mainMod}, Escape, exec, ${pkgs.lib.getExe pkgs.hyprlock}"
           "${mainMod}, Q, exit"
         ]
         ++ (
@@ -97,6 +111,7 @@
             ) 9
           )
         );
+        gesture = [ "3, horizontal, workspace" ];
         general = {
           border_size = 2;
           "col.active_border" = "rgba(33ccffee) rgba(00ff99ee) 45deg";
@@ -115,7 +130,25 @@
         ];
         input = {
           follow_mouse = 2;
+          touchpad = {
+            tap-to-click = false;
+            clickfinger_behavior = true;
+            natural_scroll = true;
+          };
+        };
+        gestures = {
+          workspace_swipe_distance = 200;
         };
       };
     };
+
+  services.hypridle = {
+    enable = true;
+    settings = {
+      general = {
+        before_sleep_cmd = "hyprlock";
+      };
+    };
+  };
+
 }

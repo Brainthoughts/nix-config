@@ -32,6 +32,7 @@
 
   networking.hostName = "pronix"; # Define your hostname.
 
+  # TODO: don't include in git
   hardware.asahi.peripheralFirmwareDirectory = ./firmware;
 
   fileSystems = {
@@ -47,4 +48,15 @@
 
   services.tlp.enable = true;
   services.upower.enable = true;
+
+  # TODO: integrate with hyprland
+  services.logind = {
+    settings = {
+      Login = {
+        HandlePowerKey = "suspend";
+        HandleLidSwitch = "suspend";
+        HandleLidSwitchExternalPower = "ignore";
+      };
+    };
+  };
 }
