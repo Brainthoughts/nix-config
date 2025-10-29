@@ -11,6 +11,7 @@
     kdePackages.dolphin
     # Commands
     brightnessctl
+    pamixer
   ];
 
   programs = {
@@ -83,8 +84,14 @@
         binde = [
           ", XF86MonBrightnessUp, exec, ${pkgs.lib.getExe pkgs.brightnessctl} s +5%"
           ", XF86MonBrightnessDown, exec, ${pkgs.lib.getExe pkgs.brightnessctl} s 5%-"
+          ", XF86AudioRaiseVolume, exec, ${pkgs.lib.getExe pkgs.pamixer} -i 3"
+          ", XF86AudioLowerVolume, exec, ${pkgs.lib.getExe pkgs.pamixer} -d 3"
+          ", XF86AudioMute, exec, ${pkgs.lib.getExe pkgs.pamixer} -t"
         ];
         bind = [
+          ", XF86AudioPrev, exec, ${pkgs.lib.getExe pkgs.playerctl} previous"
+          ", XF86AudioPlay, exec, ${pkgs.lib.getExe pkgs.playerctl} play-pause"
+          ", XF86AudioNext, exec, ${pkgs.lib.getExe pkgs.playerctl} next"
           "${mainMod}, F, exec, ${pkgs.lib.getExe pkgs.firefox}"
           "${mainMod}, X, exec, ${pkgs.lib.getExe pkgs.kitty}"
           "${mainMod}, D, exec, ${pkgs.lib.getExe' pkgs.kdePackages.dolphin "dolphin"}"
@@ -148,12 +155,17 @@
       };
     };
 
-  services.hypridle = {
-    enable = true;
-    settings = {
-      general = {
-        before_sleep_cmd = "hyprlock";
+  services = {
+    hypridle = {
+      enable = true;
+      settings = {
+        general = {
+          before_sleep_cmd = "hyprlock";
+        };
       };
+    };
+    playerctld = {
+      enable = true;
     };
   };
 
