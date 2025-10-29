@@ -10,6 +10,7 @@
     # Apps
     kdePackages.dolphin
     # Commands
+    brightnessctl
   ];
 
   programs = {
@@ -77,6 +78,11 @@
         monitor = [
           "eDP-1, 3456x2160@60, 0x0, 2"
           "HDMI-A-1, 3840x2160@60, 1728x-1080, 1.5"
+        ];
+        # repeat when held
+        binde = [
+          ", XF86MonBrightnessUp, exec, ${pkgs.lib.getExe pkgs.brightnessctl} s +5%"
+          ", XF86MonBrightnessDown, exec, ${pkgs.lib.getExe pkgs.brightnessctl} s 5%-"
         ];
         bind = [
           "${mainMod}, F, exec, ${pkgs.lib.getExe pkgs.firefox}"
