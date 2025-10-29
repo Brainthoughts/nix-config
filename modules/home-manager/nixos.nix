@@ -69,6 +69,7 @@
   wayland.windowManager.hyprland =
     let
       mainMod = "SUPER";
+      uwsmApp = "uwsm app --";
     in
     {
       enable = true;
@@ -88,13 +89,18 @@
           ", XF86AudioLowerVolume, exec, ${pkgs.lib.getExe pkgs.pamixer} -d 3"
           ", XF86AudioMute, exec, ${pkgs.lib.getExe pkgs.pamixer} -t"
         ];
+        # on long press
+        bindo = [
+          "${mainMod}, Q, exec, uwsm stop"
+        ];
+        # once on key tap
         bind = [
           ", XF86AudioPrev, exec, ${pkgs.lib.getExe pkgs.playerctl} previous"
           ", XF86AudioPlay, exec, ${pkgs.lib.getExe pkgs.playerctl} play-pause"
           ", XF86AudioNext, exec, ${pkgs.lib.getExe pkgs.playerctl} next"
-          "${mainMod}, F, exec, ${pkgs.lib.getExe pkgs.firefox}"
-          "${mainMod}, X, exec, ${pkgs.lib.getExe pkgs.kitty}"
-          "${mainMod}, D, exec, ${pkgs.lib.getExe' pkgs.kdePackages.dolphin "dolphin"}"
+          "${mainMod}, F, exec, ${uwsmApp} ${pkgs.lib.getExe pkgs.firefox}"
+          "${mainMod}, X, exec, ${uwsmApp} ${pkgs.lib.getExe pkgs.kitty}"
+          "${mainMod}, D, exec, ${uwsmApp} ${pkgs.lib.getExe' pkgs.kdePackages.dolphin "dolphin"}"
           "${mainMod}, C, closewindow, activewindow"
           "${mainMod}, H, movefocus, l"
           "${mainMod}, J, movefocus, d"
@@ -106,7 +112,6 @@
           "${mainMod} SHIFT, L, movewindow, r"
           # "${mainMod}, `, togglespecialworkspace, magic"
           "${mainMod}, Escape, exec, ${pkgs.lib.getExe pkgs.hyprlock}"
-          "${mainMod}, Q, exit"
         ]
         ++ (
           # workspaces
