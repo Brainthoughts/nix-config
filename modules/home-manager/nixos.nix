@@ -8,7 +8,10 @@
 
   home.packages = with pkgs; [
     # Apps
+    kdePackages.dolphin
     # Commands
+    brightnessctl
+    pamixer
   ];
 
   programs = {
@@ -17,6 +20,15 @@
         nvnix = "nvim ~/.config/nix/**.nix";
         norb = "sudo nixos-rebuild switch --flake ~/.config/nix/";
       };
+    };
+    hyprlock = {
+      enable = true;
+      # settings = {
+      #   general = {
+      #     hide_cursor = true;
+      #     ignore_empty_input = true;
+      #   };
+      # };
     };
     kitty = {
       settings = {
@@ -57,6 +69,7 @@
   wayland.windowManager.hyprland =
     let
       mainMod = "SUPER";
+      uwsmApp = "uwsm app --";
     in
     {
       enable = true;
@@ -64,9 +77,30 @@
         exec-once = [
           "waybar"
         ];
+        monitor = [
+          "eDP-1, 3456x2160@60, 0x0, 2"
+          "HDMI-A-1, 3840x2160@60, 1728x-1080, 1.5"
+        ];
+        # repeat when held
+        binde = [
+          ", XF86MonBrightnessUp, exec, ${pkgs.lib.getExe pkgs.brightnessctl} s +5%"
+          ", XF86MonBrightnessDown, exec, ${pkgs.lib.getExe pkgs.brightnessctl} s 5%-"
+          ", XF86AudioRaiseVolume, exec, ${pkgs.lib.getExe pkgs.pamixer} -i 3"
+          ", XF86AudioLowerVolume, exec, ${pkgs.lib.getExe pkgs.pamixer} -d 3"
+          ", XF86AudioMute, exec, ${pkgs.lib.getExe pkgs.pamixer} -t"
+        ];
+        # on long press
+        bindo = [
+          "${mainMod}, Q, exec, uwsm stop"
+        ];
+        # once on key tap
         bind = [
-          "${mainMod}, F, exec, ${pkgs.lib.getExe pkgs.firefox}"
-          "${mainMod}, X, exec, ${pkgs.lib.getExe pkgs.kitty}"
+          ", XF86AudioPrev, exec, ${pkgs.lib.getExe pkgs.playerctl} previous"
+          ", XF86AudioPlay, exec, ${pkgs.lib.getExe pkgs.playerctl} play-pause"
+          ", XF86AudioNext, exec, ${pkgs.lib.getExe pkgs.playerctl} next"
+          "${mainMod}, F, exec, ${uwsmApp} ${pkgs.lib.getExe pkgs.firefox}"
+          "${mainMod}, X, exec, ${uwsmApp} ${pkgs.lib.getExe pkgs.kitty}"
+          "${mainMod}, D, exec, ${uwsmApp} ${pkgs.lib.getExe' pkgs.kdePackages.dolphin "dolphin"}"
           "${mainMod}, C, closewindow, activewindow"
           "${mainMod}, H, movefocus, l"
           "${mainMod}, J, movefocus, d"
@@ -76,8 +110,8 @@
           "${mainMod} SHIFT, J, movewindow, d"
           "${mainMod} SHIFT, K, movewindow, u"
           "${mainMod} SHIFT, L, movewindow, r"
-          "${mainMod}, Escape, togglespecialworkspace, magic"
-          "${mainMod}, Q, exit"
+          # "${mainMod}, `, togglespecialworkspace, magic"
+          "${mainMod}, Escape, exec, ${pkgs.lib.getExe pkgs.hyprlock}"
         ]
         ++ (
           # workspaces
@@ -95,9 +129,10 @@
             ) 9
           )
         );
+        gesture = [ "3, horizontal, workspace" ];
         general = {
           border_size = 2;
-          "col.active_border" = "rgba(33ccffee) rgba(00ff99ee) 45deg";
+          "col.active_border" = "rgba(be95ffee) rgba(78a9ffee) 45deg";
           "col.inactive_border" = "rgba(595959aa)";
           resize_on_border = true;
         };
@@ -113,7 +148,30 @@
         ];
         input = {
           follow_mouse = 2;
+          touchpad = {
+            tap-to-click = false;
+            clickfinger_behavior = true;
+            natural_scroll = true;
+          };
+        };
+        gestures = {
+          workspace_swipe_distance = 200;
         };
       };
     };
+
+  services = {
+    hypridle = {
+      enable = true;
+      settings = {
+        general = {
+          before_sleep_cmd = "hyprlock";
+        };
+      };
+    };
+    playerctld = {
+      enable = true;
+    };
+  };
+
 }

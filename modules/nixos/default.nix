@@ -37,7 +37,11 @@
     LC_TIME = "de_DE.UTF-8";
   };
 
-  programs.hyprland.enable = true;
+  programs.hyprland = {
+    enable = true;
+    withUWSM = true;
+  };
+  programs.hyprlock.enable = true;
 
   # Configure console keymap
   console.keyMap = "us";

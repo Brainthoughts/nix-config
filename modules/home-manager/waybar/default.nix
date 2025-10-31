@@ -67,6 +67,7 @@ in
         pulseaudio = {
           scroll-step = 2.5;
           format = "{volume}% ${icons.volume_high}";
+          format-muted = "{volume}% ${icons.volume_mute}";
         };
 
         bluetooth = {

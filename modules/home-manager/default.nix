@@ -123,7 +123,7 @@
         shell = pkgs.lib.getExe pkgs.fish;
         editor = pkgs.lib.getExe pkgs.neovim;
         tab_bar_align = "center";
-        include = "themes/carbonfox.conf";
+        include = "${pkgs.writeText "carbonfox.conf" (builtins.readFile ./kitty/themes/carbonfox.conf)}";
       };
     };
     lazygit = {
