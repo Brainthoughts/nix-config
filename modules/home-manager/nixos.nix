@@ -8,7 +8,8 @@
 
   home.packages = with pkgs; [
     # Apps
-    kdePackages.dolphin
+    nautilus
+    webcord-vencord
     # Commands
     brightnessctl
     pamixer
@@ -21,6 +22,7 @@
         norb = "sudo nixos-rebuild switch --flake ~/.config/nix/";
       };
     };
+    # TODO: consider hyprlauncher when it matures
     fuzzel = {
       enable = true;
       settings = {
@@ -63,6 +65,12 @@
         # macos_show_window_title_in = "menubar";
         # macos_colorspace = "default";
       };
+    };
+    # TODO: check for lossless
+    # https://github.com/aome510/spotify-player/issues/829
+    # https://github.com/librespot-org/librespot/issues/1583
+    spotify-player = {
+      enable = true;
     };
     ssh = {
       enable = true;
@@ -121,17 +129,19 @@
         # on long press
         bindo = [
           "${mainMod}, Q, exec, uwsm stop"
+          "${mainMod} SHIFT, Q, exit"
+          "${mainMod}, D, killwindow, active"
         ];
         # once on key tap
         bind = [
           ", XF86AudioPrev, exec, ${pkgs.lib.getExe pkgs.playerctl} previous"
           ", XF86AudioPlay, exec, ${pkgs.lib.getExe pkgs.playerctl} play-pause"
           ", XF86AudioNext, exec, ${pkgs.lib.getExe pkgs.playerctl} next"
-          "${mainMod}, F, exec, ${uwsmApp} ${pkgs.lib.getExe pkgs.firefox}"
+          "${mainMod}, B, exec, ${uwsmApp} ${pkgs.lib.getExe pkgs.firefox}"
           "${mainMod}, X, exec, ${uwsmApp} ${pkgs.lib.getExe pkgs.kitty}"
-          "${mainMod}, D, exec, ${uwsmApp} ${pkgs.lib.getExe' pkgs.kdePackages.dolphin "dolphin"}"
+          "${mainMod}, F, exec, ${uwsmApp} ${pkgs.lib.getExe pkgs.nautilus}"
           "${mainMod}, SPACE, exec, ${uwsmApp} ${pkgs.lib.getExe pkgs.fuzzel}"
-          "${mainMod}, C, closewindow, active"
+          "${mainMod}, D, closewindow, active"
           "${mainMod}, M, togglefloating, active"
           "${mainMod}, H, movefocus, l"
           "${mainMod}, J, movefocus, d"
@@ -141,7 +151,7 @@
           "${mainMod} SHIFT, J, movewindow, d"
           "${mainMod} SHIFT, K, movewindow, u"
           "${mainMod} SHIFT, L, movewindow, r"
-          # "${mainMod}, `, togglespecialworkspace, magic"
+          "${mainMod}, `, togglespecialworkspace, magic"
           "${mainMod}, Escape, exec, ${pkgs.lib.getExe pkgs.hyprlock}"
         ]
         ++ (
