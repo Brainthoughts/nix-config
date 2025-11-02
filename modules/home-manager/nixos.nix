@@ -21,6 +21,31 @@
         norb = "sudo nixos-rebuild switch --flake ~/.config/nix/";
       };
     };
+    fuzzel = {
+      enable = true;
+      settings = {
+        main = {
+          font = "Hack";
+          terminal = "${pkgs.lib.getExe pkgs.kitty}";
+          launch-prefix = "${pkgs.lib.getExe pkgs.uwsm} app --";
+        };
+        colors = {
+          background = "#161616ff";
+          text = "#f2f4f8ff";
+          prompt = "#535353ff";
+          placeholder = "#282828ff";
+          input = "#f2f4f8ff";
+          match = "#78a9ffff";
+          selection = "#484848ff";
+          selection-text = "#f2f4f8ff";
+          selection-match = "#78a9ffff";
+          border = "#be95ffff";
+        };
+        border = {
+          width = 2;
+        };
+      };
+    };
     hyprlock = {
       enable = true;
       # settings = {
@@ -69,7 +94,7 @@
   wayland.windowManager.hyprland =
     let
       mainMod = "SUPER";
-      uwsmApp = "uwsm app --";
+      uwsmApp = "${pkgs.lib.getExe pkgs.uwsm} app --";
     in
     {
       enable = true;
@@ -80,6 +105,10 @@
         monitor = [
           "eDP-1, 3456x2160@60, 0x0, 2"
           "HDMI-A-1, 3840x2160@60, 1728x-1080, 1.5"
+        ];
+        # mouse
+        bindm = [
+          "${mainMod}, mouse:272, movewindow"
         ];
         # repeat when held
         binde = [
@@ -101,7 +130,9 @@
           "${mainMod}, F, exec, ${uwsmApp} ${pkgs.lib.getExe pkgs.firefox}"
           "${mainMod}, X, exec, ${uwsmApp} ${pkgs.lib.getExe pkgs.kitty}"
           "${mainMod}, D, exec, ${uwsmApp} ${pkgs.lib.getExe' pkgs.kdePackages.dolphin "dolphin"}"
-          "${mainMod}, C, closewindow, activewindow"
+          "${mainMod}, SPACE, exec, ${uwsmApp} ${pkgs.lib.getExe pkgs.fuzzel}"
+          "${mainMod}, C, closewindow, active"
+          "${mainMod}, M, togglefloating, active"
           "${mainMod}, H, movefocus, l"
           "${mainMod}, J, movefocus, d"
           "${mainMod}, K, movefocus, u"
