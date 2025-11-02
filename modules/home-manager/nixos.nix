@@ -96,6 +96,17 @@
     # };
     mako = {
       enable = true;
+      settings = {
+        font = "Hack";
+
+        background-color = "#161616";
+        text-color = "#f2f4f8";
+        border-color = "#be95ff";
+        progress-color = "#78a9ff";
+
+        border-radius = "10";
+        default-timeout = 5000;
+      };
     };
   };
 
