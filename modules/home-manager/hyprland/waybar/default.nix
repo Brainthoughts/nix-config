@@ -8,38 +8,50 @@
 let
 
   update_interval = 5;
-  colors = {
-    white = "#f8f8f2";
-    black = "#ffffff";
 
-    red = "#dd532e";
-    orange = "#ff9977";
-    yellow = "#fcfc53";
-    green = "#69ff94";
-    blue = "#2aa9ff";
+  divContentWithClass = class: icon: "<div class=\"${class}\">${icon}</div>";
+  inactive = divContentWithClass "inactive";
+  info = divContentWithClass "info";
+  notice = divContentWithClass "notice";
+  warn = divContentWithClass "warn";
+  critical = divContentWithClass "critical";
+
+  icons = {
+    volume_high = "";
+    volume_mute = "";
+    arrow_up_left = "󱞽";
+    arrow_down_right = "󱞣";
+    disconnected = "󰌙";
+    wifi = "";
+    ram = "";
+    cpu = "";
+    thermometer = [
+      ""
+      ""
+      (notice "")
+      (warn "")
+      (critical "")
+    ];
+    battery = [
+      ""
+      ""
+      ""
+      ""
+      ""
+    ];
   };
-
-  common_icon_colorscheme = icon: [
-    "<span color='${colors.white}'>${icon}</span>"
-    "<span color='${colors.white}'>${icon}</span>"
-    "<span color='${colors.blue}'>${icon}</span>"
-    "<span color='${colors.blue}'>${icon}</span>"
-    "<span color='${colors.green}'>${icon}</span>"
-    "<span color='${colors.green}'>${icon}</span>"
-    "<span color='${colors.yellow}'>${icon}</span>"
-    "<span color='${colors.yellow}'>${icon}</span>"
-    "<span color='${colors.orange}'>${icon}</span>"
-    "<span color='${colors.red}'>${icon}</span>"
-  ];
-
-  icons = builtins.fromJSON (builtins.readFile ./icons.json);
 in
 {
   programs.waybar = {
     enable = true;
+    systemd = {
+      enable = true;
+      # enableInspect = true;
+    };
+    style = ./style.css;
     settings = {
       mainBar = {
-        # height = 30;
+
         spacing = 0; # deal with this in css
         position = "bottom";
 
@@ -90,37 +102,33 @@ in
           interval = update_interval;
           format-ethernet = "{bandwidthUpBytes} ${icons.arrow_up_left}${icons.arrow_down_right} {bandwidthDownBytes}";
           format-wifi = "{essid} ({signalStrength}%) ${icons.wifi}";
-          format-disconnected = "<span color='${colors.yellow}'>${icons.disconnected}</span>";
+          format-disconnected = "${warn icons.disconnected}";
           tooltip-format = "{ifname} : {ipaddr} : {cidr}";
         };
 
         memory = {
           interval = update_interval;
           format = "{percentage}% {icon}";
-          format-icons = common_icon_colorscheme icons.ram;
+          format-icons = icons.ram;
         };
 
         cpu = {
           interval = update_interval;
           format = "{usage}% {icon}";
-          format-icons = common_icon_colorscheme icons.cpu;
+          format-icons = icons.cpu;
         };
 
         temperature = {
           interval = update_interval;
           format = "{temperatureC} {icon}";
-          format-icons = common_icon_colorscheme icons.thermometer;
+          format-icons = icons.thermometer;
         };
 
         clock = {
           interval = update_interval;
           format = "{:%H:%M}";
         };
-
       };
-
     };
-
-    style = ./style.css;
   };
 }

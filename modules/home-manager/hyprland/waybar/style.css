@@ -1,17 +1,55 @@
-* {
-  /* `otf-font-awesome` is required to be installed for icons */
-  font-family: Hack Nerd Font;
-  font-size: 18px;
-}
-
 window#waybar {
+  font-family: Hack Nerd Font;
+  font-size: 16px;
+
   background-color: #161616;
-  /* border-top: 2px solid rgba(100, 114, 125, 0.5); */
   color: #f2f4f8;
+
   transition-property: background-color;
   transition-duration: .5s;
 }
 
+.inactive {
+  color: #535353;
+}
+
+.info {
+  color: #78a9ff;
+}
+
+.notice {
+  color: #33b1ff;
+}
+
+.warn {
+  color: #be95ff;
+}
+
+.critical {
+  color: #ee5396;
+}
+
+button {
+  background-image: none;
+  color: inherit;
+  background-color: inherit;
+  border: none;
+  box-shadow: none;
+  text-shadow: none;
+  transition-timing-function: inherit;
+}
+
 .module {
+  font-family: inherit;
+  font-size: inherit;
   padding: 0 1em;
+}
+
+#workspaces button:not(.active) {
+  color: #535353;
+}
+
+#workspaces button:hover {
+  background-color: #78a9ff;
+  color: black;
 }
