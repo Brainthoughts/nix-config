@@ -41,6 +41,7 @@ in
       mainBar = {
         # height = 30;
         spacing = 0; # deal with this in css
+        position = "bottom";
 
         modules-left = [
           "hyprland/workspaces"
@@ -120,6 +121,6 @@ in
 
     };
 
-    style = builtins.readFile ./style.css;
+    style = ./style.css;
   };
 }

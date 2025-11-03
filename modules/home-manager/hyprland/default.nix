@@ -181,6 +181,8 @@
           "col.active_border" = "rgba(be95ffee) rgba(78a9ffee) 45deg";
           "col.inactive_border" = "rgba(595959aa)";
           resize_on_border = true;
+          gaps_in = 5;
+          gaps_out = 10;
         };
         decoration = {
           rounding = 10;
@@ -202,6 +204,11 @@
         };
         gestures = {
           workspace_swipe_distance = 200;
+        };
+        misc = {
+          disable_hyprland_logo = true;
+          disable_splash_rendering = true;
+          background_color = lib.fromHexString "0x161616";
         };
       };
     };

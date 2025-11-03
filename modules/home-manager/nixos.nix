@@ -17,6 +17,7 @@
       shellAbbrs = {
         nvnix = "nvim ~/.config/nix/**.nix";
         norb = "sudo nixos-rebuild switch --flake ~/.config/nix/";
+        norr = "sudo nixos-rebuild switch --flake ~/.config/nix/ --rollback";
       };
     };
     # TODO: check for lossless
