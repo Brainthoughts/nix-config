@@ -8,6 +8,7 @@
   home.packages = with pkgs; [
     # Apps
     nautilus
+    pavucontrol
     # webcord-vencord # tmp disabled due to insecure
     # Commands
     brightnessctl

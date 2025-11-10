@@ -8,6 +8,7 @@
 let
 
   update_interval = 5;
+  uwsm_app = app: "${lib.getExe pkgs.uwsm} app -- ${app}";
 
   divContentWithClass = class: icon: "<div class=\"${class}\">${icon}</div>";
   inactive = divContentWithClass "inactive";
@@ -81,6 +82,8 @@ in
           scroll-step = 2.5;
           format = "{volume}% ${icons.volume_high}";
           format-muted = "{volume}% ${icons.volume_mute}";
+          # open pavucontrol to output tab
+          on-click = "${uwsm_app (lib.getExe pkgs.pavucontrol)} -t 3";
         };
 
         bluetooth = {
