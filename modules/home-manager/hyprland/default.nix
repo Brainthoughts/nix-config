@@ -181,12 +181,12 @@
         );
         gesture = [ "3, horizontal, workspace" ];
         general = {
-          border_size = 2;
+          border_size = 1;
           "col.active_border" = "rgba(be95ffee) rgba(78a9ffee) 45deg";
-          "col.inactive_border" = "rgba(595959aa)";
+          "col.inactive_border" = "rgba(53535380)";
           resize_on_border = true;
-          gaps_in = 5;
-          gaps_out = 10;
+          gaps_in = 4;
+          gaps_out = 8;
         };
         decoration = {
           rounding = 10;
