@@ -8,7 +8,7 @@
   home.packages = with pkgs; [
     # Apps
     nautilus
-    webcord-vencord
+    # webcord-vencord # tmp disabled due to insecure
     # Commands
     brightnessctl
     pamixer
@@ -193,6 +193,9 @@
           "windows, 1, 8, default, popin"
         ];
         input = {
+          # keyboard, altgr for umlaut
+          kb_options = "lv3:ralt_switch";
+          kb_variant = "altgr-intl";
           follow_mouse = 2;
           touchpad = {
             tap-to-click = false;
@@ -208,6 +211,13 @@
           disable_splash_rendering = true;
           background_color = lib.fromHexString "0x161616";
         };
+        # device specific input settings
+        device = [
+          {
+            name = "logitech-g903-ls-1";
+            sensitivity = -0.6;
+          }
+        ];
       };
     };
 
