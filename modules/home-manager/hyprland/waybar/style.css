@@ -9,7 +9,9 @@ window#waybar {
   transition-duration: .5s;
 }
 
-.inactive {
+.inactive,
+.disconnected,
+.muted {
   color: #535353;
 }
 

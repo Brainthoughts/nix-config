@@ -10,13 +10,6 @@ let
   update_interval = 5;
   uwsm_app = app: "${lib.getExe pkgs.uwsm} app -- ${app}";
 
-  divContentWithClass = class: icon: "<div class=\"${class}\">${icon}</div>";
-  inactive = divContentWithClass "inactive";
-  info = divContentWithClass "info";
-  notice = divContentWithClass "notice";
-  warn = divContentWithClass "warn";
-  critical = divContentWithClass "critical";
-
   icons = {
     volume_high = "";
     volume_mute = "";
@@ -29,9 +22,9 @@ let
     thermometer = [
       ""
       ""
-      (notice "")
-      (warn "")
-      (critical "")
+      ""
+      ""
+      ""
     ];
     battery = [
       ""
@@ -90,9 +83,47 @@ in
 
         };
 
+        network = {
+          interval = update_interval;
+          format-ethernet = "{bandwidthUpBytes} ${icons.arrow_up_left}${icons.arrow_down_right} {bandwidthDownBytes}";
+          format-wifi = "{essid} ({signalStrength}%) ${icons.wifi}";
+          format-disconnected = "${icons.disconnected}";
+          tooltip-format = "{ifname} : {ipaddr} : {cidr}";
+        };
+
+        memory = {
+          interval = update_interval;
+          format = "{percentage}% {icon}";
+          format-icons = icons.ram;
+          states = {
+            notice = 50;
+            warning = 75;
+            critical = 90;
+          };
+        };
+
+        cpu = {
+          interval = update_interval;
+          format = "{usage}% {icon}";
+          format-icons = icons.cpu;
+          states = {
+            notice = 50;
+            warning = 80;
+            critical = 95;
+          };
+        };
+
+        temperature = {
+          interval = update_interval;
+          format = "{temperatureC} {icon}";
+          format-icons = icons.thermometer;
+          critical-threshold = 80;
+        };
+
         battery = {
           interval = update_interval;
           states = {
+            notice = 50;
             warning = 30;
             critical = 10;
           };
@@ -101,35 +132,10 @@ in
           tooltip-format = "{power}\n{timeTo}";
         };
 
-        network = {
-          interval = update_interval;
-          format-ethernet = "{bandwidthUpBytes} ${icons.arrow_up_left}${icons.arrow_down_right} {bandwidthDownBytes}";
-          format-wifi = "{essid} ({signalStrength}%) ${icons.wifi}";
-          format-disconnected = "${warn icons.disconnected}";
-          tooltip-format = "{ifname} : {ipaddr} : {cidr}";
-        };
-
-        memory = {
-          interval = update_interval;
-          format = "{percentage}% {icon}";
-          format-icons = icons.ram;
-        };
-
-        cpu = {
-          interval = update_interval;
-          format = "{usage}% {icon}";
-          format-icons = icons.cpu;
-        };
-
-        temperature = {
-          interval = update_interval;
-          format = "{temperatureC} {icon}";
-          format-icons = icons.thermometer;
-        };
-
         clock = {
           interval = update_interval;
           format = "{:%H:%M}";
+          tooltip-format = "{:%a %Y-%m-%d}";
         };
       };
     };
