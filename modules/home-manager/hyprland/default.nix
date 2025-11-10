@@ -131,6 +131,11 @@
           "${mainMod} SHIFT, Q, exit"
           "${mainMod}, D, killwindow, active"
         ];
+        # even when locked
+        bindl = [
+          ", switch:on:Apple SMC power/lid events, exec, hyprctl keyword monitor \"eDP-1, disable\""
+          ", switch:off:Apple SMC power/lid events, exec, hyprctl keyword monitor \"eDP-1, 3456x2160@60, 0x0, 2\""
+        ];
         # once on key tap
         bind = [
           ", XF86AudioPrev, exec, ${lib.getExe pkgs.playerctl} previous"
