@@ -11,11 +11,13 @@ window#waybar {
 
 .inactive,
 .disconnected,
-.muted {
+.muted,
+.disabled {
   color: #535353;
 }
 
-.info {
+.info,
+.connected {
   color: #78a9ff;
 }
 

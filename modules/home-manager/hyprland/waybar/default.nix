@@ -59,7 +59,7 @@ in
 
         modules-right = [
           "pulseaudio"
-          # "bluetooth"
+          "bluetooth"
           "network"
           "memory"
           "cpu"
@@ -80,7 +80,15 @@ in
         };
 
         bluetooth = {
-
+          format = "󰂯";
+          format-disabled = "󰂲";
+          format-connected = "󰂱 {device_alias}";
+          format-connected-battery = "󰂱 {device_alias} | {device_battery_percentage}%";
+          tooltip = true;
+          tooltip-format = "{controller_alias} : {controller_address}\n\n{device_enumerate}";
+          tooltip-format-enumerate-connected = "{device_alias} : {device_address}";
+          tooltip-format-enumerate-connected-battery = "{device_alias} : {device_address} : {device_battery_percentage}%";
+          on-click = "${uwsm_app (lib.getExe' pkgs.blueman "blueman-manager")}";
         };
 
         network = {
