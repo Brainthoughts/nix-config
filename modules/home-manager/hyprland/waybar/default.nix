@@ -104,8 +104,8 @@ in
           format = "{percentage}% {icon}";
           format-icons = icons.ram;
           states = {
-            notice = 50;
-            warning = 75;
+            notice = 65;
+            warning = 80;
             critical = 90;
           };
         };
