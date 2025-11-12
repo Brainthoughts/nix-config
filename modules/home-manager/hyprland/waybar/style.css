@@ -25,6 +25,7 @@ window#waybar {
   color: #33b1ff;
 }
 
+.warning,
 .warn {
   color: #be95ff;
 }
