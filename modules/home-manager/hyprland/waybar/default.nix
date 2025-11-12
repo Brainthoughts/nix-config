@@ -58,7 +58,7 @@ in
         ];
 
         modules-right = [
-          "pulseaudio"
+          "wireplumber"
           "bluetooth"
           "network"
           "memory"
@@ -71,7 +71,7 @@ in
           "clock"
         ];
 
-        pulseaudio = {
+        wireplumber = {
           scroll-step = 2.5;
           format = "{volume}% ${icons.volume_high}";
           format-muted = "{volume}% ${icons.volume_mute}";
