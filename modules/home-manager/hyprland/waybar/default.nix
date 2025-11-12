@@ -71,6 +71,10 @@ in
           "clock"
         ];
 
+        "hyprland/window" = {
+          separate-outputs = true;
+        };
+
         wireplumber = {
           scroll-step = 2.5;
           format = "{volume}% ${icons.volume_high}";
