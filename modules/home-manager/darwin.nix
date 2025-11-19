@@ -15,6 +15,7 @@
     raycast
     iina
     prismlauncher
+    utm
     # Commands
     zulu17
     nmap
