@@ -93,6 +93,9 @@
           # dictionary
           blink-cmp-dictionary
 
+          # tmux
+          vim-tmux-navigator
+
           ## lang
           # c
           clangd_extensions-nvim

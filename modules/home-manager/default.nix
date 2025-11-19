@@ -161,7 +161,7 @@
       keyMode = "vi";
       mouse = true;
       shell = pkgs.lib.getExe pkgs.fish;
-      plugins = with pkgs.tmuxPlugins; [ ];
+      plugins = with pkgs.tmuxPlugins; [ vim-tmux-navigator ];
       extraConfig = builtins.readFile ./tmux/tmux.conf;
     };
     uv = {
