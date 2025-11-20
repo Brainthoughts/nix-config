@@ -166,6 +166,7 @@
       plugins = with pkgs.tmuxPlugins; [
         vim-tmux-navigator
         fuzzback
+        continuum
       ];
       extraConfig = builtins.readFile ./tmux/tmux.conf;
     };
