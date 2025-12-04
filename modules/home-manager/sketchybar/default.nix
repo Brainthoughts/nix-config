@@ -7,7 +7,7 @@
     lua5_4_compat
   ];
 
-  programs.aerospace.userSettings = {
+  programs.aerospace.settings = {
     after-startup-command = [ "exec-and-forget ${lib.getExe pkgs.sketchybar}" ];
     on-focus-changed = [
       "exec-and-forget ${lib.getExe pkgs.sketchybar} --trigger aerospace_focus_changed"

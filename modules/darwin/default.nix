@@ -37,16 +37,19 @@
     ];
   };
 
-  # Necessary for using flakes on this system.
-  nix.settings.experimental-features = [
-    "nix-command"
-    "flakes"
-  ];
-
   # automatically collect garbage
-  nix.gc = {
-    automatic = true;
-    options = "--delete-older-than 30d";
+  nix = {
+    settings = {
+      auto-optimise-store = true;
+      experimental-features = [
+        "nix-command"
+        "flakes"
+      ];
+    };
+    gc = {
+      automatic = true;
+      options = "--delete-older-than 30d";
+    };
   };
 
   # newer version wants 30000, cant read from stateVersion that it should be 350 for some reason

@@ -68,12 +68,6 @@
     #jack.enable = true;
   };
 
-  # default enable these nix settings
-  nix.settings.experimental-features = [
-    "nix-command"
-    "flakes"
-  ];
-
   # Allow unfree packages
   nixpkgs = {
     config = {
@@ -82,9 +76,18 @@
   };
 
   # automatically collect garbage
-  nix.gc = {
-    automatic = true;
-    options = "--delete-older-than 30d";
+  nix = {
+    settings = {
+      auto-optimise-store = true;
+      experimental-features = [
+        "nix-command"
+        "flakes"
+      ];
+    };
+    gc = {
+      automatic = true;
+      options = "--delete-older-than 30d";
+    };
   };
 
   services.tailscale.enable = true;

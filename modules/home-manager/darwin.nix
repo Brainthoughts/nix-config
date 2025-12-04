@@ -29,7 +29,7 @@
       launchd = {
         enable = true;
       };
-      userSettings = {
+      settings = {
         gaps = {
           outer = {
             left = 12;
