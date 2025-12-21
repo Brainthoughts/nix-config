@@ -62,6 +62,10 @@
       # svelte
       svelte-language-server
 
+      # sql
+      sqlite
+      sqlfluff
+
       # tex
       texliveFull
       texlab
@@ -114,6 +118,11 @@
           # rust
           crates-nvim
           rustaceanvim
+
+          # sql
+          vim-dadbod
+          vim-dadbod-completion
+          vim-dadbod-ui
 
           # tex
           vimtex
