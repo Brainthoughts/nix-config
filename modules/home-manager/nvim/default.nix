@@ -29,8 +29,8 @@
       ltex-ls-plus
 
       # java
-      jdk
-      jdt-language-server
+      jdk25
+      (jdt-language-server.override { jdk = pkgs.jdk25; })
       lombok
 
       # markdown
