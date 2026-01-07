@@ -39,10 +39,10 @@
 
       # nix
       nixd
-      nixfmt-rfc-style
+      nixfmt
 
       # php
-      php84Packages.php-codesniffer
+      # php84Packages.php-codesniffer # TODO: reenable once fixed
       php84Packages.php-cs-fixer
       phpactor
 
