@@ -70,6 +70,18 @@
         };
       };
       nixosConfigurations = {
+        blacknix = nixpkgs.lib.nixosSystem {
+          system = "x86_64-linux";
+          modules = [
+            ts-main-overlay
+            ./modules/nixos/blacknix
+            home-manager.nixosModules.home-manager
+            hm-common
+            {
+              home-manager.users.alexn = ./modules/home-manager/nixos.nix;
+            }
+          ];
+        };
         macnix = nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
           modules = [
