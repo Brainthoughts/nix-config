@@ -139,7 +139,7 @@
           "${mainMod}, B, exec, ${uwsmApp} ${lib.getExe pkgs.firefox}"
           "${mainMod}, X, exec, ${uwsmApp} ${lib.getExe pkgs.kitty}"
           "${mainMod}, F, exec, ${uwsmApp} ${lib.getExe pkgs.nautilus}"
-          "${mainMod}, S, exec, ${uwsmApp} ${lib.getExe pkgs.kitty} ${lib.getExe pkgs.spotify}"
+          "${mainMod}, S, exec, ${uwsmApp} ${lib.getExe pkgs.spotify}"
           "${mainMod}, SPACE, exec, ${uwsmApp} ${lib.getExe pkgs.fuzzel}"
           "${mainMod}, D, closewindow, active"
           "${mainMod}, M, togglefloating, active"
