@@ -67,12 +67,6 @@
       #   };
       # };
     };
-    # TODO: check for lossless
-    # https://github.com/aome510/spotify-player/issues/829
-    # https://github.com/librespot-org/librespot/issues/1583
-    spotify-player = {
-      enable = true;
-    };
     ssh = {
       enable = true;
       enableDefaultConfig = false;
@@ -119,10 +113,6 @@
     {
       enable = true;
       settings = {
-        monitor = [
-          "eDP-1, 3456x2160@60, 0x0, 2"
-          "HDMI-A-1, 3840x2160@60, 1728x-1080, 1.5"
-        ];
         # mouse
         bindm = [
           "${mainMod}, mouse:272, movewindow"
@@ -141,11 +131,6 @@
           "${mainMod} SHIFT, Q, exit"
           "${mainMod}, D, killwindow, active"
         ];
-        # even when locked
-        bindl = [
-          ", switch:on:Apple SMC power/lid events, exec, hyprctl keyword monitor \"eDP-1, disable\""
-          ", switch:off:Apple SMC power/lid events, exec, hyprctl keyword monitor \"eDP-1, 3456x2160@60, 0x0, 2\""
-        ];
         # once on key tap
         bind = [
           ", XF86AudioPrev, exec, ${lib.getExe pkgs.playerctl} previous"
@@ -154,7 +139,7 @@
           "${mainMod}, B, exec, ${uwsmApp} ${lib.getExe pkgs.firefox}"
           "${mainMod}, X, exec, ${uwsmApp} ${lib.getExe pkgs.kitty}"
           "${mainMod}, F, exec, ${uwsmApp} ${lib.getExe pkgs.nautilus}"
-          "${mainMod}, S, exec, ${uwsmApp} ${lib.getExe pkgs.kitty} ${lib.getExe pkgs.spotify-player}"
+          "${mainMod}, S, exec, ${uwsmApp} ${lib.getExe pkgs.kitty} ${lib.getExe pkgs.spotify}"
           "${mainMod}, SPACE, exec, ${uwsmApp} ${lib.getExe pkgs.fuzzel}"
           "${mainMod}, D, closewindow, active"
           "${mainMod}, M, togglefloating, active"

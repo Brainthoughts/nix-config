@@ -78,7 +78,7 @@
             home-manager.nixosModules.home-manager
             hm-common
             {
-              home-manager.users.alexn = ./modules/home-manager/nixos.nix;
+              home-manager.users.alexn = ./modules/home-manager/nixos/blacknix;
             }
           ];
         };
@@ -90,7 +90,7 @@
             home-manager.nixosModules.home-manager
             hm-common
             {
-              home-manager.users.alexn = ./modules/home-manager/nixos.nix;
+              home-manager.users.alexn = ./modules/home-manager/nixos/macnix;
             }
           ];
         };
@@ -103,7 +103,7 @@
             home-manager.nixosModules.home-manager
             hm-common
             {
-              home-manager.users.alexn = ./modules/home-manager/nixos.nix;
+              home-manager.users.alexn = ./modules/home-manager/nixos/pronix;
             }
           ];
         };
