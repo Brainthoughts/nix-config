@@ -13,6 +13,9 @@
   ];
 
   programs = {
+    discord = {
+      enable = true;
+    };
     fish = {
       shellAbbrs = {
         nvnix = "nvim ~/.config/nix/**.nix";
@@ -30,14 +33,8 @@
       enable = true;
       enableDefaultConfig = false;
       matchBlocks = {
-        "github.com" = {
-          identityFile = "~/.ssh/gh";
-        };
-        "*.tum.de" = {
-          identityFile = "~/.ssh/tum";
-        };
-        "gitlab.lrz.de" = {
-          identityFile = "~/.ssh/tum";
+        "*" = {
+          identityAgent = "~/.1password/agent.sock";
         };
       };
     };

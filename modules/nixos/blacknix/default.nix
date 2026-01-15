@@ -10,6 +10,9 @@
 
   boot.kernelPackages = pkgs.linuxPackages_latest;
 
+  # bluetooth has a stroke otherwise
+  boot.kernelParams = [ "btusb.enable_autosuspend=0" ];
+
   environment.systemPackages = with pkgs; [
     docker-compose # for docker projects
   ];
@@ -29,8 +32,19 @@
     enable32Bit = true;
   };
 
+  programs = {
+    _1password.enable = true;
+    _1password-gui = {
+      enable = true;
+      polkitPolicyOwners = [ "alexn" ];
+    };
+  };
+
   # thunderbolt
-  services.hardware.bolt.enable = true;
+  services.hardware = {
+    bolt.enable = true;
+    openrgb.enable = true;
+  };
 
   virtualisation.docker = {
     enable = true;
