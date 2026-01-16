@@ -58,14 +58,30 @@
   # used by pipewire
   security.rtkit.enable = true;
 
+  # needed for airplay
+  services.avahi.enable = true;
+
   # Enable sound with pipewire.
   services.pipewire = {
     enable = true;
     alsa.enable = true;
     alsa.support32Bit = true;
     pulse.enable = true;
-    # If you want to use JACK applications, uncomment this
-    #jack.enable = true;
+    raopOpenFirewall = true;
+    extraConfig.pipewire = {
+      "10-airplay" = {
+        "context.modules" = [
+          {
+            name = "libpipewire-module-raop-discover";
+
+            # increase the buffer size if you get dropouts/glitches
+            # args = {
+            #   "raop.latency.ms" = 500;
+            # };
+          }
+        ];
+      };
+    };
   };
 
   # Allow unfree packages
