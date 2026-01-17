@@ -93,6 +93,7 @@
     let
       mainMod = "SUPER";
       uwsmApp = "${lib.getExe pkgs.uwsm} app --";
+      screenShotFolder = "~/Documents/Screenshots";
     in
     {
       enable = true;
@@ -120,6 +121,10 @@
           ", XF86AudioPrev, exec, ${lib.getExe pkgs.playerctl} previous"
           ", XF86AudioPlay, exec, ${lib.getExe pkgs.playerctl} play-pause"
           ", XF86AudioNext, exec, ${lib.getExe pkgs.playerctl} next"
+          "${mainMod}, backslash, exec, ${lib.getExe pkgs.hyprshot} -o ${screenShotFolder} -m region"
+          "${mainMod} SHIFT, backslash, exec, ${lib.getExe pkgs.hyprshot} -o ${screenShotFolder} -m window"
+          "${mainMod} CTRL, backslash, exec, ${lib.getExe pkgs.hyprshot} -o ${screenShotFolder} -m region --clipboard-only"
+          "${mainMod} CTRL SHIFT, backslash, exec, ${lib.getExe pkgs.hyprshot} -o ${screenShotFolder} -m window --clipboard-only"
           "${mainMod}, B, exec, ${uwsmApp} ${lib.getExe pkgs.firefox}"
           "${mainMod}, X, exec, ${uwsmApp} ${lib.getExe pkgs.kitty}"
           "${mainMod}, F, exec, ${uwsmApp} ${lib.getExe pkgs.nautilus}"
