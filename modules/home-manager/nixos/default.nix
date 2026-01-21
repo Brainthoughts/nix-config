@@ -10,6 +10,9 @@
     # Commands
     brightnessctl
     pamixer
+
+    # Apps
+    ghidra
   ];
 
   programs = {
