@@ -64,10 +64,7 @@ in
           "memory"
           "cpu"
           "temperature"
-        ]
-        # TODO: only include on devices with battery
-        ++ lib.lists.optional (true) "battery"
-        ++ [
+          "battery" # waybar *seems* to deal with devices without battery, may also be a product of current styling
           "clock"
         ];
 

@@ -42,7 +42,7 @@
       nixfmt
 
       # php
-      # php84Packages.php-codesniffer # TODO: reenable once fixed
+      php84Packages.php-codesniffer
       php84Packages.php-cs-fixer
       phpactor
 
@@ -79,7 +79,7 @@
 
     plugins = with pkgs.vimPlugins; [ lazy-nvim ];
 
-    extraLuaConfig =
+    initLua =
       let
         plugins = with pkgs.vimPlugins; [
           # colorscheme
