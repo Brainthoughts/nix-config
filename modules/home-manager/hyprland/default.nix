@@ -97,6 +97,7 @@
     in
     {
       enable = true;
+      systemd.enable = false;
       settings = {
         # mouse
         bindm = [
