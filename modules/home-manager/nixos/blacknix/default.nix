@@ -22,6 +22,9 @@
         };
       };
     };
+    zathura = {
+      enable = true;
+    };
   };
 
   wayland.windowManager.hyprland.settings.monitor = [
