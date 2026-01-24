@@ -47,10 +47,37 @@
     };
   };
 
-  # thunderbolt
-  services.hardware = {
-    bolt.enable = true;
-    openrgb.enable = true;
+  nixpkgs.overlays = [
+    (final: prev: {
+      openrgb = prev.openrgb.overrideAttrs (old: {
+        version =
+          assert prev.lib.assertMsg (
+            old.version == "1.0rc2"
+          ) "nixpkgs has updated OpenRGB, remove this overlay";
+          "pipeline-2025-01-21"; # Use current date or commit hash
+        src = final.fetchFromGitLab {
+          owner = "CalcProgrammer1";
+          repo = "OpenRGB";
+          rev = "e48908573a1f67943912591dcfb121d4bc79b0e8";
+          hash = "sha256-TOtUUl+fmkHN4FWgr2FjraDtfASNE0XLaKZXCYj2/t4="; # Set to correct hash
+        };
+        patches = [
+          (builtins.elemAt old.patches 0)
+        ];
+      });
+    })
+  ];
+
+  services = {
+    hardware = {
+      # thunderbolt
+      bolt.enable = true;
+      openrgb = {
+        enable = true;
+        package = pkgs.openrgb-with-all-plugins;
+        startupProfile = "main";
+      };
+    };
   };
 
   virtualisation.docker = {
