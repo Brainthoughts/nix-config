@@ -217,8 +217,25 @@
       enable = true;
       settings = {
         general = {
-          before_sleep_cmd = "hyprlock";
+          lock_cmd = "pidof hyprlock || hyprlock";
+          before_sleep_cmd = "loginctl lock-session";
+          after_sleep_cmd = "hyprlctl dispatch dpms on";
         };
+        listener = [
+          {
+            timeout = 60 * 10;
+            on-timeout = "${pkgs.lib.getExe pkgs.libnotify} \"Display going to sleep soon...\"";
+          }
+          {
+            timeout = 60 * 14;
+            on-timeout = "${pkgs.lib.getExe pkgs.libnotify} \"Display going to sleep very soon...\"";
+          }
+          {
+            timeout = 60 * 15;
+            on-timeout = "hyprctl dispatch dpms off && loginctl lock-session";
+            on-resume = "hyprctl dispatch dpms on";
+          }
+        ];
       };
     };
     playerctld = {
