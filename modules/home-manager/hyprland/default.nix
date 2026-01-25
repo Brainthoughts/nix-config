@@ -10,6 +10,7 @@
     nautilus
     pavucontrol
     tidal-hifi
+    libreoffice-fresh
     # Commands
     brightnessctl
     pamixer
@@ -147,6 +148,7 @@
           "${mainMod} SHIFT, K, movewindow, u"
           "${mainMod} SHIFT, L, movewindow, r"
           "${mainMod}, grave, togglespecialworkspace, magic"
+          "${mainMod} SHIFT, grave, movetoworkspace, special:magic"
           "${mainMod}, Escape, exec, ${lib.getExe pkgs.hyprlock}"
         ]
         ++ (
@@ -173,6 +175,9 @@
           resize_on_border = true;
           gaps_in = 4;
           gaps_out = 8;
+        };
+        binds = {
+          hide_special_on_workspace_change = true;
         };
         decoration = {
           rounding = 10;
