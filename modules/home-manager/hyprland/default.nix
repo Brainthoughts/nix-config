@@ -126,6 +126,7 @@
           "${mainMod} SHIFT, backslash, exec, ${lib.getExe pkgs.hyprshot} -o ${screenShotFolder} -m window"
           "${mainMod} CTRL, backslash, exec, ${lib.getExe pkgs.hyprshot} -o ${screenShotFolder} -m region --clipboard-only"
           "${mainMod} CTRL SHIFT, backslash, exec, ${lib.getExe pkgs.hyprshot} -o ${screenShotFolder} -m window --clipboard-only"
+          "${mainMod}, period, exec, ${lib.getExe pkgs.hyprpicker} -a"
           "${mainMod}, B, exec, ${uwsmApp} ${lib.getExe pkgs.firefox}"
           "${mainMod}, X, exec, ${uwsmApp} ${lib.getExe pkgs.kitty}"
           "${mainMod}, F, exec, ${uwsmApp} ${lib.getExe pkgs.nautilus}"
@@ -145,7 +146,7 @@
           "${mainMod} SHIFT, J, movewindow, d"
           "${mainMod} SHIFT, K, movewindow, u"
           "${mainMod} SHIFT, L, movewindow, r"
-          "${mainMod}, `, togglespecialworkspace, magic"
+          "${mainMod}, grave, togglespecialworkspace, magic"
           "${mainMod}, Escape, exec, ${lib.getExe pkgs.hyprlock}"
         ]
         ++ (
