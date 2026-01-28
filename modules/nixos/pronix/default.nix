@@ -49,6 +49,14 @@
   services.tlp.enable = true;
   services.upower.enable = true;
 
+  programs = {
+    _1password.enable = true;
+    _1password-gui = {
+      enable = true;
+      polkitPolicyOwners = [ "alexn" ];
+    };
+  };
+
   # TODO: integrate with hyprland
   services.logind = {
     settings = {

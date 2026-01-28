@@ -5,6 +5,16 @@
     ../default.nix
   ];
 
+  programs = {
+    ssh = {
+      matchBlocks = {
+        "*" = {
+          identityAgent = "~/.1password/agent.sock";
+        };
+      };
+    };
+  };
+
   wayland.windowManager.hyprland.settings.monitor = [
     "eDP-1, 3456x2160@60, 0x0, 2"
     "HDMI-A-1, 3840x2160@60, 1728x-1080, 1.5"
