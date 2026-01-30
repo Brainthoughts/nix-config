@@ -51,6 +51,7 @@ in
 
         modules-left = [
           "hyprland/workspaces"
+          "tray"
         ];
 
         modules-center = [
@@ -67,6 +68,11 @@ in
           "battery" # waybar *seems* to deal with devices without battery, may also be a product of current styling
           "clock"
         ];
+
+        tray = {
+          icon-size = 25;
+          show-passive-items = true;
+        };
 
         "hyprland/window" = {
           separate-outputs = true;

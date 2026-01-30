@@ -58,3 +58,7 @@ button {
   background-color: #78a9ff;
   color: black;
 }
+
+#tray * {
+  padding: 0 .5em;
+}
