@@ -32,5 +32,8 @@
     enable = true;
     colorScheme = "dark";
   };
-
+  xdg.mimeApps = {
+    enable = true;
+    defaultApplicationPackages = [ pkgs.zathura ];
+  };
 }
