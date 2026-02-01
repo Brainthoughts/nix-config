@@ -12,15 +12,15 @@
   ];
 
   programs = {
-    discord = {
-      enable = true;
-    };
     ssh = {
       matchBlocks = {
         "*" = {
           identityAgent = "~/.1password/agent.sock";
         };
       };
+    };
+    vesktop = {
+      enable = true;
     };
     zathura = {
       enable = true;
