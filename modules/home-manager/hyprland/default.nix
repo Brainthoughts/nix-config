@@ -135,6 +135,8 @@
           "${mainMod}, SPACE, exec, ${uwsmApp} ${lib.getExe pkgs.fuzzel}"
           "${mainMod}, D, closewindow, active"
           "${mainMod}, M, togglefloating, active"
+          "${mainMod}, A, fullscreen, 1" # maximize
+          "${mainMod} SHIFT, A, fullscreen, 0" # fullscreen
           "${mainMod}, N, workspace, m+1"
           "${mainMod}, P, workspace, m-1"
           "${mainMod}, C, workspace, emptym"
