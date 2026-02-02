@@ -125,6 +125,7 @@
         editor = pkgs.lib.getExe pkgs.neovim;
         tab_bar_align = "center";
         include = "${pkgs.writeText "carbonfox.conf" (builtins.readFile ./kitty/themes/carbonfox.conf)}";
+        window_alert_on_bell = false;
       };
     };
     lazygit = {
