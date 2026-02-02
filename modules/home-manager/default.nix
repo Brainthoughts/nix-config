@@ -11,6 +11,7 @@
 
     ## Commands
     _1password-cli
+    file
 
     # javascript
     nodejs
