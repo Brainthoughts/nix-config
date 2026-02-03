@@ -169,10 +169,20 @@
             ) 9
           )
         );
+
         gesture = [ "3, horizontal, workspace" ];
+
+        # window rules
+        windowrule = [
+          "match:float true, border_color rgb(33b1ff)"
+          "match:modal true, border_color rgb(be95ff)"
+          "match:fullscreen true, border_color rgb(ee5396)"
+        ];
+
+        # variables
         general = {
           border_size = 1;
-          "col.active_border" = "rgba(be95ffee) rgba(78a9ffee) 45deg";
+          "col.active_border" = "rgb(78a9ff)";
           "col.inactive_border" = "rgba(53535380)";
           resize_on_border = true;
           gaps_in = 4;
@@ -211,6 +221,7 @@
           background_color = lib.fromHexString "0x161616";
           focus_on_activate = true;
         };
+
         # device specific input settings
         device = [
           {
