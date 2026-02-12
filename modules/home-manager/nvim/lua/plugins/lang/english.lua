@@ -33,7 +33,13 @@ return {
 		opts = {
 			servers = {
 				ltex_plus = {
-					language = "en-US",
+					settings = {
+						ltex = {
+							language = "en-US",
+							-- completionEnabled = true, -- above completion seems better
+							checkFrequency = "save",
+						},
+					},
 				},
 			},
 		},
