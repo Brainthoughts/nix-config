@@ -64,6 +64,8 @@
     };
   };
 
+  programs.localsend.enable = true;
+
   # Configure console keymap
   console.keyMap = "us";
 
