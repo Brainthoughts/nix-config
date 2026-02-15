@@ -21,6 +21,9 @@
   networking.firewall.allowedTCPPorts = [
   ];
 
+  networking.wireguard.enable = true;
+  networking.networkmanager.plugins = with pkgs; [ networkmanager-openvpn ];
+
   hardware.amdgpu = {
     initrd.enable = true;
     opencl.enable = true;

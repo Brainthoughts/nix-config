@@ -10,6 +10,7 @@
     # Commands
     brightnessctl
     pamixer
+    gcr
 
     # Apps
     ghidra
@@ -28,10 +29,14 @@
       enableDefaultConfig = false;
     };
   };
+
   gtk = {
     enable = true;
     colorScheme = "dark";
   };
+
+  services.gnome-keyring.enable = true;
+
   xdg.mimeApps = {
     enable = true;
     defaultApplicationPackages = [ pkgs.zathura ];

@@ -6,6 +6,8 @@
   ];
 
   home.packages = with pkgs; [
+    eduvpn-client
+    openvpn
     # minecraft
     prismlauncher
     zulu25
