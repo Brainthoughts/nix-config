@@ -21,6 +21,9 @@
         };
       };
     };
+    lutris = {
+      enable = true;
+    };
     vesktop = {
       enable = true;
     };
