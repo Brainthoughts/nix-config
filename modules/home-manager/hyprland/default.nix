@@ -27,12 +27,6 @@
   };
 
   programs = {
-    fish = {
-      shellAbbrs = {
-        nvnix = "nvim ~/.config/nix/**.nix";
-        norb = "sudo nixos-rebuild switch --flake ~/.config/nix/";
-      };
-    };
     # TODO: consider hyprlauncher when it matures
     fuzzel = {
       enable = true;

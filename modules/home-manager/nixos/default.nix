@@ -20,9 +20,12 @@
     fish = {
       shellAbbrs = {
         nvnix = "nvim ~/.config/nix/**.nix";
-        norb = "sudo nixos-rebuild switch --flake ~/.config/nix/";
-        norr = "sudo nixos-rebuild switch --flake ~/.config/nix/ --rollback";
+        norb = "${pkgs.lib.getExe pkgs.nh} os switch ~/.config/nix";
+        norr = "${pkgs.lib.getExe pkgs.nh} os rollback";
       };
+    };
+    nh = {
+      enable = true;
     };
     ssh = {
       enable = true;
