@@ -20,8 +20,8 @@
     fish = {
       shellAbbrs = {
         nvnix = "nvim ~/.config/nix/**.nix";
-        norb = "${pkgs.lib.getExe pkgs.nh} os switch ~/.config/nix";
-        norr = "${pkgs.lib.getExe pkgs.nh} os rollback";
+        norb = "nh os switch ~/.config/nix";
+        norr = "nh os rollback";
       };
     };
     nh = {
