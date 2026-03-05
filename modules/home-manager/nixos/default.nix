@@ -11,6 +11,8 @@
     brightnessctl
     pamixer
     gcr
+    eduvpn-client
+    openvpn
 
     # Apps
     ghidra

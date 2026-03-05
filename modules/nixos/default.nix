@@ -19,6 +19,9 @@
     wifi.backend = "iwd";
   };
 
+  networking.wireguard.enable = true;
+  networking.networkmanager.plugins = with pkgs; [ networkmanager-openvpn ];
+
   # Set your time zone.
   time.timeZone = "Europe/Berlin";
 
