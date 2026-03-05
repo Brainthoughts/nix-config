@@ -5,6 +5,10 @@
     ../default.nix
   ];
 
+  home.packages = with pkgs; [
+    gramps
+  ];
+
   programs = {
     ssh = {
       matchBlocks = {
