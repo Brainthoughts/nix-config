@@ -160,7 +160,7 @@
           nvim-lint
           nvim-lspconfig
           nvim-notify
-          nvim-treesitter.withAllGrammars
+          nvim-treesitter
           nvim-treesitter-context
           nvim-treesitter-textobjects
           nvim-ts-autotag
@@ -222,53 +222,16 @@
           else
             drv;
         lazyPath = pkgs.linkFarm "lazy-plugins" (builtins.map mkEntryFromDrv plugins);
+
+        treesitterGrammars = pkgs.symlinkJoin {
+          name = "nvim-treesitter-grammars";
+          paths = pkgs.vimPlugins.nvim-treesitter.withAllGrammars.dependencies;
+        };
       in
-      builtins.replaceStrings [ "<lazyPath>" ] [ "${lazyPath}" ] (builtins.readFile ./init.lua);
+      builtins.replaceStrings [ "<lazyPath>" "<TSGrammarPath>" ] [ "${lazyPath}" "${treesitterGrammars}" ]
+        (builtins.readFile ./init.lua);
   };
 
-  # https://github.com/nvim-treesitter/nvim-treesitter#i-get-query-error-invalid-node-type-at-position
-  # switched to all grammars while wiating for nixpkgs to switch to nvim-treesitter main
-  # xdg.configFile."nvim/parser".source =
-  #   let
-  #     parsers = pkgs.symlinkJoin {
-  #       name = "treesitter-parsers";
-  #       paths =
-  #         (pkgs.vimPlugins.nvim-treesitter.withPlugins (
-  #           plugins: with plugins; [
-  #             # c
-  #             c
-  #             cpp
-  #             # java
-  #             java
-  #             # json
-  #             json
-  #             # nix
-  #             nix
-  #             # lua
-  #             lua
-  #             # markdown
-  #             markdown
-  #             # make
-  #             make
-  #             # php
-  #             php
-  #             # python
-  #             python
-  #             # rust
-  #             rust
-  #             ron
-  #             # web
-  #             html
-  #             javascript
-  #             css
-  #             typescript
-  #             svelte
-  #           ]
-  #         )).dependencies;
-  #     };
-  #   in
-  #   "${parsers}/parser";
-  #
   # Normal LazyVim config here, see https://github.com/LazyVim/starter/tree/main/lua
   xdg.configFile."nvim/lua".source = ./lua;
   xdg.configFile."nvim/queries".source = ./queries;
