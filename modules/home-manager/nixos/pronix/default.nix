@@ -27,6 +27,6 @@
     # even when locked
     [
       ", switch:on:Apple SMC power/lid events, exec, hyprctl keyword monitor \"eDP-1, disable\""
-      ", switch:off:Apple SMC power/lid events, exec, hyprctl keyword monitor \"eDP-1, 3456x2160@60, 0x0, 2\""
+      ", switch:off:Apple SMC power/lid events, exec, hyprctl keyword monitor \"eDP-1, 3456x2160@60, 0x0, 1.5\""
     ];
 }
