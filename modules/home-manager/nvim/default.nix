@@ -25,6 +25,11 @@
       lldb
       bear
 
+      # docker
+      dockerfile-language-server
+      docker-compose-language-service
+      hadolint
+
       # english
       ltex-ls-plus
 
@@ -32,6 +37,9 @@
       jdk25
       (jdt-language-server.override { jdk = pkgs.jdk25; })
       lombok
+
+      # json
+      vscode-json-languageserver
 
       # markdown
       markdownlint-cli2
@@ -106,6 +114,9 @@
 
           # java
           nvim-jdtls
+
+          # json
+          SchemaStore-nvim
 
           # markdown
           markdown-preview-nvim
