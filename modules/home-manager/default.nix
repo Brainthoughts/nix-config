@@ -157,6 +157,7 @@
     };
     tmux = {
       enable = true;
+      prefix = "C-Space";
       secureSocket = true;
       terminal = "tmux";
       clock24 = true;
