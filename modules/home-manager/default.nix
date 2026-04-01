@@ -155,6 +155,10 @@
     tealdeer = {
       enable = true;
     };
+    thunderbird = {
+      enable = true;
+      profiles = { };
+    };
     tmux = {
       enable = true;
       prefix = "C-Space";
