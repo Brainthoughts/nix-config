@@ -107,6 +107,8 @@
           name = "Alexander Niedner";
         };
       };
+      # silence legacy warning
+      signing.format = null;
     };
     home-manager = {
       enable = true;

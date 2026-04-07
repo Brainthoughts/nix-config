@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, config, ... }:
 {
 
   imports = [
@@ -38,6 +38,8 @@
   gtk = {
     enable = true;
     colorScheme = "dark";
+    # silence legacy warnings
+    gtk4.theme = config.gtk.theme;
   };
 
   services.gnome-keyring.enable = true;
