@@ -35,6 +35,8 @@
     };
   };
 
+  programs.btop.package = pkgs.btop-rocm;
+
   wayland.windowManager.hyprland.settings.monitor = [
     "DP-1, 3840x2160@144, 0x0, 1"
   ];
