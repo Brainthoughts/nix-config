@@ -17,6 +17,9 @@
         };
       };
     };
+    vesktop = {
+      enable = true;
+    };
   };
 
   wayland.windowManager.hyprland.settings.monitor = [
