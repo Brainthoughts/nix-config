@@ -94,6 +94,7 @@
       interactiveShellInit = builtins.readFile ./fish/config.fish;
       functions = {
         fish_greeting = pkgs.lib.getExe pkgs.fastfetch;
+        fish_title = builtins.readFile ./fish/fish_title.fish;
       };
       shellAliases = {
         ff = "fastfetch";
