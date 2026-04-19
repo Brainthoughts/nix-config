@@ -9,7 +9,7 @@
   };
 
   flake.nixosModules.blacknix =
-    { config, pkgs, ... }:
+    { pkgs, ... }:
     {
       imports = [
         ./_hardware-configuration.nix
