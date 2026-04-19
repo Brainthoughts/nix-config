@@ -19,5 +19,6 @@
           norr = "nh os rollback";
         };
       };
+      programs.tmux.shell = pkgs.lib.getExe pkgs.fish;
     };
 }
