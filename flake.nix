@@ -8,6 +8,9 @@
     flake-parts = {
       url = "github:hercules-ci/flake-parts";
     };
+    import-tree = {
+      url = "github:vic/import-tree";
+    };
     nix-darwin = {
       url = "github:LnL7/nix-darwin";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -31,6 +34,7 @@
       self,
       nixpkgs,
       flake-parts,
+      import-tree,
       nix-darwin,
       home-manager,
       nix-index-database,
@@ -38,12 +42,14 @@
     }:
     flake-parts.lib.mkFlake { inherit inputs; } (
       top@{
+        self,
         config,
         withSystem,
         moduleWithSystem,
         ...
       }:
-      {
+      (import-tree ./modules)
+      // {
         flake =
           let
             hm-common = {
@@ -75,11 +81,11 @@
               blacknix = nixpkgs.lib.nixosSystem {
                 system = "x86_64-linux";
                 modules = [
-                  ./modules/nixos/blacknix
+                  self.nixosModules.blacknix
                   home-manager.nixosModules.home-manager
-                  hm-common
+                  self.nixosModules.home-manager
                   {
-                    home-manager.users.alexn = ./modules/home-manager/nixos/blacknix;
+                    home-manager.users.alexn = ./modules/_home-manager/nixos/blacknix;
                   }
                 ];
               };
