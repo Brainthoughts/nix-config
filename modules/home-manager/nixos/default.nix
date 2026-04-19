@@ -23,6 +23,7 @@
       shellAbbrs = {
         nvnix = "nvim ~/.config/nix/**.nix";
         norb = "nh os switch ~/.config/nix";
+        nort = "nh os switch ~/.config/nix";
         norr = "nh os rollback";
       };
     };
