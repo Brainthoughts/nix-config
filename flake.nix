@@ -78,17 +78,6 @@
               };
             };
             nixosConfigurations = {
-              macnix = nixpkgs.lib.nixosSystem {
-                system = "x86_64-linux";
-                modules = [
-                  ./modules/nixos/macnix
-                  home-manager.nixosModules.home-manager
-                  hm-common
-                  {
-                    home-manager.users.alexn = ./modules/home-manager/nixos/macnix;
-                  }
-                ];
-              };
               pronix = nixpkgs.lib.nixosSystem {
                 system = "aarch64-linux";
                 modules = [

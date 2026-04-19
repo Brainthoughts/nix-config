@@ -1,6 +1,6 @@
 { self, ... }:
 {
-  flake.homeModules.home =
+  flake.homeModules.base =
     { pkgs, ... }:
     {
 

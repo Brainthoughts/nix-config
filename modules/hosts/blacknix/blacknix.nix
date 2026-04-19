@@ -106,7 +106,7 @@
     { pkgs, ... }:
     {
       imports = [
-        self.homeModules.home
+        self.homeModules.base
         self.homeModules.nixos
         self.homeModules.hyprland
       ];
