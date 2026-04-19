@@ -112,6 +112,8 @@
       ];
 
       home.packages = with pkgs; [
+        # music
+        tidal-hifi
         # minecraft
         prismlauncher
         zulu25

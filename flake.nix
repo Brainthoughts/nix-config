@@ -77,20 +77,6 @@
                 ];
               };
             };
-            nixosConfigurations = {
-              pronix = nixpkgs.lib.nixosSystem {
-                system = "aarch64-linux";
-                modules = [
-                  nixos-apple-silicon.nixosModules.default
-                  ./modules/nixos/pronix
-                  home-manager.nixosModules.home-manager
-                  hm-common
-                  {
-                    home-manager.users.alexn = ./modules/home-manager/nixos/pronix;
-                  }
-                ];
-              };
-            };
           };
       }
     );
