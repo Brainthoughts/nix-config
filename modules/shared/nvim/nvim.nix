@@ -8,6 +8,8 @@
     }:
 
     {
+      programs.kitty.settings.editor = pkgs.lib.getExe pkgs.neovim;
+
       programs.neovim = {
         enable = true;
         defaultEditor = true;

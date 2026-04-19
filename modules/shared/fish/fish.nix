@@ -20,5 +20,6 @@
         };
       };
       programs.tmux.shell = pkgs.lib.getExe pkgs.fish;
+      programs.kitty.settings.shell = pkgs.lib.getExe pkgs.fish;
     };
 }
