@@ -31,53 +31,9 @@
 
   outputs =
     inputs@{
-      self,
-      nixpkgs,
       flake-parts,
       import-tree,
-      nix-darwin,
-      home-manager,
-      nix-index-database,
-      nixos-apple-silicon,
+      ...
     }:
-    flake-parts.lib.mkFlake { inherit inputs; } (
-      top@{
-        self,
-        config,
-        withSystem,
-        moduleWithSystem,
-        ...
-      }:
-      (import-tree ./modules)
-      // {
-        flake =
-          let
-            hm-common = {
-              home-manager = {
-                useGlobalPkgs = true;
-                useUserPackages = true;
-                verbose = true;
-                backupFileExtension = "bak";
-                sharedModules = [
-                  nix-index-database.homeModules.nix-index
-                ];
-              };
-            };
-          in
-          {
-            darwinConfigurations = {
-              Sweet-16 = nix-darwin.lib.darwinSystem {
-                modules = [
-                  ./modules/darwin
-                  home-manager.darwinModules.home-manager
-                  hm-common
-                  {
-                    home-manager.users.alexn = ./modules/home-manager/darwin.nix;
-                  }
-                ];
-              };
-            };
-          };
-      }
-    );
+    flake-parts.lib.mkFlake { inherit inputs; } (import-tree ./modules);
 }
