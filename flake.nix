@@ -82,7 +82,6 @@
                 system = "x86_64-linux";
                 modules = [
                   self.nixosModules.blacknix
-                  home-manager.nixosModules.home-manager
                   self.nixosModules.home-manager
                   {
                     home-manager.users.alexn = ./modules/_home-manager/nixos/blacknix;
