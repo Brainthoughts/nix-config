@@ -1,4 +1,9 @@
-{ self, inputs, ... }:
+{
+  self,
+  inputs,
+  config,
+  ...
+}:
 {
 
   flake.nixosConfigurations.blacknix = inputs.nixpkgs.lib.nixosSystem {
@@ -17,7 +22,7 @@
         self.nixosModules.regreet
       ];
 
-      home-manager.users.alexn = self.homeModules.blacknix;
+      home-manager.users.${config.my.username} = self.homeModules.blacknix;
 
       networking.hostName = "blacknix";
 
@@ -36,7 +41,7 @@
         _1password.enable = true;
         _1password-gui = {
           enable = true;
-          polkitPolicyOwners = [ "alexn" ];
+          polkitPolicyOwners = [ config.my.username ];
         };
         gamemode.enable = true;
         steam = {

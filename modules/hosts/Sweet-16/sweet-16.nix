@@ -1,4 +1,9 @@
-{ self, inputs, ... }:
+{
+  self,
+  inputs,
+  config,
+  ...
+}:
 {
   flake.darwinConfigurations.Sweet-16 = inputs.nix-darwin.lib.darwinSystem {
     modules = [
@@ -9,7 +14,7 @@
   flake.darwinModules.Sweet-16 = {
     imports = [ self.darwinModules.base ];
 
-    home-manager.users.alexn = self.homeModules.Sweet-16;
+    home-manager.users.${config.my.username} = self.homeModules.Sweet-16;
   };
 
   flake.homeModules.Sweet-16 = {

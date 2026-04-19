@@ -1,4 +1,9 @@
-{ self, inputs, ... }:
+{
+  self,
+  inputs,
+  config,
+  ...
+}:
 {
   flake.nixosConfigurations.macnix = inputs.nixpkgs.lib.nixosSystem {
     system = "x86_64-linux";
@@ -15,7 +20,7 @@
         self.nixosModules.base
       ];
 
-      home-manager.users.alexn = self.homeModules.macnix;
+      home-manager.users.${config.my.username} = self.homeModules.macnix;
 
       networking.hostName = "macnix"; # Define your hostname.
 
@@ -113,13 +118,13 @@
             "security" = "user";
           };
           "TUM" = {
-            "path" = "/home/alexn/TUM";
+            "path" = "/home/${config.my.username}/TUM";
             "browseable" = "yes";
             "read only" = "no";
             "guest ok" = "no";
             "create mask" = "0644";
             "directory mask" = "0755";
-            "force user" = "alexn";
+            "force user" = config.my.username;
           };
           "MEDIA" = {
             "path" = "/mnt/media";
@@ -128,7 +133,7 @@
             "guest ok" = "no";
             "create mask" = "0644";
             "directory mask" = "0755";
-            "force user" = "alexn";
+            "force user" = config.my.username;
           };
         };
       };

@@ -1,4 +1,9 @@
-{ self, inputs, ... }:
+{
+  self,
+  inputs,
+  config,
+  ...
+}:
 {
   flake.nixosConfigurations.pronix = inputs.nixpkgs.lib.nixosSystem {
     system = "aarch64-linux";
@@ -16,7 +21,7 @@
       self.nixosModules.regreet
     ];
 
-    home-manager.users.alexn = self.homeModules.pronix;
+    home-manager.users.${config.my.username} = self.homeModules.pronix;
 
     # nixpkgs.overlays = [
     #   (final: prev: {
@@ -59,7 +64,7 @@
       _1password.enable = true;
       _1password-gui = {
         enable = true;
-        polkitPolicyOwners = [ "alexn" ];
+        polkitPolicyOwners = [ config.my.username ];
       };
     };
 

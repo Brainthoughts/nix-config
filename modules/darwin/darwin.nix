@@ -1,4 +1,9 @@
-{ self, inputs, ... }:
+{
+  self,
+  inputs,
+  config,
+  ...
+}:
 {
   flake.darwinModules.base =
     { pkgs, ... }:
@@ -25,7 +30,7 @@
       };
 
       # needed temporarily while migration to multi-user support ongoing
-      system.primaryUser = "alexn";
+      system.primaryUser = config.my.username;
 
       homebrew = {
         enable = true;
@@ -89,9 +94,9 @@
       system.stateVersion = 4;
 
       # Declare the user that will be running `nix-darwin`.
-      users.users.alexn = {
-        name = "alexn";
-        home = "/Users/alexn";
+      users.users.${config.my.username} = {
+        name = config.my.username;
+        home = "/Users/${config.my.username}";
       };
     };
 

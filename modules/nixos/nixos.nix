@@ -1,4 +1,4 @@
-{ inputs, ... }:
+{ inputs, config, ... }:
 {
   flake.nixosModules.base =
     { pkgs, ... }:
@@ -125,7 +125,7 @@
       services.tailscale.enable = true;
 
       # Define a user account. Don't forget to set a password with ‘passwd’.
-      users.users.alexn = {
+      users.users.${config.my.username} = {
         isNormalUser = true;
         description = "Alexander N";
         extraGroups = [
