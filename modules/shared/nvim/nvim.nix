@@ -8,6 +8,10 @@
     }:
 
     {
+      home.sessionVariables = {
+        VISUAL = "nvim";
+      };
+
       programs.kitty.settings.editor = pkgs.lib.getExe pkgs.neovim;
 
       programs.neovim = {

@@ -2,7 +2,7 @@
   flake.homeModules.kitty =
     { pkgs, ... }:
     {
-      programms.kitty = {
+      programs.kitty = {
         enable = true;
         font = {
           name = "Hack Nerd Font Mono";

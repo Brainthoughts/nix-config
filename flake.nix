@@ -78,16 +78,6 @@
               };
             };
             nixosConfigurations = {
-              blacknix = nixpkgs.lib.nixosSystem {
-                system = "x86_64-linux";
-                modules = [
-                  self.nixosModules.blacknix
-                  self.nixosModules.home-manager
-                  {
-                    home-manager.users.alexn = ./modules/_home-manager/nixos/blacknix;
-                  }
-                ];
-              };
               macnix = nixpkgs.lib.nixosSystem {
                 system = "x86_64-linux";
                 modules = [

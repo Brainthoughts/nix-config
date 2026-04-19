@@ -1,11 +1,22 @@
+{ self, inputs, ... }:
 {
+
+  flake.nixosConfigurations.blacknix = inputs.nixpkgs.lib.nixosSystem {
+    system = "x86_64-linux";
+    modules = [
+      self.nixosModules.blacknix
+    ];
+  };
+
   flake.nixosModules.blacknix =
     { config, pkgs, ... }:
     {
       imports = [
-        ../../_nixos/default.nix
         ./_hardware-configuration.nix
+        self.nixosModules.base
       ];
+
+      home-manager.users.alexn = self.homeModules.blacknix;
 
       networking.hostName = "blacknix"; # Define your hostname.
 
@@ -89,5 +100,48 @@
           dns = [ "8.8.8.8" ];
         };
       };
+    };
+
+  flake.homeModules.blacknix =
+    { pkgs, ... }:
+    {
+      imports = [
+        self.homeModules.home
+        self.homeModules.nixos
+        self.homeModules.hyprland
+      ];
+
+      home.packages = with pkgs; [
+        # minecraft
+        prismlauncher
+        zulu25
+      ];
+
+      programs = {
+        ssh = {
+          matchBlocks = {
+            "*" = {
+              identityAgent = "~/.1password/agent.sock";
+            };
+          };
+        };
+        vesktop = {
+          enable = true;
+        };
+        zathura = {
+          enable = true;
+          options = {
+            default-bg = "#161616";
+            completion-group-bg = "#161616";
+            statusbar-bg = "#161616";
+          };
+        };
+      };
+
+      programs.btop.package = pkgs.btop-rocm;
+
+      wayland.windowManager.hyprland.settings.monitor = [
+        "DP-1, 3840x2160@144, 0x0, 1"
+      ];
     };
 }
