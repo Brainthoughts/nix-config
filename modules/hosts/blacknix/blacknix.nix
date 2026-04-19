@@ -14,34 +14,22 @@
       imports = [
         ./_hardware-configuration.nix
         self.nixosModules.base
+        self.nixosModules.regreet
       ];
 
       home-manager.users.alexn = self.homeModules.blacknix;
 
-      networking.hostName = "blacknix"; # Define your hostname.
+      networking.hostName = "blacknix";
 
       boot.kernelPackages = pkgs.linuxPackages_latest;
 
       # bluetooth has a stroke otherwise
       boot.kernelParams = [ "btusb.enable_autosuspend=0" ];
 
-      environment.systemPackages = with pkgs; [
-        docker-compose # for docker projects
-      ];
-
-      # Open ports in the firewall.
-      networking.firewall.allowedTCPPorts = [
-      ];
-
       hardware.amdgpu = {
         initrd.enable = true;
         opencl.enable = true;
         # overdrive.enable = true;
-      };
-
-      hardware.graphics = {
-        enable = true;
-        enable32Bit = true;
       };
 
       programs = {
@@ -52,10 +40,9 @@
         };
         gamemode.enable = true;
         steam = {
-          enable = true; # Master switch, already covered in installation
+          enable = true;
           remotePlay.openFirewall = true; # Open ports in the firewall for Steam Remote Play
           dedicatedServer.openFirewall = true; # Open ports for Source Dedicated Server hosting
-          # Other general flags if available can be set here.
         };
       };
 
@@ -71,7 +58,7 @@
               owner = "CalcProgrammer1";
               repo = "OpenRGB";
               rev = "e48908573a1f67943912591dcfb121d4bc79b0e8";
-              hash = "sha256-TOtUUl+fmkHN4FWgr2FjraDtfASNE0XLaKZXCYj2/t4="; # Set to correct hash
+              hash = "sha256-TOtUUl+fmkHN4FWgr2FjraDtfASNE0XLaKZXCYj2/t4=";
             };
             patches = [
               (builtins.elemAt old.patches 0)

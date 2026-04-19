@@ -13,6 +13,7 @@
       # Include the results of the hardware scan.
       ./_hardware-configuration.nix
       self.nixosModules.base
+      self.nixosModules.regreet
     ];
 
     home-manager.users.alexn = self.homeModules.pronix;
