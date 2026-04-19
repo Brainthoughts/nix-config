@@ -1,0 +1,253 @@
+{
+  flake.homeModules.nvim =
+    {
+      config,
+      lib,
+      pkgs,
+      ...
+    }:
+
+    {
+      programs.neovim = {
+        enable = true;
+        defaultEditor = true;
+
+        extraPackages = with pkgs; [
+          # LazyVim
+          lua-language-server
+          stylua
+
+          # Telescope
+          ripgrep
+
+          ## Langs
+          # Clang
+          clang-tools
+          gnumake
+          lldb
+          bear
+
+          # docker
+          dockerfile-language-server
+          docker-compose-language-service
+          hadolint
+
+          # english
+          ltex-ls-plus
+
+          # java
+          jdk25
+          (jdt-language-server.override { jdk = pkgs.jdk25; })
+          lombok
+
+          # json
+          vscode-json-languageserver
+
+          # markdown
+          markdownlint-cli2
+          marksman
+
+          # nix
+          nixd
+          nixfmt
+
+          # php
+          php84Packages.php-codesniffer
+          php84Packages.php-cs-fixer
+          phpactor
+
+          # python
+          python3
+          ruff
+          basedpyright
+          python313Packages.debugpy
+
+          # rust
+          rustc
+          rustfmt
+          cargo
+          clippy
+          rust-analyzer
+
+          # svelte
+          svelte-language-server
+
+          # sql
+          sqlite
+          sqlfluff
+
+          # tex
+          texliveFull
+          texlab
+
+          # typescript
+          vtsls
+
+          # web
+          vscode-langservers-extracted
+        ];
+
+        plugins = with pkgs.vimPlugins; [ lazy-nvim ];
+
+        initLua =
+          let
+            plugins = with pkgs.vimPlugins; [
+              # colorscheme
+              nightfox-nvim
+
+              # color highlighting
+              mini-hipatterns
+
+              # dap
+              nvim-nio
+              nvim-dap
+              nvim-dap-ui
+              nvim-dap-virtual-text
+
+              # dictionary
+              blink-cmp-dictionary
+
+              # tmux
+              vim-tmux-navigator
+
+              ## lang
+              # c
+              clangd_extensions-nvim
+
+              # java
+              nvim-jdtls
+
+              # json
+              SchemaStore-nvim
+
+              # markdown
+              markdown-preview-nvim
+              render-markdown-nvim
+
+              # python
+              neotest-python
+              nvim-dap-python
+
+              # rust
+              crates-nvim
+              rustaceanvim
+
+              # sql
+              vim-dadbod
+              vim-dadbod-completion
+              vim-dadbod-ui
+
+              # tex
+              vimtex
+
+              # ui
+              oil-nvim
+
+              # LazyVim
+              LazyVim
+              bufferline-nvim
+              blink-cmp
+              cmp-buffer
+              cmp-nvim-lsp
+              cmp-path
+              cmp_luasnip
+              conform-nvim
+              dashboard-nvim
+              dressing-nvim
+              flash-nvim
+              friendly-snippets
+              fzf-lua
+              gitsigns-nvim
+              grug-far-nvim
+              indent-blankline-nvim
+              lazydev-nvim
+              lualine-nvim
+              mini-icons
+              neo-tree-nvim
+              neoconf-nvim
+              neodev-nvim
+              noice-nvim
+              none-ls-nvim
+              nui-nvim
+              nvim-cmp
+              nvim-lint
+              nvim-lspconfig
+              nvim-notify
+              nvim-treesitter
+              nvim-treesitter-context
+              nvim-treesitter-textobjects
+              nvim-ts-autotag
+              nvim-ts-context-commentstring
+              nvim-web-devicons
+              persistence-nvim
+              plenary-nvim
+              snacks-nvim
+              telescope-fzf-native-nvim
+              telescope-nvim
+              todo-comments-nvim
+              tokyonight-nvim
+              trouble-nvim
+              ts-comments-nvim
+              undotree
+              vim-illuminate
+              vim-startuptime
+              which-key-nvim
+              {
+                name = "LuaSnip";
+                path = luasnip;
+              }
+              {
+                name = "catppuccin";
+                path = catppuccin-nvim;
+              }
+              {
+                name = "mini.ai";
+                path = mini-nvim;
+              }
+              {
+                name = "mini.bufremove";
+                path = mini-nvim;
+              }
+              {
+                name = "mini.comment";
+                path = mini-nvim;
+              }
+              {
+                name = "mini.indentscope";
+                path = mini-nvim;
+              }
+              {
+                name = "mini.pairs";
+                path = mini-nvim;
+              }
+              {
+                name = "mini.surround";
+                path = mini-nvim;
+              }
+            ];
+            mkEntryFromDrv =
+              drv:
+              if lib.isDerivation drv then
+                {
+                  name = "${lib.getName drv}";
+                  path = drv;
+                }
+              else
+                drv;
+            lazyPath = pkgs.linkFarm "lazy-plugins" (builtins.map mkEntryFromDrv plugins);
+
+            treesitterGrammars = pkgs.symlinkJoin {
+              name = "nvim-treesitter-grammars";
+              paths = pkgs.vimPlugins.nvim-treesitter.withAllGrammars.dependencies;
+            };
+          in
+          builtins.replaceStrings [ "<lazyPath>" "<TSGrammarPath>" ] [ "${lazyPath}" "${treesitterGrammars}" ]
+            (builtins.readFile ./_/init.lua);
+      };
+
+      # Normal LazyVim config here, see https://github.com/LazyVim/starter/tree/main/lua
+      xdg.configFile."nvim/lua".source = ./_/lua;
+      xdg.configFile."nvim/queries".source = ./_/queries;
+      xdg.configFile."nvim/extra/lombok".source = pkgs.lombok;
+    };
+}
