@@ -30,8 +30,6 @@ in
 
       networking.hostName = "blacknix";
 
-      boot.kernelPackages = pkgs.linuxPackages_latest;
-
       # bluetooth has a stroke otherwise
       boot.kernelParams = [ "btusb.enable_autosuspend=0" ];
 
