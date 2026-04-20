@@ -3,7 +3,12 @@
   inputs,
   ...
 }:
+let
+  system = "aarch64-darwin";
+in
 {
+  systems = [ system ];
+
   flake.darwinConfigurations.Sweet-16 = inputs.nix-darwin.lib.darwinSystem {
     modules = [
       self.darwinModules.Sweet-16

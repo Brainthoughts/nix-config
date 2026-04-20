@@ -3,10 +3,14 @@
   inputs,
   ...
 }:
+let
+  system = "x86_64-linux";
+in
 {
+  systems = [ system ];
 
   flake.nixosConfigurations.blacknix = inputs.nixpkgs.lib.nixosSystem {
-    system = "x86_64-linux";
+    inherit system;
     modules = [
       self.nixosModules.blacknix
     ];

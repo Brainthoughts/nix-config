@@ -3,9 +3,14 @@
   inputs,
   ...
 }:
+let
+  system = "aarch64-linux";
+in
 {
+  systems = [ system ];
+
   flake.nixosConfigurations.pronix = inputs.nixpkgs.lib.nixosSystem {
-    system = "aarch64-linux";
+    inherit system;
     modules = [
       inputs.nixos-apple-silicon.nixosModules.default
       self.nixosModules.pronix

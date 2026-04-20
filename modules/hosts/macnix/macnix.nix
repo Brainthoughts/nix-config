@@ -3,9 +3,14 @@
   inputs,
   ...
 }:
+let
+  system = "x86_64-linux";
+in
 {
+  systems = [ system ];
+
   flake.nixosConfigurations.macnix = inputs.nixpkgs.lib.nixosSystem {
-    system = "x86_64-linux";
+    inherit system;
     modules = [
       self.nixosModules.macnix
     ];
