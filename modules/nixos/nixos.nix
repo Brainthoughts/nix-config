@@ -17,12 +17,6 @@
         self.nixosModules.options
       ];
 
-      my.username = lib.mkDefault "alexn";
-      my.nerd-font = lib.mkDefault {
-        name = "Hack Nerd Font Mono";
-        package = pkgs.nerd-fonts.hack;
-      };
-
       home-manager = {
         useGlobalPkgs = true;
         useUserPackages = true;

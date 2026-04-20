@@ -21,7 +21,7 @@
       options.my = {
         username = lib.mkOption {
           type = lib.types.str;
-          default = "user";
+          default = "alexn";
           description = "The username of your user";
         };
         nerd-font = {
