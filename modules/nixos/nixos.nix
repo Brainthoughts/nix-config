@@ -7,7 +7,6 @@
   flake.nixosModules.base =
     {
       pkgs,
-      lib,
       config,
       ...
     }:
@@ -61,12 +60,6 @@
         LC_TELEPHONE = "de_DE.UTF-8";
         LC_TIME = "de_DE.UTF-8";
       };
-
-      programs.hyprland = {
-        enable = true;
-        withUWSM = true;
-      };
-      programs.hyprlock.enable = true;
 
       programs.localsend.enable = true;
 

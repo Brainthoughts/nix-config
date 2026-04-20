@@ -1,5 +1,19 @@
 { self, ... }:
 {
+
+  flake.nixosModules.hyprland =
+    { config, ... }:
+    {
+      programs.hyprland = {
+        enable = true;
+        withUWSM = true;
+      };
+      programs.hyprlock.enable = true;
+
+      home-manager.users.${config.my.username}.imports = [ self.homeModules.hyprland ];
+
+    };
+
   flake.homeModules.hyprland =
     {
       pkgs,

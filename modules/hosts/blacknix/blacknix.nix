@@ -19,6 +19,7 @@
         ./_hardware-configuration.nix
         self.nixosModules.base
         self.nixosModules.regreet
+        self.nixosModules.hyprland
       ];
 
       home-manager.users.${config.my.username} = self.homeModules.blacknix;
@@ -99,7 +100,6 @@
       imports = [
         self.homeModules.base
         self.homeModules.nixos
-        self.homeModules.hyprland
       ];
 
       home.packages = with pkgs; [
