@@ -1,7 +1,6 @@
 {
   self,
   inputs,
-  config,
   ...
 }:
 {
@@ -11,11 +10,13 @@
     ];
   };
 
-  flake.darwinModules.Sweet-16 = {
-    imports = [ self.darwinModules.base ];
+  flake.darwinModules.Sweet-16 =
+    { config, ... }:
+    {
+      imports = [ self.darwinModules.base ];
 
-    home-manager.users.${config.my.username} = self.homeModules.Sweet-16;
-  };
+      home-manager.users.${config.my.username} = self.homeModules.Sweet-16;
+    };
 
   flake.homeModules.Sweet-16 = {
     imports = [

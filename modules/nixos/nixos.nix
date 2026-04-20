@@ -1,9 +1,28 @@
-{ inputs, config, ... }:
+{
+  self,
+  inputs,
+  ...
+}:
 {
   flake.nixosModules.base =
-    { pkgs, ... }:
     {
-      imports = [ inputs.home-manager.nixosModules.home-manager ];
+      pkgs,
+      lib,
+      config,
+      ...
+    }:
+    {
+      imports = [
+        inputs.home-manager.nixosModules.home-manager
+        self.nixosModules.options
+      ];
+
+      my.username = lib.mkDefault "alexn";
+      my.nerd-font = lib.mkDefault {
+        name = "Hack Nerd Font Mono";
+        package = pkgs.nerd-fonts.hack;
+      };
+
       home-manager = {
         useGlobalPkgs = true;
         useUserPackages = true;
@@ -155,7 +174,7 @@
 
       fonts = {
         packages = with pkgs; [
-          nerd-fonts.hack
+          config.my.nerd-font.package
         ];
       };
 

@@ -1,12 +1,11 @@
 {
   self,
   inputs,
-  config,
   ...
 }:
 {
   flake.darwinModules.base =
-    { pkgs, ... }:
+    { pkgs, config, ... }:
     {
       imports = [ inputs.home-manager.darwinModules.home-manager ];
       home-manager = {
@@ -25,7 +24,7 @@
 
       fonts = {
         packages = with pkgs; [
-          nerd-fonts.hack
+          config.my.nerd-font.package
         ];
       };
 

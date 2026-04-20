@@ -1,6 +1,6 @@
 {
   flake.nixosModules.regreet =
-    { pkgs, ... }:
+    { pkgs, config, ... }:
     {
       programs.regreet = {
         enable = true;
@@ -14,10 +14,7 @@
           package = pkgs.bibata-cursors;
           name = "Bibata-Modern-Classic";
         };
-        font = {
-          name = "Hack Nerd Font Mono";
-          package = pkgs.nerd-fonts.hack;
-        };
+        font = config.my.nerd-font;
         settings = {
           application_prefer_dark_theme = true;
         };

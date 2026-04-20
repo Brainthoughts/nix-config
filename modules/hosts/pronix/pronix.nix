@@ -1,7 +1,6 @@
 {
   self,
   inputs,
-  config,
   ...
 }:
 {
@@ -13,72 +12,74 @@
     ];
   };
 
-  flake.nixosModules.pronix = {
-    imports = [
-      # Include the results of the hardware scan.
-      ./_hardware-configuration.nix
-      self.nixosModules.base
-      self.nixosModules.regreet
-    ];
-
-    home-manager.users.${config.my.username} = self.homeModules.pronix;
-
-    # nixpkgs.overlays = [
-    #   (final: prev: {
-    #     vimPlugins = prev.vimPlugins.extend (
-    #       final': prev': {
-    #         neotest = (
-    #           prev'.neotest.overrideAttrs (old: {
-    #             doCheck = false;
-    #           })
-    #         );
-    #       }
-    #     );
-    #   })
-    # ];
-
-    # Use the systemd-boot EFI boot loader.
-    boot.loader.systemd-boot.enable = true;
-    boot.loader.efi.canTouchEfiVariables = false;
-
-    networking.hostName = "pronix"; # Define your hostname.
-
-    # TODO: don't include in git
-    hardware.asahi.peripheralFirmwareDirectory = ./_firmware;
-
-    fileSystems = {
-      "/".options = [
-        "compress=zstd"
-        "noatime"
+  flake.nixosModules.pronix =
+    { config, ... }:
+    {
+      imports = [
+        # Include the results of the hardware scan.
+        ./_hardware-configuration.nix
+        self.nixosModules.base
+        self.nixosModules.regreet
       ];
-      "/nix".options = [
-        "compress=zstd"
-        "noatime"
-      ];
-    };
 
-    services.tlp.enable = true;
-    services.upower.enable = true;
+      home-manager.users.${config.my.username} = self.homeModules.pronix;
 
-    programs = {
-      _1password.enable = true;
-      _1password-gui = {
-        enable = true;
-        polkitPolicyOwners = [ config.my.username ];
+      # nixpkgs.overlays = [
+      #   (final: prev: {
+      #     vimPlugins = prev.vimPlugins.extend (
+      #       final': prev': {
+      #         neotest = (
+      #           prev'.neotest.overrideAttrs (old: {
+      #             doCheck = false;
+      #           })
+      #         );
+      #       }
+      #     );
+      #   })
+      # ];
+
+      # Use the systemd-boot EFI boot loader.
+      boot.loader.systemd-boot.enable = true;
+      boot.loader.efi.canTouchEfiVariables = false;
+
+      networking.hostName = "pronix"; # Define your hostname.
+
+      # TODO: don't include in git
+      hardware.asahi.peripheralFirmwareDirectory = ./_firmware;
+
+      fileSystems = {
+        "/".options = [
+          "compress=zstd"
+          "noatime"
+        ];
+        "/nix".options = [
+          "compress=zstd"
+          "noatime"
+        ];
       };
-    };
 
-    # TODO: integrate with hyprland
-    services.logind = {
-      settings = {
-        Login = {
-          HandlePowerKey = "suspend";
-          HandleLidSwitch = "suspend";
-          HandleLidSwitchExternalPower = "ignore";
+      services.tlp.enable = true;
+      services.upower.enable = true;
+
+      programs = {
+        _1password.enable = true;
+        _1password-gui = {
+          enable = true;
+          polkitPolicyOwners = [ config.my.username ];
+        };
+      };
+
+      # TODO: integrate with hyprland
+      services.logind = {
+        settings = {
+          Login = {
+            HandlePowerKey = "suspend";
+            HandleLidSwitch = "suspend";
+            HandleLidSwitchExternalPower = "ignore";
+          };
         };
       };
     };
-  };
 
   flake.homeModules.pronix =
     { pkgs, ... }:

@@ -1,7 +1,12 @@
 { self, ... }:
 {
   flake.homeModules.hyprland =
-    { pkgs, lib, ... }:
+    {
+      pkgs,
+      lib,
+      osConfig,
+      ...
+    }:
     {
 
       imports = [
@@ -35,7 +40,7 @@
           enable = true;
           settings = {
             main = {
-              font = "Hack";
+              font = osConfig.my.nerd-font.name;
               terminal = "${lib.getExe pkgs.kitty}";
               launch-prefix = "${lib.getExe pkgs.uwsm} app --";
             };
@@ -74,7 +79,7 @@
         mako = {
           enable = true;
           settings = {
-            font = "Hack";
+            font = osConfig.my.nerd-font.name;
 
             background-color = "#161616";
             text-color = "#f2f4f8";

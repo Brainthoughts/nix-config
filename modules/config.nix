@@ -1,5 +1,0 @@
-{
-  config.my = {
-    username = "alexn";
-  };
-}

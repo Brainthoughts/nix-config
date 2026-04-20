@@ -1,7 +1,6 @@
 {
   self,
   inputs,
-  config,
   ...
 }:
 {
@@ -14,7 +13,7 @@
   };
 
   flake.nixosModules.blacknix =
-    { pkgs, ... }:
+    { pkgs, config, ... }:
     {
       imports = [
         ./_hardware-configuration.nix

@@ -1,7 +1,6 @@
 {
   self,
   inputs,
-  config,
   ...
 }:
 {
@@ -13,7 +12,7 @@
   };
 
   flake.nixosModules.macnix =
-    { pkgs, ... }:
+    { pkgs, config, ... }:
     {
       imports = [
         ./_hardware-configuration.nix
