@@ -25,7 +25,6 @@ in
 
   flake.homeModules.Sweet-16 = {
     imports = [
-      self.homeModules.base
       self.homeModules.darwin
     ];
   };

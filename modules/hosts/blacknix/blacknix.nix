@@ -102,7 +102,6 @@ in
     { pkgs, ... }:
     {
       imports = [
-        self.homeModules.base
         self.homeModules.nixos
       ];
 

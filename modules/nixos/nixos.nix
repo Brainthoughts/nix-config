@@ -186,6 +186,8 @@
 
     { pkgs, config, ... }:
     {
+      imports = [ self.homeModules.base ];
+
       home.packages = with pkgs; [
         # Commands
         brightnessctl

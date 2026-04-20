@@ -107,6 +107,7 @@
     {
       imports = [
         ./_sketchybar
+        self.homeModules.base
       ];
 
       home.packages = with pkgs; [

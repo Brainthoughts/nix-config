@@ -148,7 +148,7 @@ in
 
   flake.homeModules.macnix = {
     imports = [
-      self.homeModules.base
+      self.homeModules.nixos
     ];
 
     programs.ssh.matchBlocks = {
