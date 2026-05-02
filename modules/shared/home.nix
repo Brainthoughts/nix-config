@@ -25,7 +25,7 @@
 
         # Python
         python3
-        pdm
+        # pdm # also broken rn
         pre-commit
 
         # rust
@@ -36,7 +36,7 @@
 
         # low-level misc
         gdb
-        tshark
+        # tshark # broken hash rn
       ];
 
       programs = {
