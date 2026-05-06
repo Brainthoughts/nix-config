@@ -7,7 +7,7 @@
 
 let
 
-  update_interval = 5;
+  update_interval = 1;
   uwsm_app = app: "${lib.getExe pkgs.uwsm} app -- ${app}";
 
   icons = {
