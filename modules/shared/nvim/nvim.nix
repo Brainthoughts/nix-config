@@ -18,6 +18,10 @@
         enable = true;
         defaultEditor = true;
 
+        withNodeJs = true;
+        withPython3 = true;
+        withRuby = false;
+
         extraPackages = with pkgs; [
           # LazyVim
           lua-language-server
