@@ -14,5 +14,12 @@
           window_alert_on_bell = false;
         };
       };
+
+      xdg.terminal-exec = {
+        enable = true;
+        settings = {
+          default = [ "kitty.desktop" ];
+        };
+      };
     };
 }
