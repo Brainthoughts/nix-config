@@ -117,136 +117,138 @@
         in
         {
           enable = true;
+          configType = "lua";
           systemd.enable = false;
+          extraConfig =
+            # lua
+            ''
+              -- mouse
+              hl.bind("${mainMod} + mouse:272", hl.dsp.window.drag(), { mouse = true })
+
+              -- repeat
+              hl.bind("XF86MonBrightnessUp", hl.dsp.exec_cmd("${lib.getExe pkgs.brightnessctl} s +5%"), { repeating = true })
+              hl.bind("XF86MonBrightnessDown", hl.dsp.exec_cmd("${lib.getExe pkgs.brightnessctl} s 5%-"), { repeating = true })
+              hl.bind("XF86AudioRaiseVolume", hl.dsp.exec_cmd("${lib.getExe pkgs.pamixer} -i 3"), { repeating = true })
+              hl.bind("XF86AudioLowerVolume", hl.dsp.exec_cmd("${lib.getExe pkgs.pamixer} -d 3"), { repeating = true })
+              hl.bind("XF86AudioMute", hl.dsp.exec_cmd("${lib.getExe pkgs.pamixer} -t"), { repeating = true })
+
+              -- hold
+              hl.bind("${mainMod} + Q", hl.dsp.exec_cmd("${lib.getExe pkgs.uwsm} stop"), {long_press = true})
+              hl.bind("${mainMod} + SHIFT + Q", hl.dsp.exec_cmd("${lib.getExe pkgs.uwsm} exit"), {long_press = true})
+              hl.bind("${mainMod} + D", hl.dsp.window.kill(), {long_press = true})
+
+              -- single
+              hl.bind("XF86AudioPrev", hl.dsp.exec_cmd("${lib.getExe pkgs.playerctl} previous"))
+              hl.bind("XF86AudioPlay", hl.dsp.exec_cmd("${lib.getExe pkgs.playerctl} play-pause"))
+              hl.bind("XF86AudioNext", hl.dsp.exec_cmd("${lib.getExe pkgs.playerctl} next"))
+
+              hl.bind("${mainMod} + backslash", hl.dsp.exec_cmd("${lib.getExe pkgs.hyprshot} -o ${screenShotFolder} -m region"))
+              hl.bind("${mainMod} + SHIFT + backslash", hl.dsp.exec_cmd("${lib.getExe pkgs.hyprshot} -o ${screenShotFolder} -m window"))
+              hl.bind("${mainMod} + CTRL + backslash", hl.dsp.exec_cmd("${lib.getExe pkgs.hyprshot} -o ${screenShotFolder} -m region --clipboard-only"))
+              hl.bind("${mainMod} + CTRL + SHIFT + backslash", hl.dsp.exec_cmd("${lib.getExe pkgs.hyprshot} -o ${screenShotFolder} -m window --clipboard-only"))
+              hl.bind("${mainMod} + period", hl.dsp.exec_cmd("${lib.getExe pkgs.hyprpicker} -a"))
+
+              hl.bind("${mainMod} + B", hl.dsp.exec_cmd("${uwsmApp} ${lib.getExe pkgs.firefox}"))
+              hl.bind("${mainMod} + X", hl.dsp.exec_cmd("${uwsmApp} ${lib.getExe pkgs.kitty}"))
+              hl.bind("${mainMod} + F", hl.dsp.exec_cmd("${uwsmApp} ${lib.getExe pkgs.nautilus}"))
+
+              hl.bind("${mainMod} + space", hl.dsp.exec_cmd("${uwsmApp} ${lib.getExe pkgs.fuzzel}"))
+
+              hl.bind("${mainMod} + D", hl.dsp.window.close())
+              hl.bind("${mainMod} + M", hl.dsp.window.float())
+              hl.bind("${mainMod} + A", hl.dsp.window.fullscreen({"maximized", "toggle"}))
+              hl.bind("${mainMod} + SHIFT + A", hl.dsp.window.fullscreen({"fullscreen", "toggle"}))
+
+              hl.bind("${mainMod} + N", hl.dsp.focus({ workspace = "m+1" }))
+              hl.bind("${mainMod} + P", hl.dsp.focus({ workspace = "m-1" }))
+              hl.bind("${mainMod} + C", hl.dsp.focus({ workspace = "emptym" }))
+              hl.bind("${mainMod} + Z", hl.dsp.focus({ workspace = "previous_per_monitor" }))
+
+              hl.bind("${mainMod} + H", hl.dsp.focus({ direction = "l" }))
+              hl.bind("${mainMod} + L", hl.dsp.focus({ direction = "r" }))
+              hl.bind("${mainMod} + J", hl.dsp.focus({ direction = "d" }))
+              hl.bind("${mainMod} + K", hl.dsp.focus({ direction = "u" }))
+              hl.bind("${mainMod} + SHIFT + H", hl.dsp.window.move({ direction = "l" }))
+              hl.bind("${mainMod} + SHIFT + L", hl.dsp.window.move({ direction = "r" }))
+              hl.bind("${mainMod} + SHIFT + J", hl.dsp.window.move({ direction = "d" }))
+              hl.bind("${mainMod} + SHIFT + K", hl.dsp.window.move({ direction = "u" }))
+
+              for i = 0,9,1 do 
+                hl.bind("${mainMod} + code:1" .. i, hl.dsp.focus({ workspace = i+1 }))
+                hl.bind("${mainMod} + SHIFT + code:1" .. i, hl.dsp.window.move({ workspace = i+1, true }))
+              end
+
+              hl.bind("${mainMod} + grave", hl.dsp.workspace.toggle_special("magic"))
+              hl.bind("${mainMod} + SHIFT + grave", hl.dsp.window.move({ workspace = "special:magic", true}))
+
+              hl.bind("${mainMod} + Escape", hl.dsp.exec_cmd("${lib.getExe pkgs.hyprlock}"))
+            '';
           settings = {
-            # mouse
-            bindm = [
-              "${mainMod}, mouse:272, movewindow"
-            ];
-            # repeat when held
-            binde = [
-              ", XF86MonBrightnessUp, exec, ${lib.getExe pkgs.brightnessctl} s +5%"
-              ", XF86MonBrightnessDown, exec, ${lib.getExe pkgs.brightnessctl} s 5%-"
-              ", XF86AudioRaiseVolume, exec, ${lib.getExe pkgs.pamixer} -i 3"
-              ", XF86AudioLowerVolume, exec, ${lib.getExe pkgs.pamixer} -d 3"
-              ", XF86AudioMute, exec, ${lib.getExe pkgs.pamixer} -t"
-            ];
-            # on long press
-            bindo = [
-              "${mainMod}, Q, exec, uwsm stop"
-              "${mainMod} SHIFT, Q, exit"
-              "${mainMod}, D, killwindow, active"
-            ];
-            # once on key tap
-            bind = [
-              ", XF86AudioPrev, exec, ${lib.getExe pkgs.playerctl} previous"
-              ", XF86AudioPlay, exec, ${lib.getExe pkgs.playerctl} play-pause"
-              ", XF86AudioNext, exec, ${lib.getExe pkgs.playerctl} next"
-              "${mainMod}, backslash, exec, ${lib.getExe pkgs.hyprshot} -o ${screenShotFolder} -m region"
-              "${mainMod} SHIFT, backslash, exec, ${lib.getExe pkgs.hyprshot} -o ${screenShotFolder} -m window"
-              "${mainMod} CTRL, backslash, exec, ${lib.getExe pkgs.hyprshot} -o ${screenShotFolder} -m region --clipboard-only"
-              "${mainMod} CTRL SHIFT, backslash, exec, ${lib.getExe pkgs.hyprshot} -o ${screenShotFolder} -m window --clipboard-only"
-              "${mainMod}, period, exec, ${lib.getExe pkgs.hyprpicker} -a"
-              "${mainMod}, B, exec, ${uwsmApp} ${lib.getExe pkgs.firefox}"
-              "${mainMod}, X, exec, ${uwsmApp} ${lib.getExe pkgs.kitty}"
-              "${mainMod}, F, exec, ${uwsmApp} ${lib.getExe pkgs.nautilus}"
-              "${mainMod}, SPACE, exec, ${uwsmApp} ${lib.getExe pkgs.fuzzel}"
-              "${mainMod}, D, closewindow, active"
-              "${mainMod}, M, togglefloating, active"
-              "${mainMod}, A, fullscreen, 1" # maximize
-              "${mainMod} SHIFT, A, fullscreen, 0" # fullscreen
-              "${mainMod}, N, workspace, m+1"
-              "${mainMod}, P, workspace, m-1"
-              "${mainMod}, C, workspace, emptym"
-              "${mainMod}, Z, workspace, previous_per_monitor"
-              "${mainMod}, H, movefocus, l"
-              "${mainMod}, J, movefocus, d"
-              "${mainMod}, K, movefocus, u"
-              "${mainMod}, L, movefocus, r"
-              "${mainMod} SHIFT, H, movewindow, l"
-              "${mainMod} SHIFT, J, movewindow, d"
-              "${mainMod} SHIFT, K, movewindow, u"
-              "${mainMod} SHIFT, L, movewindow, r"
-              "${mainMod}, grave, togglespecialworkspace, magic"
-              "${mainMod} SHIFT, grave, movetoworkspace, special:magic"
-              "${mainMod}, Escape, exec, ${lib.getExe pkgs.hyprlock}"
-            ]
-            ++ (
-              # workspaces
-              # binds $mod + [shift +] {1..9} to [move to] workspace {1..9}
-              builtins.concatLists (
-                builtins.genList (
-                  i:
-                  let
-                    ws = i + 1;
-                  in
-                  [
-                    "${mainMod}, code:1${toString i}, workspace, ${toString ws}"
-                    "${mainMod} SHIFT, code:1${toString i}, movetoworkspace, ${toString ws}"
-                  ]
-                ) 9
-              )
-            );
+            config = {
+              _args = [
+                {
+                  gesture = [ "3, horizontal, workspace" ];
 
-            gesture = [ "3, horizontal, workspace" ];
+                  # window rules
+                  windowrule = [
+                    "match:float true, border_color rgb(33b1ff)"
+                    "match:modal true, border_color rgb(be95ff)"
+                    "match:fullscreen true, border_color rgb(ee5396)"
+                  ];
 
-            # window rules
-            windowrule = [
-              "match:float true, border_color rgb(33b1ff)"
-              "match:modal true, border_color rgb(be95ff)"
-              "match:fullscreen true, border_color rgb(ee5396)"
-            ];
+                  # variables
+                  general = {
+                    border_size = 1;
+                    "col.active_border" = "rgb(78a9ff)";
+                    "col.inactive_border" = "rgba(53535380)";
+                    resize_on_border = true;
+                    gaps_in = 4;
+                    gaps_out = 8;
+                  };
+                  binds = {
+                    hide_special_on_workspace_change = true;
+                  };
+                  decoration = {
+                    rounding = 10;
+                    inactive_opacity = 0.9;
+                    shadow = {
+                      enabled = false;
+                    };
+                  };
+                  animation = [
+                    "windows, 1, 8, default, popin"
+                  ];
+                  input = {
+                    # keyboard, altgr for umlaut
+                    kb_options = "lv3:ralt_switch";
+                    kb_variant = "altgr-intl";
+                    follow_mouse = 2;
+                    touchpad = {
+                      tap_to_click = false;
+                      clickfinger_behavior = true;
+                      natural_scroll = true;
+                    };
+                  };
+                  gestures = {
+                    workspace_swipe_distance = 200;
+                  };
+                  misc = {
+                    disable_hyprland_logo = true;
+                    disable_splash_rendering = true;
+                    background_color = lib.fromHexString "0x161616";
+                    focus_on_activate = true;
+                  };
 
-            # variables
-            general = {
-              border_size = 1;
-              "col.active_border" = "rgb(78a9ff)";
-              "col.inactive_border" = "rgba(53535380)";
-              resize_on_border = true;
-              gaps_in = 4;
-              gaps_out = 8;
+                  # device specific input settings
+                  device = [
+                    {
+                      name = "logitech-g903-ls-1";
+                      sensitivity = -0.6;
+                    }
+                  ];
+                }
+              ];
             };
-            binds = {
-              hide_special_on_workspace_change = true;
-            };
-            decoration = {
-              rounding = 10;
-              inactive_opacity = 0.9;
-              shadow = {
-                enabled = false;
-              };
-            };
-            animation = [
-              "windows, 1, 8, default, popin"
-            ];
-            input = {
-              # keyboard, altgr for umlaut
-              kb_options = "lv3:ralt_switch";
-              kb_variant = "altgr-intl";
-              follow_mouse = 2;
-              touchpad = {
-                tap-to-click = false;
-                clickfinger_behavior = true;
-                natural_scroll = true;
-              };
-            };
-            gestures = {
-              workspace_swipe_distance = 200;
-            };
-            misc = {
-              disable_hyprland_logo = true;
-              disable_splash_rendering = true;
-              background_color = lib.fromHexString "0x161616";
-              focus_on_activate = true;
-            };
-
-            # device specific input settings
-            device = [
-              {
-                name = "logitech-g903-ls-1";
-                sensitivity = -0.6;
-              }
-            ];
           };
         };
 
