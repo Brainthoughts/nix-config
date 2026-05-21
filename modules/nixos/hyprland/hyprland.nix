@@ -182,74 +182,70 @@
               hl.bind("${mainMod} + SHIFT + grave", hl.dsp.window.move({ workspace = "special:magic", true}))
 
               hl.bind("${mainMod} + Escape", hl.dsp.exec_cmd("${lib.getExe pkgs.hyprlock}"))
+
+              hl.config({
+                gesture = { 
+                  "3, horizontal, workspace",
+                },
+
+                -- window rules
+                windowrule = {
+                  "match:float true, border_color rgb(33b1ff)",
+                  "match:modal true, border_color rgb(be95ff)",
+                  "match:fullscreen true, border_color rgb(ee5396)",
+                },
+
+                -- variables
+                general = {
+                  border_size = 1,
+                  ["col.active_border"] = "rgb(78a9ff)",
+                  ["col.inactive_border"] = "rgba(53535380)",
+                  resize_on_border = true,
+                  gaps_in = 4,
+                  gaps_out = 8,
+                },
+                binds = {
+                  hide_special_on_workspace_change = true,
+                },
+                decoration = {
+                  rounding = 10,
+                  inactive_opacity = 0.9,
+                  shadow = {
+                    enabled = false,
+                  }
+                },
+                animation = {
+                  "windows, 1, 8, default, popin",
+                },
+                input = {
+                  -- keyboard, altgr for umlaut
+                  kb_options = "lv3:ralt_switch",
+                  kb_variant = "altgr-intl",
+                  follow_mouse = 2,
+                  touchpad = {
+                    tap_to_click = false,
+                    clickfinger_behavior = true,
+                    natural_scroll = true,
+                  }
+                },
+                gestures = {
+                  workspace_swipe_distance = 200,
+                },
+                misc = {
+                  disable_hyprland_logo = true,
+                  disable_splash_rendering = true,
+                  background_color = "#161616",
+                  focus_on_activate = true,
+                },
+                -- device specific input settings
+                device = {
+                  {
+                    name = "logitech-g903-ls-1",
+                    sensitivity = -0.6,
+                  }
+                },
+              })
             '';
-          settings = {
-            config = {
-              _args = [
-                {
-                  gesture = [ "3, horizontal, workspace" ];
-
-                  # window rules
-                  windowrule = [
-                    "match:float true, border_color rgb(33b1ff)"
-                    "match:modal true, border_color rgb(be95ff)"
-                    "match:fullscreen true, border_color rgb(ee5396)"
-                  ];
-
-                  # variables
-                  general = {
-                    border_size = 1;
-                    "col.active_border" = "rgb(78a9ff)";
-                    "col.inactive_border" = "rgba(53535380)";
-                    resize_on_border = true;
-                    gaps_in = 4;
-                    gaps_out = 8;
-                  };
-                  binds = {
-                    hide_special_on_workspace_change = true;
-                  };
-                  decoration = {
-                    rounding = 10;
-                    inactive_opacity = 0.9;
-                    shadow = {
-                      enabled = false;
-                    };
-                  };
-                  animation = [
-                    "windows, 1, 8, default, popin"
-                  ];
-                  input = {
-                    # keyboard, altgr for umlaut
-                    kb_options = "lv3:ralt_switch";
-                    kb_variant = "altgr-intl";
-                    follow_mouse = 2;
-                    touchpad = {
-                      tap_to_click = false;
-                      clickfinger_behavior = true;
-                      natural_scroll = true;
-                    };
-                  };
-                  gestures = {
-                    workspace_swipe_distance = 200;
-                  };
-                  misc = {
-                    disable_hyprland_logo = true;
-                    disable_splash_rendering = true;
-                    background_color = lib.fromHexString "0x161616";
-                    focus_on_activate = true;
-                  };
-
-                  # device specific input settings
-                  device = [
-                    {
-                      name = "logitech-g903-ls-1";
-                      sensitivity = -0.6;
-                    }
-                  ];
-                }
-              ];
-            };
-          };
         };
 
       services = {
