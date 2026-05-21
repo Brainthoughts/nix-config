@@ -111,15 +111,18 @@ in
         };
       };
 
-      wayland.windowManager.hyprland.settings.monitor = [
-        "eDP-1, 3456x2160@120, 0x0, 1.5"
-      ];
+      wayland.windowManager.hyprland.extraConfig =
+        # lua
+        ''
+          hl.monitor({
+            output = "eDP-1",
+            mode = "3456x2160@120",
+            position = "0x0",
+            scale = 1.5,
+          })
 
-      wayland.windowManager.hyprland.settings.bindl =
-        # even when locked
-        [
-          ", switch:on:Apple SMC power/lid events, exec, hyprctl keyword monitor \"eDP-1, disable\""
-          ", switch:off:Apple SMC power/lid events, exec, hyprctl keyword monitor \"eDP-1, 3456x2160@120, 0x0, 1.5\""
-        ];
+          hl.bind("switch:on:Apple SMC power/lid events", hl.dsp.exec_cmd("hyprctl keyword monitor \"eDP-1, disable\""), { locked = true })
+          hl.bind("switch:off:Apple SMC power/lid events", hl.dsp.exec_cmd("hyprctl keyword monitor \"eDP-1, 3456x2160@120, 0x0, 1.5\""), { locked = true })
+        '';
     };
 }
