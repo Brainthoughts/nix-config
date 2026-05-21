@@ -114,15 +114,24 @@ in
       wayland.windowManager.hyprland.extraConfig =
         # lua
         ''
-          hl.monitor({
-            output = "eDP-1",
-            mode = "3456x2160@120",
-            position = "0x0",
-            scale = 1.5,
-          })
+          function setDisplay(disabled) 
+            return function()
+                hl.monitor({
+                  output = "eDP-1",
+                  mode = "3456x2160@120",
+                  position = "0x0",
+                  scale = "1.5",
+                  disabled = disabled,
+                })
+              end
+          end
+          setDisplay(false)()
 
-          hl.bind("switch:on:Apple SMC power/lid events", hl.dsp.exec_cmd("hyprctl keyword monitor \"eDP-1, disable\""), { locked = true })
-          hl.bind("switch:off:Apple SMC power/lid events", hl.dsp.exec_cmd("hyprctl keyword monitor \"eDP-1, 3456x2160@120, 0x0, 1.5\""), { locked = true })
+          -- disable currently bugged, work around
+          -- hl.bind("switch:on:Apple SMC power/lid events", setDisplay(true), { locked = true })
+          -- hl.bind("switch:off:Apple SMC power/lid events", setDisplay(false), { locked = true })
+          hl.bind("switch:on:Apple SMC power/lid events", hl.dsp.dpms({ action = "disable" }), { locked = true })
+          hl.bind("switch:off:Apple SMC power/lid events", hl.dsp.dpms({ action = "enable" }), { locked = true })
         '';
     };
 }
