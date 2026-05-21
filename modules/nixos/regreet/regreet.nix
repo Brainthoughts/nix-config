@@ -8,7 +8,7 @@
           name = "Adwaita-dark";
         };
         iconTheme = {
-          name = "Adwaita-dark";
+          name = "Adwaita";
         };
         cursorTheme = {
           package = pkgs.bibata-cursors;

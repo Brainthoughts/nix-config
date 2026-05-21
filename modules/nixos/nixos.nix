@@ -211,7 +211,7 @@
         enable = true;
         colorScheme = "dark";
         # silence legacy warnings
-        gtk4.theme = config.gtk.theme;
+        gtk4.theme = null;
       };
 
       services.gnome-keyring.enable = true;
