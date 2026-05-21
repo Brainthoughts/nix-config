@@ -183,6 +183,14 @@
 
               hl.bind("${mainMod} + Escape", hl.dsp.exec_cmd("${lib.getExe pkgs.hyprlock}"))
 
+              -- device specific input settings
+              hl.device(
+                {
+                  name = "logitech-g903-ls-1",
+                  sensitivity = -0.6,
+                }
+              )
+
               hl.config({
                 gesture = { 
                   "3, horizontal, workspace",
@@ -236,13 +244,6 @@
                   disable_splash_rendering = true,
                   background_color = "#161616",
                   focus_on_activate = true,
-                },
-                -- device specific input settings
-                device = {
-                  {
-                    name = "logitech-g903-ls-1",
-                    sensitivity = -0.6,
-                  }
                 },
               })
             '';
