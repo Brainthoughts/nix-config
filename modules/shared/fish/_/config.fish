@@ -36,3 +36,5 @@ set -g fish_pager_color_description $comment
 
 fish_vi_cursor
 fish_vi_key_bindings
+
+setup_ssh

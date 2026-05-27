@@ -112,13 +112,6 @@ in
       ];
 
       programs = {
-        ssh = {
-          matchBlocks = {
-            "*" = {
-              identityAgent = "~/.1password/agent.sock";
-            };
-          };
-        };
         vesktop = {
           enable = true;
         };

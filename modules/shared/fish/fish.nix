@@ -8,6 +8,7 @@
         functions = {
           fish_greeting = pkgs.lib.getExe pkgs.fastfetch;
           fish_title = builtins.readFile ./_/fish_title.fish;
+          setup_ssh = builtins.readFile ./_/setup_ssh.fish;
         };
         shellAliases = {
           ff = "fastfetch";
