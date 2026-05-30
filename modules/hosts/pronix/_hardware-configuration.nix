@@ -29,7 +29,7 @@
   };
 
   boot.initrd.luks.devices."crypted".device =
-    "/dev/disk/by-uuid/58f75321-0551-49b2-838a-53c1261b225f";
+    "/dev/disk/by-uuid/67201825-24f0-4606-8c0e-18710bd0fbe7";
 
   fileSystems."/nix" = {
     device = "/dev/mapper/crypted";
