@@ -60,12 +60,12 @@ in
               assert prev.lib.assertMsg (
                 old.version == "1.0rc2"
               ) "nixpkgs has updated OpenRGB, remove this overlay";
-              "pipeline-2025-01-21"; # Use current date or commit hash
+              "pipeline-2026-5-31";
             src = final.fetchFromGitLab {
               owner = "CalcProgrammer1";
               repo = "OpenRGB";
-              rev = "e48908573a1f67943912591dcfb121d4bc79b0e8";
-              hash = "sha256-TOtUUl+fmkHN4FWgr2FjraDtfASNE0XLaKZXCYj2/t4=";
+              rev = "8afad91b33f5fc61f632fe67b6ca98fe2299613d";
+              hash = "sha256-A/zp8XTtwBJtof2UTrxA2zc87biQ4eXAImWjWHWapik=";
             };
             patches = [
               (builtins.elemAt old.patches 0)
