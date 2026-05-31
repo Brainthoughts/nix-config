@@ -4,6 +4,7 @@
   flake.nixosModules.hyprland =
     { config, ... }:
     {
+      environment.sessionVariables.NIXOS_OZONE_WL = 1;
       programs.hyprland = {
         enable = true;
         withUWSM = true;
@@ -18,6 +19,7 @@
     {
       pkgs,
       lib,
+      config,
       osConfig,
       ...
     }:
@@ -27,8 +29,6 @@
         ./_/waybar
         self.homeModules.kitty
       ];
-
-      environment.sessionVariables.NIXOS_OZONE_WL = 1;
 
       home.packages = with pkgs; [
         # Apps
@@ -64,6 +64,7 @@
       programs = {
         firefox = {
           enable = true;
+          configPath = "${config.xdg.configHome}/mozilla/firefox";
         };
         # TODO: consider hyprlauncher when it matures
         fuzzel = {
