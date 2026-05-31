@@ -18,7 +18,10 @@ in
   };
 
   flake.nixosModules.pronix =
-    { config, ... }:
+    {
+      config,
+      ...
+    }:
     {
       imports = [
         # Include the results of the hardware scan.
@@ -30,19 +33,23 @@ in
 
       home-manager.users.${config.my.username} = self.homeModules.pronix;
 
-      # nixpkgs.overlays = [
-      #   (final: prev: {
-      #     vimPlugins = prev.vimPlugins.extend (
-      #       final': prev': {
-      #         neotest = (
-      #           prev'.neotest.overrideAttrs (old: {
-      #             doCheck = false;
-      #           })
-      #         );
-      #       }
-      #     );
-      #   })
-      # ];
+      nixpkgs.overlays = [
+        (final: prev: {
+          aquamarine = prev.aquamarine.overrideAttrs (old: {
+            version =
+              assert prev.lib.assertMsg (
+                old.version == "0.11.0"
+              ) "nixpkgs has updated aquamarine, remove this overlay";
+              "0.12.0";
+            src = final.fetchFromGitHub {
+              owner = "hyprwm";
+              repo = "aquamarine";
+              tag = "v0.12.0";
+              hash = "sha256-TtAhxedbRAl1u6OyT+4eRxZ417G2NMJNoqEbIhjvWo0=";
+            };
+          });
+        })
+      ];
 
       # Use the systemd-boot EFI boot loader.
       boot.loader.systemd-boot.enable = true;
