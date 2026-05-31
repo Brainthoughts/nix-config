@@ -143,9 +143,6 @@
         ];
       };
 
-      # Install firefox.
-      programs.firefox.enable = true;
-
       # List packages installed in system profile. To search, run:
       # $ nix search wget
       environment.systemPackages = with pkgs; [
@@ -156,8 +153,6 @@
         fish
         man-pages
       ];
-
-      environment.sessionVariables.NIXOS_OZONE_WL = 1;
 
       fonts = {
         packages = with pkgs; [
@@ -190,14 +185,7 @@
 
       home.packages = with pkgs; [
         # Commands
-        brightnessctl
-        pamixer
-        gcr
-        eduvpn-client
-        openvpn
-
         # Apps
-        ghidra
       ];
 
       programs = {
@@ -205,20 +193,6 @@
           enable = true;
           enableDefaultConfig = false;
         };
-      };
-
-      gtk = {
-        enable = true;
-        colorScheme = "dark";
-        # silence legacy warnings
-        gtk4.theme = null;
-      };
-
-      services.gnome-keyring.enable = true;
-
-      xdg.mimeApps = {
-        enable = true;
-        defaultApplicationPackages = [ pkgs.zathura ];
       };
     };
 }

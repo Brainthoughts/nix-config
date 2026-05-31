@@ -28,14 +28,20 @@
         self.homeModules.kitty
       ];
 
+      environment.sessionVariables.NIXOS_OZONE_WL = 1;
+
       home.packages = with pkgs; [
         # Apps
         nautilus
         pavucontrol
         libreoffice-fresh
+        ghidra
         # Commands
         brightnessctl
         pamixer
+        gcr
+        eduvpn-client
+        openvpn
       ];
 
       home.pointerCursor = {
@@ -48,7 +54,17 @@
         };
       };
 
+      gtk = {
+        enable = true;
+        colorScheme = "dark";
+        # silence legacy warnings
+        gtk4.theme = null;
+      };
+
       programs = {
+        firefox = {
+          enable = true;
+        };
         # TODO: consider hyprlauncher when it matures
         fuzzel = {
           enable = true;
@@ -90,6 +106,9 @@
         # hyprpaper = {
         #   enable = true;
         # };
+        gnome-keyring = {
+          enable = true;
+        };
         hyprpolkitagent = {
           enable = true;
         };
@@ -280,5 +299,9 @@
         };
       };
 
+      xdg.mimeApps = {
+        enable = true;
+        defaultApplicationPackages = [ pkgs.zathura ];
+      };
     };
 }
