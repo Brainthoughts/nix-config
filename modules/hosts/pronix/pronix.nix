@@ -33,6 +33,16 @@ in
 
       home-manager.users.${config.my.username} = self.homeModules.pronix;
 
+      # so we don't have to spend 30 mins rebuilding the kernel
+      nix.settings = {
+        extra-substituters = [
+          "https://nixos-apple-silicon.cachix.org"
+        ];
+        extra-trusted-public-keys = [
+          "nixos-apple-silicon.cachix.org-1:8psDu5SA5dAD7qA0zMy5UT292TxeEPzIz8VVEr2Js20="
+        ];
+      };
+
       nixpkgs.overlays = [
         (final: prev: {
           aquamarine = prev.aquamarine.overrideAttrs (old: {
