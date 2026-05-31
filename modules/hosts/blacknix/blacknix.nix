@@ -90,9 +90,6 @@ in
         enable = true;
         # seems to hang on restart sometimes
         liveRestore = false;
-        daemon.settings = {
-          dns = [ "8.8.8.8" ];
-        };
       };
     };
 
