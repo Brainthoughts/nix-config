@@ -176,8 +176,8 @@
 
               hl.bind("${mainMod} + D", hl.dsp.window.close())
               hl.bind("${mainMod} + M", hl.dsp.window.float())
-              hl.bind("${mainMod} + A", hl.dsp.window.fullscreen({"maximized", "toggle"}))
-              hl.bind("${mainMod} + SHIFT + A", hl.dsp.window.fullscreen({"fullscreen", "toggle"}))
+              hl.bind("${mainMod} + A", hl.dsp.window.fullscreen({ moode="maximized", action="toggle" }))
+              hl.bind("${mainMod} + SHIFT + A", hl.dsp.window.fullscreen({ mode="fullscreen", action="toggle" }))
 
               hl.bind("${mainMod} + N", hl.dsp.focus({ workspace = "m+1" }))
               hl.bind("${mainMod} + P", hl.dsp.focus({ workspace = "m-1" }))
