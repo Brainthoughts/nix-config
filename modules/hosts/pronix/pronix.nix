@@ -43,24 +43,6 @@ in
         ];
       };
 
-      nixpkgs.overlays = [
-        (final: prev: {
-          aquamarine = prev.aquamarine.overrideAttrs (old: {
-            version =
-              assert prev.lib.assertMsg (
-                old.version == "0.11.0"
-              ) "nixpkgs has updated aquamarine, remove this overlay";
-              "0.12.0";
-            src = final.fetchFromGitHub {
-              owner = "hyprwm";
-              repo = "aquamarine";
-              tag = "v0.12.0";
-              hash = "sha256-TtAhxedbRAl1u6OyT+4eRxZ417G2NMJNoqEbIhjvWo0=";
-            };
-          });
-        })
-      ];
-
       # Use the systemd-boot EFI boot loader.
       boot.loader.systemd-boot.enable = true;
       boot.loader.efi.canTouchEfiVariables = false;
