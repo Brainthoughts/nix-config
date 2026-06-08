@@ -28,12 +28,6 @@ in
 
       networking.hostName = "macnix"; # Define your hostname.
 
-      virtualisation.docker = {
-        enable = true;
-        # seems to hang on restart sometimes
-        liveRestore = false;
-      };
-
       environment.systemPackages = with pkgs; [
         samba
         cifs-utils

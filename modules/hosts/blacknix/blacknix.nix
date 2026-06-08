@@ -85,12 +85,6 @@ in
           };
         };
       };
-
-      virtualisation.docker = {
-        enable = true;
-        # seems to hang on restart sometimes
-        liveRestore = false;
-      };
     };
 
   flake.homeModules.blacknix =

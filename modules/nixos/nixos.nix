@@ -160,6 +160,12 @@
         ];
       };
 
+      virtualisation.docker = {
+        enable = true;
+        # seems to hang on restart sometimes
+        # liveRestore = false;
+      };
+
       # Enable the OpenSSH daemon.
       services.openssh.enable = true;
 
