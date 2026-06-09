@@ -324,7 +324,7 @@
             general = {
               lock_cmd = "pidof hyprlock || hyprlock";
               before_sleep_cmd = "loginctl lock-session";
-              after_sleep_cmd = "hyprlctl dispatch dpms on";
+              after_sleep_cmd = "hyprctl dispatch 'hl.dsp.dpms({ action = \"enable\" })'";
             };
             listener = [
               {
@@ -337,8 +337,8 @@
               }
               {
                 timeout = 60 * 15;
-                on-timeout = "hyprctl dispatch dpms off && loginctl lock-session";
-                on-resume = "hyprctl dispatch dpms on";
+                on-timeout = "hyprctl dispatch 'hl.dsp.dpms({ action = \"disable\" })' && loginctl lock-session";
+                on-resume = "hyprctl dispatch 'hl.dsp.dpms({ action = \"enable\" })'";
               }
             ];
           };
