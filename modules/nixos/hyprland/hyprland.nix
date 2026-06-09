@@ -13,6 +13,38 @@
 
       home-manager.users.${config.my.username}.imports = [ self.homeModules.hyprland ];
 
+      nixpkgs.overlays = [
+        (self: super: {
+          waybar = super.waybar.overrideAttrs (old: {
+            version =
+              assert self.lib.assertMsg (old.version == "0.15.0") "waybar has been updated, remove this overlay";
+              "2026-06-09";
+            src = self.fetchFromGitHub {
+              owner = "Alexays";
+              repo = "Waybar";
+              rev = "05945748dccce28bf96d26d8f64a9e69a8dd49ba";
+              hash = "sha256-51R3mIt8cLNvh/X5qe9vOqeJCj0U9KRyemVE5y+OhiU=";
+            };
+
+            postUnpack = ''
+              pushd "$sourceRoot"
+              cp -R --no-preserve=mode,ownership ${
+                self.fetchFromGitHub {
+                  owner = "LukashonakV";
+                  repo = "cava";
+                  rev = "0.10.7";
+                  hash = "sha256-zkyj1vBzHtoypX4Bxdh1Vmwh967DKKxN751v79hzmgQ=";
+                }
+              } subprojects/cava-0.10.7 
+              patchShebangs .
+              popd
+            '';
+
+            nativeInstallCheckInputs = [
+            ];
+          });
+        })
+      ];
     };
 
   flake.homeModules.hyprland =
