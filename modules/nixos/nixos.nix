@@ -171,7 +171,15 @@
 
       networking.firewall.enable = true;
 
-      zramSwap.enable = true;
+      zramSwap = {
+        enable = true;
+        memoryPercent = 25 * 5; # aim for max 25% ram usage assuming compression to 1/5 original size
+      };
+      systemd.oomd = {
+        enable = true;
+        enableRootSlice = true;
+        enableUserSlices = true;
+      };
 
       # This value determines the NixOS release from which the default
       # settings for stateful data, like file locations and database versions
