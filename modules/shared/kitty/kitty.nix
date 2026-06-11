@@ -1,6 +1,11 @@
 {
   flake.homeModules.kitty =
-    { pkgs, osConfig, ... }:
+    {
+      pkgs,
+      lib,
+      osConfig,
+      ...
+    }:
     {
       programs.kitty = {
         enable = true;
@@ -12,6 +17,9 @@
           tab_bar_align = "center";
           include = "${pkgs.writeText "carbonfox.conf" (builtins.readFile ./_/themes/carbonfox.conf)}";
           window_alert_on_bell = false;
+          auto_reload_config =
+            assert lib.assertMsg (pkgs.kitty.version == "0.47.1") "kitty patched inotify";
+            -1;
         };
       };
 
