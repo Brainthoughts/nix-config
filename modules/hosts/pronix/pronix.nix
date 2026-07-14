@@ -50,7 +50,10 @@ in
       networking.hostName = "pronix"; # Define your hostname.
 
       # TODO: don't include in git
-      hardware.asahi.peripheralFirmwareDirectory = ./_firmware;
+      hardware.asahi = {
+        enable = true;
+        peripheralFirmwareDirectory = ./_firmware;
+      };
 
       fileSystems = {
         "/".options = [
