@@ -17,8 +17,9 @@
 
       home.packages = with pkgs; [
         ## Commands
-        _1password-cli
         file
+        qemu
+        xxd
 
         # javascript
         nodejs

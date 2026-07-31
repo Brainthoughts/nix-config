@@ -24,6 +24,7 @@ in
         self.nixosModules.base
         self.nixosModules.regreet
         self.nixosModules.hyprland
+        self.nixosModules."1password"
       ];
 
       home-manager.users.${config.my.username} = self.homeModules.blacknix;
