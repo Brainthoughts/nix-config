@@ -60,6 +60,7 @@
       imports = [
         ./_/waybar
         self.homeModules.kitty
+        self.homeModules.apps
       ];
 
       home.packages = with pkgs; [
@@ -350,7 +351,6 @@
 
       xdg.mimeApps = {
         enable = true;
-        defaultApplicationPackages = [ pkgs.zathura ];
       };
     };
 }
