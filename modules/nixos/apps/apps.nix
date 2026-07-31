@@ -12,8 +12,14 @@
     }:
     {
       imports = [
-        self.homeModules.zathura
+        self.homeModules.firefox
         self.homeModules.kitty
+        self.homeModules.zathura
       ];
+
+      programs = {
+        mpv.enable = true;
+        vesktop.enable = true;
+      };
     };
 }

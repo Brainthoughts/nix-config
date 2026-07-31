@@ -69,14 +69,6 @@ in
       services.tlp.enable = true;
       services.upower.enable = true;
 
-      programs = {
-        _1password.enable = true;
-        _1password-gui = {
-          enable = true;
-          polkitPolicyOwners = [ config.my.username ];
-        };
-      };
-
       # TODO: integrate with hyprland
       services.logind = {
         settings = {
@@ -101,9 +93,6 @@ in
       ];
 
       programs = {
-        vesktop = {
-          enable = true;
-        };
       };
 
       wayland.windowManager.hyprland.extraConfig =

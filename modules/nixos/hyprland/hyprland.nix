@@ -60,6 +60,7 @@
       imports = [
         ./_/waybar
         self.homeModules.kitty
+        self.homeModules.firefox
         self.homeModules.apps
       ];
 
@@ -95,10 +96,6 @@
       };
 
       programs = {
-        firefox = {
-          enable = true;
-          configPath = "${config.xdg.configHome}/mozilla/firefox";
-        };
         # TODO: consider hyprlauncher when it matures
         fuzzel = {
           enable = true;

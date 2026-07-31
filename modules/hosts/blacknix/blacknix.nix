@@ -40,11 +40,6 @@ in
       };
 
       programs = {
-        _1password.enable = true;
-        _1password-gui = {
-          enable = true;
-          polkitPolicyOwners = [ config.my.username ];
-        };
         gamemode.enable = true;
         steam = {
           enable = true;
@@ -82,9 +77,6 @@ in
       ];
 
       programs = {
-        vesktop = {
-          enable = true;
-        };
       };
 
       programs.btop.package = pkgs.btop-rocm;
