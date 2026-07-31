@@ -2,7 +2,7 @@
   flake.nixosModules.regreet =
     { pkgs, config, ... }:
     {
-      programs.regreet = {
+      services.displayManager.regreet = {
         enable = true;
         theme = {
           name = "Adwaita-dark";
