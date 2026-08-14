@@ -18,6 +18,7 @@
       ];
 
       programs = {
+        element-desktop.enable = true;
         mpv.enable = true;
         vesktop.enable = true;
       };
