@@ -83,7 +83,7 @@ in
     };
 
   flake.homeModules.pronix =
-    { pkgs, ... }:
+    { pkgs, lib, ... }:
     {
       imports = [
         self.homeModules.nixos
@@ -117,6 +117,9 @@ in
           -- hl.bind("switch:off:Apple SMC power/lid events", setDisplay(false), { locked = true })
           hl.bind("switch:on:Apple SMC power/lid events", hl.dsp.dpms({ action = "disable" }), { locked = true })
           hl.bind("switch:off:Apple SMC power/lid events", hl.dsp.dpms({ action = "enable" }), { locked = true })
+
+          hl.bind("ALT + XF86MonBrightnessUp", hl.dsp.exec_cmd("${lib.getExe pkgs.brightnessctl} -d kbd_backlight s +5%"), { repeating = true })
+          hl.bind("ALT + XF86MonBrightnessDown", hl.dsp.exec_cmd("${lib.getExe pkgs.brightnessctl} -d kbd_backlight s 5%-"), { repeating = true })
         '';
     };
 }
