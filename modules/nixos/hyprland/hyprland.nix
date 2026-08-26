@@ -68,7 +68,7 @@
         # Apps
         nautilus
         pavucontrol
-        libreoffice-fresh
+        libreoffice-stable
         ghidra
         # Commands
         brightnessctl
