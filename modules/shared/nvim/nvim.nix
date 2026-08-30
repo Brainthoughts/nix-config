@@ -51,7 +51,7 @@
           lombok
 
           # json
-          vscode-json-languageserver
+          vscode-langservers-extracted
 
           # markdown
           markdownlint-cli2
@@ -95,6 +95,8 @@
 
           # web
           vscode-langservers-extracted
+          jinja-lsp
+          djlint
         ];
 
         plugins = with pkgs.vimPlugins; [ lazy-nvim ];
