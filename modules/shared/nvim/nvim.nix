@@ -248,7 +248,9 @@
 
             treesitterGrammars = pkgs.symlinkJoin {
               name = "nvim-treesitter-grammars";
-              paths = pkgs.vimPlugins.nvim-treesitter.withAllGrammars.dependencies;
+              paths =
+                pkgs.vimPlugins.nvim-treesitter.withAllGrammars.dependencies
+                ++ (builtins.attrValues pkgs.vimPlugins.nvim-treesitter.queries);
             };
           in
           builtins.replaceStrings [ "<lazyPath>" "<TSGrammarPath>" ] [ "${lazyPath}" "${treesitterGrammars}" ]
