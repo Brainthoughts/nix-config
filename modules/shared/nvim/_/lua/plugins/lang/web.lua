@@ -26,6 +26,17 @@ return {
 			formatters_by_ft = {
 				htmldjango = { "djlint" },
 				jinja = { "djlint" },
+				html = { "djlint" },
+			},
+			formatters = {
+				djlint = {
+					prepend_args = {
+						"--indent",
+						"2",
+						"--profile",
+						"jinja",
+					},
+				},
 			},
 		},
 	},
