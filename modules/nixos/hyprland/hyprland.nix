@@ -176,11 +176,13 @@
               hl.bind("${mainMod} + mouse:272", hl.dsp.window.drag(), { mouse = true })
 
               -- repeat
-              hl.bind("XF86MonBrightnessUp", hl.dsp.exec_cmd("${lib.getExe pkgs.brightnessctl} -e s +5%"), { repeating = true })
-              hl.bind("XF86MonBrightnessDown", hl.dsp.exec_cmd("${lib.getExe pkgs.brightnessctl} -e s 5%-"), { repeating = true })
-              hl.bind("XF86AudioRaiseVolume", hl.dsp.exec_cmd("${lib.getExe pkgs.pamixer} -i 3"), { repeating = true })
-              hl.bind("XF86AudioLowerVolume", hl.dsp.exec_cmd("${lib.getExe pkgs.pamixer} -d 3"), { repeating = true })
-              hl.bind("XF86AudioMute", hl.dsp.exec_cmd("${lib.getExe pkgs.pamixer} -t"), { repeating = true })
+              hl.bind("XF86MonBrightnessUp", hl.dsp.exec_cmd("${lib.getExe pkgs.brightnessctl} -e s +5%"), { repeating = true, locked = true })
+              hl.bind("XF86MonBrightnessDown", hl.dsp.exec_cmd("${lib.getExe pkgs.brightnessctl} -e s 5%-"), { repeating = true, locked = true })
+              hl.bind("ALT + XF86MonBrightnessUp", hl.dsp.exec_cmd("${lib.getExe pkgs.brightnessctl} -e -d kbd_backlight s +5%"), { repeating = true, locked = true })
+              hl.bind("ALT + XF86MonBrightnessDown", hl.dsp.exec_cmd("${lib.getExe pkgs.brightnessctl} -e -d kbd_backlight s 5%-"), { repeating = true, locked = true })
+              hl.bind("XF86AudioRaiseVolume", hl.dsp.exec_cmd("${lib.getExe pkgs.pamixer} -i 3"), { repeating = true, locked = true })
+              hl.bind("XF86AudioLowerVolume", hl.dsp.exec_cmd("${lib.getExe pkgs.pamixer} -d 3"), { repeating = true, locked = true })
+              hl.bind("XF86AudioMute", hl.dsp.exec_cmd("${lib.getExe pkgs.pamixer} -t"), { repeating = true, locked = true })
 
               -- hold
               hl.bind("${mainMod} + Q", hl.dsp.exec_cmd("${lib.getExe pkgs.uwsm} stop"), {long_press = true})
