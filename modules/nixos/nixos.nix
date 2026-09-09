@@ -130,17 +130,22 @@
 
       services.tailscale.enable = true;
 
+      programs.zsh.enable = true;
+
       # Define a user account. Don't forget to set a password with ‘passwd’.
-      users.users.${config.my.username} = {
-        isNormalUser = true;
-        description = "Alexander N";
-        extraGroups = [
-          "networkmanager"
-          "wheel"
-          "dialout"
-        ];
-        packages = with pkgs; [
-        ];
+      users = {
+        defaultUserShell = pkgs.zsh;
+        users.${config.my.username} = {
+          isNormalUser = true;
+          description = "Alexander N";
+          extraGroups = [
+            "networkmanager"
+            "wheel"
+            "dialout"
+          ];
+          packages = with pkgs; [
+          ];
+        };
       };
 
       # List packages installed in system profile. To search, run:
@@ -207,6 +212,7 @@
           enable = true;
           enableDefaultConfig = false;
         };
+        zsh.enable = true;
       };
     };
 }
