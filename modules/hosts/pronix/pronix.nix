@@ -53,7 +53,12 @@ in
       # TODO: don't include in git
       hardware.asahi = {
         enable = true;
-        peripheralFirmwareDirectory = ./_firmware;
+        peripheralFirmwareDirectory =
+          (fetchTree {
+            type = "path";
+            path = "/boot/vendorfw/";
+            narHash = "sha256-DI9S4H2lcP5sl+5IlrI1rWfL/LFNlPqKj+pPnrrIU3c=";
+          }).outPath;
       };
 
       fileSystems = {
