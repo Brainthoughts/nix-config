@@ -1,4 +1,4 @@
-{ self, ... }:
+{ self, pkgs, ... }:
 {
 
   flake.nixosModules.hyprland =
@@ -10,6 +10,8 @@
         withUWSM = true;
       };
       programs.hyprlock.enable = true;
+
+      services.gnome.gnome-keyring.enable = true;
 
       home-manager.users.${config.my.username}.imports = [ self.homeModules.hyprland ];
 
@@ -73,7 +75,6 @@
         # Commands
         brightnessctl
         pamixer
-        gcr_4
         eduvpn-client
         openvpn
       ];
@@ -137,9 +138,6 @@
         # hyprpaper = {
         #   enable = true;
         # };
-        gnome-keyring = {
-          enable = true;
-        };
         hyprpolkitagent = {
           enable = true;
         };
