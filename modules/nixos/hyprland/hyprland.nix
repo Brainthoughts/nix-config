@@ -73,7 +73,7 @@
         # Commands
         brightnessctl
         pamixer
-        gcr
+        gcr_4
         eduvpn-client
         openvpn
       ];
