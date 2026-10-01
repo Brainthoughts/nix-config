@@ -16,6 +16,7 @@
         settings = {
           tab_bar_align = "center";
           include = "${pkgs.writeText "carbonfox.conf" (builtins.readFile ./_/themes/carbonfox.conf)}";
+          remember_window_size = false;
           window_alert_on_bell = false;
         };
       };
