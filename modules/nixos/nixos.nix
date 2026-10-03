@@ -142,6 +142,7 @@
             "networkmanager"
             "wheel"
             "dialout"
+            "kvm"
           ];
           packages = with pkgs; [
           ];
