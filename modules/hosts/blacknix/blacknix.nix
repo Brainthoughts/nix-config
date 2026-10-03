@@ -13,6 +13,7 @@ in
     inherit system;
     modules = [
       self.nixosModules.blacknix
+      self.nixosModules.ba
     ];
   };
 
