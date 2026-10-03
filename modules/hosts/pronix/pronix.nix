@@ -75,6 +75,10 @@ in
       services.tlp.enable = true;
       services.upower.enable = true;
 
+      zramSwap = {
+        enable = true;
+      };
+
       # TODO: integrate with hyprland
       services.logind = {
         settings = {

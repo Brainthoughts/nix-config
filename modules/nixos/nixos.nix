@@ -177,10 +177,6 @@
 
       networking.firewall.enable = true;
 
-      zramSwap = {
-        enable = true;
-        memoryPercent = 25 * 5; # aim for max 25% ram usage assuming compression to 1/5 original size
-      };
       systemd.oomd = {
         enable = true;
         enableRootSlice = true;
