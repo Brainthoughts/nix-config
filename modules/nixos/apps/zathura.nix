@@ -6,7 +6,6 @@
   flake.homeModules.zathura =
     {
       pkgs,
-      lib,
       config,
       ...
     }:
@@ -19,6 +18,6 @@
           statusbar-bg = "#161616";
         };
       };
-      xdg.mimeApps.defaultApplicationPackages = [ pkgs.zathura ];
+      xdg.mimeApps.defaultApplicationPackages = [ config.programs.zathura.package ];
     };
 }
