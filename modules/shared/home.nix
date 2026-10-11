@@ -9,6 +9,7 @@
         self.homeModules.starship
         self.homeModules.tmux
         self.homeModules.nvim
+        self.homeModules.readline
       ];
 
       # this is internal compatibility configuration
