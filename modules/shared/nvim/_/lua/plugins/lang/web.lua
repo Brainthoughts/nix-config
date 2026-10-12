@@ -15,7 +15,7 @@ return {
 					filetypes = { "jinja", "htmldjango", "html" },
 				},
 				jinja_lsp = {
-					filetypes = { "jinja", "htmldjango", "rust", "python" },
+					filetypes = { "jinja", "htmldjango", "rust", "python", "html" },
 				},
 			},
 		},
