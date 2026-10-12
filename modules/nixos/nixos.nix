@@ -177,10 +177,16 @@
 
       networking.firewall.enable = true;
 
-      systemd.oomd = {
+      services.earlyoom = {
         enable = true;
-        enableRootSlice = true;
-        enableUserSlices = true;
+        freeMemThreshold = 5;
+        freeSwapThreshold = 100; # otherwise zram causes problems (probably)
+        freeSwapKillThreshold = 100;
+      };
+
+      zramSwap = {
+        enable = true;
+        memoryPercent = 100; # godspeed earlyoom
       };
 
       # This value determines the NixOS release from which the default
