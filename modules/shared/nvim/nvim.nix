@@ -47,7 +47,7 @@
 
           # java
           jdk25
-          (jdt-language-server.override { jdk = pkgs.jdk25; })
+          jdt-language-server
           lombok
 
           # json
