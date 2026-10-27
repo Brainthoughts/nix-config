@@ -4,10 +4,12 @@
   ...
 }:
 {
-  flake.nixosModules.base =
+  flake.nixosModules.bare =
     {
       pkgs,
       config,
+      lib,
+      options,
       ...
     }:
     {
@@ -26,22 +28,11 @@
         ];
       };
 
+      environment.enableAllTerminfo = true;
+
       # Bootloader.
       boot.loader.systemd-boot.enable = true;
       boot.loader.efi.canTouchEfiVariables = true;
-
-      # Enable networking
-      networking.wireless.iwd = {
-        enable = true;
-        settings.General.EnableNetworkConfiguration = true;
-      };
-      networking.networkmanager = {
-        enable = true;
-        wifi.backend = "iwd";
-      };
-
-      networking.wireguard.enable = true;
-      networking.networkmanager.plugins = with pkgs; [ networkmanager-openvpn ];
 
       # Set your time zone.
       time.timeZone = "Europe/Berlin";
@@ -61,54 +52,12 @@
         LC_TIME = "de_DE.UTF-8";
       };
 
-      programs.localsend.enable = true;
-
       # Configure console keymap
       console.keyMap = "us";
 
-      # bluetooth
-      hardware.bluetooth.enable = true;
-      hardware.bluetooth.powerOnBoot = true;
-      services.blueman.enable = true;
-
-      # Enable CUPS to print documents.
-      services.printing.enable = true;
-
-      # real-time scheduling for user processes
-      # used by pipewire
-      security.rtkit.enable = true;
-
-      # needed for airplay
-      services.avahi.enable = true;
-
-      # Enable sound with pipewire.
-      services.pipewire = {
-        enable = true;
-        alsa.enable = true;
-        alsa.support32Bit = true;
-        pulse.enable = true;
-        raopOpenFirewall = true;
-        extraConfig.pipewire = {
-          "10-airplay" = {
-            "context.modules" = [
-              {
-                name = "libpipewire-module-raop-discover";
-
-                # increase the buffer size if you get dropouts/glitches
-                args = {
-                  "raop.latency.ms" = 0;
-                };
-              }
-            ];
-          };
-        };
-      };
-
       # Allow unfree packages
-      nixpkgs = {
-        config = {
-          allowUnfree = true;
-        };
+      nixpkgs.config = lib.mkIf (!options.nixpkgs.pkgs.isDefined) {
+        allowUnfree = true;
       };
 
       # automatically collect garbage
@@ -123,12 +72,7 @@
           automatic = true;
           options = "--delete-older-than 7d";
         };
-        optimise = {
-          automatic = true;
-        };
       };
-
-      services.tailscale.enable = true;
 
       programs.zsh.enable = true;
 
@@ -137,14 +81,9 @@
         defaultUserShell = pkgs.zsh;
         users.${config.my.username} = {
           isNormalUser = true;
-          description = "Alexander N";
           extraGroups = [
-            "networkmanager"
             "wheel"
-            "dialout"
             "kvm"
-          ];
-          packages = with pkgs; [
           ];
         };
       };
@@ -160,34 +99,14 @@
         man-pages
       ];
 
-      fonts = {
-        packages = with pkgs; [
-          config.my.nerd-font.package
-        ];
-      };
-
       virtualisation.docker = {
         enable = true;
-        # seems to hang on restart sometimes
-        # liveRestore = false;
       };
 
       # Enable the OpenSSH daemon.
       services.openssh.enable = true;
 
       networking.firewall.enable = true;
-
-      services.earlyoom = {
-        enable = true;
-        freeMemThreshold = 5;
-        freeSwapThreshold = 100; # otherwise zram causes problems (probably)
-        freeSwapKillThreshold = 100;
-      };
-
-      zramSwap = {
-        enable = true;
-        memoryPercent = 100; # godspeed earlyoom
-      };
 
       # This value determines the NixOS release from which the default
       # settings for stateful data, like file locations and database versions
@@ -196,26 +115,5 @@
       # Before changing this value read the documentation for this option
       # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
       system.stateVersion = "23.11"; # Did you read the comment?
-
-    };
-
-  flake.homeModules.nixos =
-
-    { pkgs, config, ... }:
-    {
-      imports = [ self.homeModules.base ];
-
-      home.packages = with pkgs; [
-        # Commands
-        # Apps
-      ];
-
-      programs = {
-        ssh = {
-          enable = true;
-          enableDefaultConfig = false;
-        };
-        zsh.enable = true;
-      };
     };
 }

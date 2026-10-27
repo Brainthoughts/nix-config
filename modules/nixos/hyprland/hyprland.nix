@@ -14,6 +14,7 @@
       services.gnome.gnome-keyring.enable = true;
 
       services.languagetool.enable = true;
+      programs.localsend.enable = true;
 
       home-manager.users.${config.my.username}.imports = [ self.homeModules.hyprland ];
 
