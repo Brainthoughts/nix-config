@@ -1,0 +1,99 @@
+{
+  "package": "aisdk:@ai-sdk/openai-compatible",
+  "name": "Morpheus",
+  "settings": {
+    "baseURL": "https://morpheus.cit.tum.de/api/v1"
+  },
+  "models": {
+    "google/gemma-4-31B-it": {
+      "name": "Gemma 4 (31B)",
+      "capabilities": {
+        "tools": true,
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "limit": {
+        "context": 262144
+      },
+      "variants": [
+        {
+          "id": "off",
+          "body": {
+            "chat_template_kwargs": {
+              "enable_thinking": false
+            }
+          }
+        },
+        {
+          "id": "on",
+          "body": {
+            "chat_template_kwargs": {
+              "enable_thinking": true
+            }
+          }
+        }
+      ]
+    },
+    "cyankiwi/Qwen3.8-Flash-Next-AWQ-INT4": {
+      "name": "Qwen 3.8 Flash Next (AWQ INT4)",
+      "capabilities": {
+        "tools": true,
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "limit": {
+        "context": 262144
+      },
+      "variants": [
+        {
+          "id": "off",
+          "body": {
+            "chat_template_kwargs": {
+              "enable_thinking": false
+            }
+          }
+        },
+        {
+          "id": "low",
+          "body": {
+            "chat_template_kwargs": {
+              "enable_thinking": true,
+              "preserve_thinking": true
+            },
+            "reasoning_effort": "low"
+          }
+        },
+        {
+          "id": "medium",
+          "body": {
+            "chat_template_kwargs": {
+              "enable_thinking": true,
+              "preserve_thinking": true
+            },
+            "reasoning_effort": "medium"
+          }
+        },
+        {
+          "id": "xhigh",
+          "body": {
+            "chat_template_kwargs": {
+              "enable_thinking": true,
+              "preserve_thinking": true
+            },
+            "reasoning_effort": "xhigh"
+          }
+        }
+      ]
+    }
+  }
+}

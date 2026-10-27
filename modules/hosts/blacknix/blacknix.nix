@@ -14,6 +14,7 @@ in
     modules = [
       self.nixosModules.blacknix
       self.nixosModules.ba
+      self.nixosModules.opencode-vm
     ];
   };
 
