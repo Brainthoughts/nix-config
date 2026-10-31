@@ -21,16 +21,30 @@
         ];
       };
 
+      fileSystems."/nix/.rw-store" = {
+        fsType = "tmpfs";
+        options = [
+          "mode=0755"
+          "size=8G"
+        ];
+        neededForBoot = true;
+      };
+
       microvm = {
         balloon = lib.mkDefault true;
-
         writableStoreOverlay = lib.mkDefault "/nix/.rw-store";
-        volumes = [
+
+        shares = [
           {
-            image = "nix-store-overlay.img";
-            mountPoint = "/nix/.rw-store";
-            size = 1024 * 16;
+            source = "/nix/store";
+            mountPoint = "/nix/.ro-store";
+            tag = "ro-store";
+            proto = "virtiofs";
+            readOnly = true;
           }
+        ];
+
+        volumes = [
           {
             image = "ssh-keys.img";
             mountPoint = "/var/lib/ssh-keys";
