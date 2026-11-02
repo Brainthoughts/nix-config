@@ -11,6 +11,8 @@
           imports = [ self.nixosModules.vm-base ];
           networking.hostName = "opencode";
 
+          nixpkgs.overlays = [ self.overlays.opencode-mcp ];
+
           security.sudo.wheelNeedsPassword = false;
 
           users.users.${config.my.username} = {
@@ -33,6 +35,9 @@
 
             "d    /home/${config.my.username}/.local/share/opencode 0755  ${config.my.username} users  -"
             "z    /home/${config.my.username}/.local/share/opencode 0755  ${config.my.username} users  -"
+
+            "d    /home/${config.my.username}/.local/share/opencode/mcp-memory 0755  ${config.my.username} users  -"
+            "z    /home/${config.my.username}/.local/share/opencode/mcp-memory 0755  ${config.my.username} users  -"
           ];
 
           microvm = {

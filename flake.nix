@@ -35,6 +35,9 @@
       url = "github:microvm-nix/microvm.nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    serena = {
+      url = "github:oraios/serena";
+    };
   };
 
   outputs =
