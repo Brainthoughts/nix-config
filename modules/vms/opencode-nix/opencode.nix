@@ -78,6 +78,22 @@
         fi
       '';
 
+      # opencode keeps its plan notes (and other mutable per-user state) in
+      # ~/.opencode; the VM's root filesystem is tmpfs, so anchor the whole
+      # directory inside the persistent state volume.
+      home.activation.persistOpencodeHome = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
+        _oc_link=${lib.escapeShellArg (config.home.homeDirectory + "/.opencode")}
+        _oc_dir=${lib.escapeShellArg (config.xdg.dataHome + "/opencode/dot-opencode")}
+        mkdir -p "$_oc_dir"
+        if [ -e "$_oc_link" ] && [ ! -L "$_oc_link" ]; then
+          # only ever an empty dir opencode created before activation ran
+          rm -rf "$_oc_link"
+        fi
+        if [ "$(readlink -f "$_oc_link")" != "$_oc_dir" ]; then
+          ln -sfn "$_oc_dir" "$_oc_link"
+        fi
+      '';
+
       # nixd needs a nixpkgs provider that isn't based on NIX_PATH (flakes-only system)
       xdg.configFile."nixd/config.json".text = builtins.toJSON {
         eval.nixpkgs.expr = ''builtins.getFlake "${toString self.inputs.nixpkgs}"'';
