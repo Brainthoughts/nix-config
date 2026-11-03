@@ -161,9 +161,9 @@
 
         };
         skills = {
-          ast-grep = ./skills/ast-grep;
-          memory = ./skills/memory;
-          serena = ./skills/serena;
+          ast-grep = ./_/skills/ast-grep;
+          memory = ./_/skills/memory;
+          serena = ./_/skills/serena;
         };
       };
     };

@@ -37,6 +37,7 @@
     };
     serena = {
       url = "github:oraios/serena";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
   };
 
