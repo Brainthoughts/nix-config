@@ -6,6 +6,14 @@
       inherit (final) lib python3Packages;
     in
     {
+      # Lombok annotation-processing jar, needed by Serena's Java language
+      # server (upstream JDTLS mode requires a lombok javaagent path). Not
+      # packaged standalone in nixpkgs; it is a single self-contained jar.
+      lombok = final.fetchurl {
+        url = "https://projectlombok.org/downloads/lombok-1.18.48.jar";
+        hash = "sha256-hUd6RlXrssB0qQmc+3Sb5FREn+5WTUKCYQ3xuF98UIs=";
+      };
+
       # MCP server exposing ast-grep's structural code search tools
       # (https://github.com/ast-grep/ast-grep-mcp). Not packaged in nixpkgs,
       # so build the upstream Python server here. It shells out to the

@@ -5,10 +5,10 @@ description: IDE-grade semantic code navigation and symbol-level editing via the
 
 # Serena — Semantic Code Toolkit
 
-Serena runs language servers for the active project (Nix via nixd, Python,
-Rust, TypeScript, Markdown are pinned to local binaries; others auto-detect)
-and exposes symbol-level tools. It is stateful: exactly one project is active
-per session.
+Serena runs language servers for the active project (Nix, Python, Rust,
+TypeScript, C++, Java, Markdown and YAML are pinned to store binaries in the
+global config; others auto-detect) and exposes symbol-level tools. It is
+stateful: exactly one project is active per session.
 
 ## Startup
 
@@ -67,3 +67,14 @@ save re-exploration in future sessions. (This is separate from the global
 - Symbol-level tools work on code files only. Config/markup oddities in Nix
   (e.g. `mkEnableOption` description strings) are better handled with
   ast-grep or plain search.
+- **Huge repos (chromium):** `find_symbol` without `relative_path` runs a
+  workspace-wide search that can make clangd consume >10 G and OOM the vm —
+  always pass `relative_path`. Serena walks and stats every *tracked*
+  project file at startup and before each symbolic call; on chromium that
+  baseline poll alone exceeds serena's 240 s tool timeout, so every first
+  call dies unless `.serena/project.yml` sets `ignored_paths`
+  (e.g. `third_party/**`) to shrink the tracked set (~15x faster; ignored
+  files then reject symbol queries but remain readable). The chromium
+  checkout is exposed at the host path its `compile_commands.json` was
+  generated with; open projects under that mount, not under `/shared/`, or
+  clangd will not find compile flags.

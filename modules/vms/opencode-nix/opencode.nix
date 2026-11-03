@@ -37,6 +37,28 @@
             ls_path: ${lib.getExe pkgs.marksman}
           yaml:
             ls_path: ${pkgs.vscode-langservers-extracted}/bin/yaml-language-server
+          # ls_extra_args: serena also appends its own --background-index,
+          # but ours comes last and clangd lets the final occurrence win.
+          # Serena's background indexing walks the whole compilation
+          # database; on huge monorepos (chromium) that parse storm pushed
+          # clangd past 5.5G and OOM-killed the vm. Pre-indexed checkouts
+          # and on-open indexing are unaffected.
+          cpp:
+            ls_path: ${pkgs.llvmPackages.clang-unwrapped}/bin/clangd
+            ls_extra_args: ["--background-index=false"]
+          # Java uses Serena's "upstream JDTLS mode" (no VSIX download):
+          # an existing jdtls install plus a lombok javaagent.
+          # jdtls_path points at an activation-materialized copy because
+          # Serena copies config_linux into its workspace and preserves the
+          # source's read-only store modes (copytree), which JDTLS needs
+          # writable; see materializeJdtls below.
+          # java_home must be a JDK 25: the jdt-language-server 1.63 bundles
+          # Require-Bundle against osgi.ee=JavaSE/25 and silently fail to
+          # start their application on anything older.
+          java:
+            jdtls_path: ${config.xdg.dataHome}/opencode/jdtls
+            lombok_path: ${pkgs.lombok}
+            java_home: ${pkgs.jdk25}
         # lua-language-server resolves via PATH (home.packages), not ls_path
         trusted_project_path_patterns:
           - ${config.home.homeDirectory}
@@ -65,10 +87,6 @@
         serena
       ];
 
-      # the seed config is only referenced by the activation script; keep it
-      # in the generation's dependencies so it is realised on switch
-      home.extraDependencies = [ serenaConfig ];
-
       # Serena rewrites serena_config.yml (project registry, auth secret),
       # so only seed it when absent instead of managing the file.
       home.activation.seedSerenaConfig = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
@@ -76,6 +94,18 @@
         if [ ! -e ${lib.escapeShellArg (serenaHome + "/serena_config.yml")} ]; then
           cp ${serenaConfig} ${lib.escapeShellArg (serenaHome + "/serena_config.yml")}
         fi
+      '';
+
+      # Materialize the JDTLS distribution into the state volume with writable
+      # mode bits: Serena copies config_linux into its per-workspace dir and
+      # the copy inherits the nix store's read-only permissions, which JDTLS
+      # cannot write its logs into. Refreshed on every switch.
+      home.activation.materializeJdtls = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
+        _jdtls=${lib.escapeShellArg (config.xdg.dataHome + "/opencode/jdtls")}
+        rm -rf "$_jdtls"
+        mkdir -p "$_jdtls"
+        cp -r ${pkgs.jdt-language-server}/share/java/jdtls/. "$_jdtls/"
+        chmod -R u+w "$_jdtls"
       '';
 
       # opencode keeps its plan notes (and other mutable per-user state) in
