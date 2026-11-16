@@ -139,6 +139,7 @@
               # python
               neotest-python
               nvim-dap-python
+              venv-selector-nvim
 
               # rust
               crates-nvim
