@@ -78,3 +78,17 @@ save re-exploration in future sessions. (This is separate from the global
   checkout is exposed at the host path its `compile_commands.json` was
   generated with; open projects under that mount, not under `/shared/`, or
   clangd will not find compile flags.
+- **chromium uses a different clangd.** Stock clangd cannot parse chromium's
+  trunk-generated CDB (its trunk-only flags trip `-Werror`). The checkout's
+  `.serena/project.yml` therefore pins a trunk-matched clangd via
+  `ls_specific_settings.cpp.ls_path` → `~/.local/share/opencode/clangd-chromium`
+  (project settings replace the global `cpp` block, so only chromium is
+  affected). If that symlink is missing the checkout silently falls back to a
+  clangd that downloads an unrunnable glibc build or errors — check it with
+  `~/.local/share/opencode/clangd-chromium/bin/clangd --version` (should be
+  clang 23). It is created by `home.activation` on every switch.
+- **Reseeding after a VM reboot.** The overlay and its `.serena/project.yml`
+  live in RAM and vanish on reboot; `home.activation` only reseeds on a
+  config switch while the overlay is mounted. To re-arm manually: mount the
+  overlay, then `cp` the checkout `project.yml` back (its `ls_path` and
+  `ignored_paths` are what make clangd 23 resolve flags quickly).
