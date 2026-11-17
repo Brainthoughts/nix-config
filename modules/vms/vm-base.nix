@@ -30,6 +30,15 @@
         neededForBoot = true;
       };
 
+      # Same setup as the hosts (modules/nixos/base.nix): compressed zram swap
+      # makes anonymous memory and tmpfs pages (the rw-store overlay)
+      # reclaimable, so the guest can actually return them to the host via the
+      # virtio-balloon free-page-reporting channel that microvm.nix enables.
+      zramSwap = {
+        enable = true;
+        memoryPercent = 100;
+      };
+
       microvm = {
         balloon = lib.mkDefault true;
         writableStoreOverlay = lib.mkDefault "/nix/.rw-store";

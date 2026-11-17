@@ -42,7 +42,7 @@
 
           microvm = {
             vcpu = 16;
-            mem = 1024 * 16; # MB
+            mem = 1024 * 32; # MB
 
             volumes = [
               {
