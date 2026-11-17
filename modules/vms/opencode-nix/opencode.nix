@@ -21,6 +21,7 @@
           snapshot = false;
           autoupdate = false;
           lsp = true;
+          model = "morpheus/cyankiwi/Qwen3.8-Flash-Next-AWQ-INT4";
           providers = {
             morpheus = builtins.fromJSON (builtins.readFile ./_/morpheus.json);
           };
@@ -30,6 +31,10 @@
           keybinds = {
             leader = "alt+space";
           };
+          session = {
+            thinking = "show";
+          };
+
         };
       };
     };
