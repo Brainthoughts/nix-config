@@ -74,7 +74,7 @@
       home.packages = [
         pkgs.ast-grep
         pkgs.ast-grep-mcp
-        pkgs.mcp-server-memory
+        # pkgs.mcp-server-memory
         # Serena's lua support finds its language server via PATH lookup
         pkgs.lua-language-server
         serena
@@ -90,7 +90,7 @@
       '';
 
       # Materialize the JDTLS distribution into the state volume with writable
-      # mode bits: Serena copies config_linux into its per-workspace dir and
+      # mode bits: Serena copies config_linu into its per-workspace dir and
       # the copy inherits the nix store's read-only permissions, which JDTLS
       # cannot write its logs into. Refreshed on every switch.
       home.activation.materializeJdtls = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
@@ -146,11 +146,11 @@
             env.AST_GREP_PATH = lib.getExe pkgs.ast-grep;
           };
 
-          memory = {
-            command = lib.getExe pkgs.mcp-server-memory;
-            # lives on the persistent opencode state volume
-            env.MEMORY_FILE_PATH = "${config.xdg.dataHome}/opencode/mcp-memory/knowledge-graph.json";
-          };
+          # memory = {
+          #   command = lib.getExe pkgs.mcp-server-memory;
+          #   # lives on the persistent opencode state volume
+          #   env.MEMORY_FILE_PATH = "${config.xdg.dataHome}/opencode/mcp-memory/knowledge-graph.json";
+          # };
 
           nixos = {
             command = lib.getExe pkgs.mcp-nixos;
@@ -189,7 +189,7 @@
         };
         skills = {
           ast-grep = ./_/skills/ast-grep;
-          memory = ./_/skills/memory;
+          # memory = ./_/skills/memory;
           serena = ./_/skills/serena;
         };
       };
