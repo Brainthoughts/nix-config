@@ -37,15 +37,8 @@
             ls_path: ${lib.getExe pkgs.marksman}
           yaml:
             ls_path: ${pkgs.vscode-langservers-extracted}/bin/yaml-language-server
-          # ls_extra_args: serena also appends its own --background-index,
-          # but ours comes last and clangd lets the final occurrence win.
-          # Serena's background indexing walks the whole compilation
-          # database; on huge monorepos (chromium) that parse storm pushed
-          # clangd past 5.5G and OOM-killed the vm. Pre-indexed checkouts
-          # and on-open indexing are unaffected.
           cpp:
             ls_path: ${pkgs.llvmPackages.clang-unwrapped}/bin/clangd
-            ls_extra_args: ["--background-index=false"]
           # Java uses Serena's "upstream JDTLS mode" (no VSIX download):
           # an existing jdtls install plus a lombok javaagent.
           # jdtls_path points at an activation-materialized copy because
@@ -157,6 +150,10 @@
             command = lib.getExe pkgs.mcp-server-memory;
             # lives on the persistent opencode state volume
             env.MEMORY_FILE_PATH = "${config.xdg.dataHome}/opencode/mcp-memory/knowledge-graph.json";
+          };
+
+          nixos = {
+            command = lib.getExe pkgs.mcp-nixos;
           };
         };
       };

@@ -68,8 +68,8 @@ save re-exploration in future sessions. (This is separate from the global
   (e.g. `mkEnableOption` description strings) are better handled with
   ast-grep or plain search.
 - **Huge repos (chromium):** `find_symbol` without `relative_path` runs a
-  workspace-wide search that can make clangd consume >10 G and OOM the vm —
-  always pass `relative_path`. Serena walks and stats every *tracked*
+  workspace-wide search that can make clangd consume >10 G — always pass
+  `relative_path`. Serena walks and stats every *tracked*
   project file at startup and before each symbolic call; on chromium that
   baseline poll alone exceeds serena's 240 s tool timeout, so every first
   call dies unless `.serena/project.yml` sets `ignored_paths`
