@@ -54,8 +54,7 @@ Serena also stores project-scoped markdown notes: `write_memory`,
 `read_memory`, `list_memories`, plus an onboarding tool that drafts an
 initial overview. Use memories for architecture notes, conventions, and
 gotchas discovered during work — they are re-read on project activation and
-save re-exploration in future sessions. (This is separate from the global
-`memory` knowledge graph; project specifics go to Serena memories.)
+save re-exploration in future sessions.
 
 ## Gotchas
 
@@ -67,28 +66,24 @@ save re-exploration in future sessions. (This is separate from the global
 - Symbol-level tools work on code files only. Config/markup oddities in Nix
   (e.g. `mkEnableOption` description strings) are better handled with
   ast-grep or plain search.
-- **Huge repos (chromium):** `find_symbol` without `relative_path` runs a
-  workspace-wide search that can make clangd consume >10 G — always pass
-  `relative_path`. Serena walks and stats every *tracked*
-  project file at startup and before each symbolic call; on chromium that
-  baseline poll alone exceeds serena's 240 s tool timeout, so every first
-  call dies unless `.serena/project.yml` sets `ignored_paths`
-  (e.g. `third_party/**`) to shrink the tracked set (~15x faster; ignored
-  files then reject symbol queries but remain readable). The chromium
-  checkout is exposed at the host path its `compile_commands.json` was
-  generated with; open projects under that mount, not under `/shared/`, or
-  clangd will not find compile flags.
-- **chromium uses a different clangd.** Stock clangd cannot parse chromium's
-  trunk-generated CDB (its trunk-only flags trip `-Werror`). The checkout's
-  `.serena/project.yml` therefore pins a trunk-matched clangd via
+- **Chromium — open it at the literal `~/Projects` path.** The checkout is
+  bind-mounted at the exact absolute path its `compile_commands.json` and clangd
+  index were built with: `~/Projects/ba/chromium-things/chromium/src`. That is
+  the writable workspace overlay reached via a **bind, not a symlink** — a
+  symlink would make clangd's `realpath()` canonicalization resolve away from the
+  literal path and drop all compile flags. Work under `~/Projects/...`, never a
+  `/shared/...` path, or clangd finds no compile command.
+- **Chromium uses its own clangd.** Stock clangd cannot parse chromium's
+  trunk-generated CDB (trunk-only flags trip `-Werror`). The checkout's
+  `.serena/project.yml` pins a trunk-matched clangd via
   `ls_specific_settings.cpp.ls_path` → `~/.local/share/opencode/clangd-chromium`
   (project settings replace the global `cpp` block, so only chromium is
-  affected). If that symlink is missing the checkout silently falls back to a
-  clangd that downloads an unrunnable glibc build or errors — check it with
-  `~/.local/share/opencode/clangd-chromium/bin/clangd --version` (should be
-  clang 23). It is created by `home.activation` on every switch.
-- **Reseeding after a VM reboot.** The overlay and its `.serena/project.yml`
-  live in RAM and vanish on reboot; `home.activation` only reseeds on a
-  config switch while the overlay is mounted. To re-arm manually: mount the
-  overlay, then `cp` the checkout `project.yml` back (its `ls_path` and
-  `ignored_paths` are what make clangd 23 resolve flags quickly).
+  affected). Verify with `~/.local/share/opencode/clangd-chromium/bin/clangd
+  --version` (clang 23); it is created by `home.activation` on every switch.
+- **Huge repos (chromium): keep calls scoped.** `find_symbol` without
+  `relative_path` runs a workspace-wide query that can push clangd >10 G — always
+  pass `relative_path`. Serena stats every *tracked* file at startup and before
+  each symbolic call; the checkout's `project.yml` sets `ignored_paths`
+  (e.g. `third_party/**`) to shrink the tracked set, otherwise that baseline poll
+  alone exceeds serena's 240 s tool timeout and the first call dies. Ignored
+  files stay readable but reject symbol queries.
