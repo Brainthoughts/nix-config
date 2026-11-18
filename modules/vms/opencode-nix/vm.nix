@@ -70,14 +70,20 @@
 
           # overlayfs needs upper/work to already exist on the volume; the user
           # owns upper so they can create new top-level entries in the merged view.
+          # DefaultDependencies=false keeps this a low-level unit: as a normal
+          # service it is After=basic.target, which (with it Before the overlay
+          # mount, a local-fs.target mount) closes a boot ordering cycle
+          # overlay->prep->basic->...->local-fs->overlay. Same trick as NixOS
+          # swap.nix ("needed to prevent a cycle").
           systemd.services.prepare-rw-overlay = {
             description = "Create workspace overlay upper/work directories";
+            unitConfig.DefaultDependencies = false;
             unitConfig.RequiresMountsFor = "/var/overlay";
             requiredBy = [ "shared-read\\x2donly.mount" ];
             before = [ "shared-read\\x2donly.mount" ];
             serviceConfig = {
-              type = "oneshot";
-              umask = "022";
+              Type = "oneshot";
+              UMask = "0022";
             };
             script = ''
               mkdir -p /var/overlay/upper /var/overlay/work
@@ -97,6 +103,8 @@
           microvm = {
             vcpu = 16;
             mem = 1024 * 32; # MB
+
+            virtiofsd.extraArgs = [ "--no-announce-submounts" ];
 
             volumes = [
               {
