@@ -93,7 +93,7 @@
           # overlay->prep->basic->...->local-fs->overlay. Same trick as NixOS
           # swap.nix ("needed to prevent a cycle").
           systemd.services.prepare-rw-overlay = {
-            description = "Create workspace overlay upper/work directories";
+            description = "Create workspace overlay upper/work + persistence directories";
             unitConfig.DefaultDependencies = false;
             unitConfig.RequiresMountsFor = "/var/overlay";
             requiredBy = [ "shared-read\\x2donly.mount" ];
@@ -103,12 +103,36 @@
               UMask = "0022";
             };
             script = ''
-              mkdir -p /var/overlay/upper /var/overlay/work
-              chown ${config.my.username}:users /var/overlay/upper
-              chmod 0755 /var/overlay/upper
+              mkdir -p /var/overlay/upper /var/overlay/work /var/overlay/persist/zoxide
+              chown ${config.my.username}:users /var/overlay/upper /var/overlay/persist /var/overlay/persist/zoxide
+              chmod 0755 /var/overlay/upper /var/overlay/persist /var/overlay/persist/zoxide
               chmod 0700 /var/overlay/work
             '';
           };
+
+          # Persistence on the overlay volume: bind a tool's default data path
+          # onto a reusable /var/overlay/persist dir so it survives rebuilds and
+          # reboots (the tmpfs root wipes everything under ~ otherwise). This is
+          # transparent — the tool still sees its normal path, no env needed.
+          # Source dirs are created by prepare-rw-overlay before these bind; add
+          # a dir there plus a bind here for any other cache worth persisting.
+          systemd.mounts = [
+            {
+              what = "/var/overlay/persist/zoxide";
+              where = "/home/${config.my.username}/.local/share/zoxide";
+              type = "none";
+              options = "bind";
+              requires = [
+                "var-overlay.mount"
+                "prepare-rw-overlay.service"
+              ];
+              after = [
+                "var-overlay.mount"
+                "prepare-rw-overlay.service"
+              ];
+              wantedBy = [ "local-fs.target" ];
+            }
+          ];
 
           # The overlay-upper volume churns (clangd index rebuilds, project
           # resets); QEMU volumes get discard=unmap, so trimming punches holes
