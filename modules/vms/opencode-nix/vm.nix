@@ -68,6 +68,23 @@
             ];
           };
 
+          # Expose the same writable overlay under the literal ~/Projects path.
+          # The host bind-mounts a project into the export at a path that mirrors
+          # ~/Projects/..., so it then appears here at the *exact* absolute path
+          # the project's compile_commands.json / clangd index were generated with.
+          # This must be a bind, not a symlink: clangd canonicalizes paths with
+          # realpath(), and a symlink would resolve away from ~/Projects/... and
+          # break CDB/index matching, whereas a bind keeps the path canonical.
+          # Writable: edits and index writes land in the overlay upper, host
+          # untouched. (Caveat: writing a new clangd index shard into an existing
+          # lower .cache/clangd dir copy-ups that dir to the upper.)
+          fileSystems."/home/${config.my.username}/Projects" = {
+            device = "/shared/read-only";
+            fsType = "none";
+            options = [ "bind" ];
+            depends = [ "/shared/read-only" ];
+          };
+
           # overlayfs needs upper/work to already exist on the volume; the user
           # owns upper so they can create new top-level entries in the merged view.
           # DefaultDependencies=false keeps this a low-level unit: as a normal
