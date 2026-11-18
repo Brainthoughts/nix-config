@@ -1,7 +1,7 @@
 # Important Agent Context
 
 - You are running in a nixos vm. External binaries will not work. Be aware that the writable nix store overlay is only 8GB so huge builds can cause it to fill.
-- If `nix` fails with `Stale file handle` on a `/nix/store` path, it's a stale dentry in that overlay after a host GC, not a config error. Clear it with `echo 3 | sudo tee /proc/sys/vm/drop_caches` (no reboot needed).
+- If something fails with `Stale file handle`, you can usually clear it with `echo 3 | sudo tee /proc/sys/vm/drop_caches`.
 - You have docker permissions. You can use this to run external binaries or tools that are not currently installed.
 - If you would like a tool or package installed because you use it frequently or it is not convenient/available in docker then ask the user.
 - You have passwordless sudo in the vm should something require it. Only use it when needed.
