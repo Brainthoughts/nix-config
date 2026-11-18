@@ -35,28 +35,11 @@
           mv lib $out
         '';
       };
-      # Stable, hash-free path (on the persistent state volume) so the seeded
-      # chromium project.yml can pin clangd without naming a store path that
-      # changes every rebuild; the symlink is refreshed on every activation.
+      # Stable, hash-free path (on the persistent state volume) that the chromium
+      # .serena/project.yml — kept in the workspace overlay, not managed here —
+      # points its clangd ls_path at, so that file never has to name a store path
+      # that changes every rebuild; the symlink is refreshed on every activation.
       chromiumClangd = "${config.xdg.dataHome}/opencode/clangd-chromium";
-      chromiumSrc = "${config.home.homeDirectory}/Projects/ba/chromium-things/chromium/src";
-
-      # Seeded into the checkout when mounted. ignored_paths keeps serena's
-      # per-call file-change poll under its tool timeout; ls_specific_settings
-      # .cpp overrides the global clangd (project settings replace, not merge,
-      # so ls_path must be spelled out here) so only chromium uses clangd 23.
-      chromiumProjectYml = pkgs.writeText "chromium-serena-project.yml" ''
-        project_name: chromium
-        language_servers:
-        - cpp
-        ignored_paths:
-        - third_party/**
-        - native_tests/**
-        - docs/**
-        ls_specific_settings:
-          cpp:
-            ls_path: ${chromiumClangd}/bin/clangd
-      '';
 
       # Serena writes runtime state (project registry, auth secret, logs) into
       # SERENA_HOME and rewrites this file itself, so it is seeded by
@@ -166,16 +149,12 @@
         fi
       '';
 
-      # Keep a stable path pointing at the trunk-matched clangd and, while the
-      # chromium overlay is mounted, seed its .serena/project.yml (the checkout
-      # lives on a manually-mounted overlay, so this only lands when it is
-      # present at activation time; see the serena skill for remounting).
+      # Keep a stable, hash-free path pointing at the trunk-matched clangd. The
+      # chromium .serena/project.yml (and its ignored_paths / clangd pin) live in
+      # the persistent workspace overlay rather than here, and reference this path
+      # for ls_path; see the serena skill for what that file must contain.
       home.activation.chromiumClangd = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
         ln -sfn ${lib.escapeShellArg clangdChromium} ${lib.escapeShellArg chromiumClangd}
-        if [ -d ${lib.escapeShellArg chromiumSrc} ]; then
-          mkdir -p ${lib.escapeShellArg (chromiumSrc + "/.serena")}
-          cp ${chromiumProjectYml} ${lib.escapeShellArg (chromiumSrc + "/.serena/project.yml")}
-        fi
       '';
 
       # nixd needs a nixpkgs provider that isn't based on NIX_PATH (flakes-only system)
