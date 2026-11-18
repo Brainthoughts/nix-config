@@ -40,6 +40,55 @@
             "z    /home/${config.my.username}/.local/share/opencode/mcp-memory 0755  ${config.my.username} users  -"
           ];
 
+          # Writable overlay over the read-only workspace share. The host export
+          # is mounted read-only at /mnt/ro (staging) and merged here by overlayfs
+          # whose upper lives on the persistent /var/overlay volume: projects
+          # bind-mounted into the host share appear under /shared/read-only and are
+          # writable in-guest (serena config, clangd index, small builds) while the
+          # host stays pristine (the share is exported read-only — QEMU -drive
+          # read-only=on — and writes land in the upper). The lower is a single
+          # virtiofs mount, so host bind-mounts added at runtime show up here
+          # transparently. Chromium's CDB deep-path is layered on separately
+          # (see the serena skill).
+          systemd.services.prepare-rw-overlay = {
+            description = "Create workspace overlay upper/work directories";
+            requires = [ "var-overlay.mount" ];
+            after = [ "var-overlay.mount" ];
+            serviceConfig = {
+              type = "oneshot";
+              umask = "022";
+            };
+            script = ''
+              mkdir -p /var/overlay/upper /var/overlay/work
+              chown ${config.my.username}:users /var/overlay/upper
+              chmod 0755 /var/overlay/upper
+              chmod 0700 /var/overlay/work
+            '';
+          };
+
+          systemd.mounts.workspace-ro-overlay = {
+            # Name the unit exactly as the escaped path so path-based
+            # dependencies (RequiresMountsFor=/shared/read-only) resolve to it.
+            name = "shared-read\\x2donly.mount";
+            description = "Writable overlay of the read-only workspace share";
+            what = "overlay";
+            where = "/shared/read-only";
+            type = "overlay";
+            needsDirectories = true;
+            options = "lowerdir=/mnt/ro,upperdir=/var/overlay/upper,workdir=/var/overlay/work";
+            requires = [
+              "mnt-ro.mount"
+              "var-overlay.mount"
+              "prepare-rw-overlay.service"
+            ];
+            after = [
+              "mnt-ro.mount"
+              "var-overlay.mount"
+              "prepare-rw-overlay.service"
+            ];
+            wantedBy = [ "multi-user.target" ];
+          };
+
           microvm = {
             vcpu = 16;
             mem = 1024 * 32; # MB
@@ -50,12 +99,23 @@
                 mountPoint = "/home/${config.my.username}/.local/share/opencode";
                 size = 1024 * 16;
               }
+              # Persistent upper layer for the read-only-workspace overlay below
+              # (autoCreate formats once, so it survives reboots). Holds every
+              # project's per-project writes: serena config, clangd index, small
+              # builds. Keep it roomy; freed space is returned via TRIM.
+              {
+                image = "opencode-rw-overlay.img";
+                mountPoint = "/var/overlay";
+                size = 1024 * 48;
+              }
             ];
 
             shares = [
               {
+                # Staging mount for the read-only workspace; overlaid read-write
+                # onto /shared/read-only below (see systemd.mounts.workspace-ro-overlay).
                 source = "/home/${config.my.username}/opencode/read-only";
-                mountPoint = "/shared/read-only";
+                mountPoint = "/mnt/ro";
                 tag = "workspace-ro";
                 proto = "virtiofs";
                 readOnly = true;
