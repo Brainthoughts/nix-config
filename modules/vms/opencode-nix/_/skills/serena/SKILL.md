@@ -66,20 +66,6 @@ save re-exploration in future sessions.
 - Symbol-level tools work on code files only. Config/markup oddities in Nix
   (e.g. `mkEnableOption` description strings) are better handled with
   ast-grep or plain search.
-- **Chromium — open it at the literal `~/Projects` path.** The checkout is
-  bind-mounted at the exact absolute path its `compile_commands.json` and clangd
-  index were built with: `~/Projects/ba/chromium-things/chromium/src`. That is
-  the writable workspace overlay reached via a **bind, not a symlink** — a
-  symlink would make clangd's `realpath()` canonicalization resolve away from the
-  literal path and drop all compile flags. Work under `~/Projects/...`, never a
-  `/shared/...` path, or clangd finds no compile command.
-- **Chromium uses its own clangd.** Stock clangd cannot parse chromium's
-  trunk-generated CDB (trunk-only flags trip `-Werror`). The checkout's
-  `.serena/project.yml` pins a trunk-matched clangd via
-  `ls_specific_settings.cpp.ls_path` → `~/.local/share/opencode/clangd-chromium`
-  (project settings replace the global `cpp` block, so only chromium is
-  affected). Verify with `~/.local/share/opencode/clangd-chromium/bin/clangd
-  --version` (clang 23); it is created by `home.activation` on every switch.
 - **Huge repos (chromium): keep calls scoped.** `find_symbol` without
   `relative_path` runs a workspace-wide query that can push clangd >10 G — always
   pass `relative_path`. Serena stats every *tracked* file at startup and before
