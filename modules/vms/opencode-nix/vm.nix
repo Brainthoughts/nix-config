@@ -89,6 +89,13 @@
             wantedBy = [ "multi-user.target" ];
           };
 
+          # The overlay-upper volume churns (clangd index rebuilds, project
+          # resets); QEMU volumes get discard=unmap, so trimming punches holes
+          # back into the raw image. Batched fstrim (vs online discard=async)
+          # is gentler on the host's btrfs; daily keeps the 48G image from
+          # holding onto freed space between resets.
+          services.fstrim.interval = "daily";
+
           microvm = {
             vcpu = 16;
             mem = 1024 * 32; # MB
