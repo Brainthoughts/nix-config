@@ -36,8 +36,8 @@
             "d    /home/${config.my.username}/.local/share/opencode 0755  ${config.my.username} users  -"
             "z    /home/${config.my.username}/.local/share/opencode 0755  ${config.my.username} users  -"
 
-            "d    /home/${config.my.username}/.local/share/opencode/mcp-memory 0755  ${config.my.username} users  -"
-            "z    /home/${config.my.username}/.local/share/opencode/mcp-memory 0755  ${config.my.username} users  -"
+            # "d    /home/${config.my.username}/.local/share/opencode/mcp-memory 0755  ${config.my.username} users  -"
+            # "z    /home/${config.my.username}/.local/share/opencode/mcp-memory 0755  ${config.my.username} users  -"
           ];
 
           # Writable overlay over the read-only workspace share. The host export
@@ -50,10 +50,31 @@
           # virtiofs mount, so host bind-mounts added at runtime show up here
           # transparently. Chromium's CDB deep-path is layered on separately
           # (see the serena skill).
+          #
+          # fileSystems (not systemd.mounts): the mountpoint is auto-created and
+          # `depends` orders it after the staging share and the upper volume by
+          # path, instead of hardcoding microvm's generated unit names. This is
+          # how microvm builds its own store overlay.
+          fileSystems."/shared/read-only" = {
+            fsType = "overlay";
+            overlay = {
+              lowerdir = [ "/mnt/ro" ];
+              upperdir = "/var/overlay/upper";
+              workdir = "/var/overlay/work";
+            };
+            depends = [
+              "/mnt/ro"
+              "/var/overlay"
+            ];
+          };
+
+          # overlayfs needs upper/work to already exist on the volume; the user
+          # owns upper so they can create new top-level entries in the merged view.
           systemd.services.prepare-rw-overlay = {
             description = "Create workspace overlay upper/work directories";
-            requires = [ "var-overlay.mount" ];
-            after = [ "var-overlay.mount" ];
+            unitConfig.RequiresMountsFor = "/var/overlay";
+            requiredBy = [ "shared-read\\x2donly.mount" ];
+            before = [ "shared-read\\x2donly.mount" ];
             serviceConfig = {
               type = "oneshot";
               umask = "022";
@@ -64,29 +85,6 @@
               chmod 0755 /var/overlay/upper
               chmod 0700 /var/overlay/work
             '';
-          };
-
-          systemd.mounts.workspace-ro-overlay = {
-            # Name the unit exactly as the escaped path so path-based
-            # dependencies (RequiresMountsFor=/shared/read-only) resolve to it.
-            name = "shared-read\\x2donly.mount";
-            description = "Writable overlay of the read-only workspace share";
-            what = "overlay";
-            where = "/shared/read-only";
-            type = "overlay";
-            needsDirectories = true;
-            options = "lowerdir=/mnt/ro,upperdir=/var/overlay/upper,workdir=/var/overlay/work";
-            requires = [
-              "mnt-ro.mount"
-              "var-overlay.mount"
-              "prepare-rw-overlay.service"
-            ];
-            after = [
-              "mnt-ro.mount"
-              "var-overlay.mount"
-              "prepare-rw-overlay.service"
-            ];
-            wantedBy = [ "multi-user.target" ];
           };
 
           # The overlay-upper volume churns (clangd index rebuilds, project
