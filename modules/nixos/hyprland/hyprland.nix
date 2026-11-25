@@ -1,4 +1,4 @@
-{ self, pkgs, ... }:
+{ self, ... }:
 {
 
   flake.nixosModules.hyprland =
@@ -67,6 +67,29 @@
         colorScheme = "dark";
         # silence legacy warnings
         gtk4.theme = null;
+      };
+
+      qt = {
+        enable = true;
+        platformTheme.name = "qtct";
+
+        qt5ctSettings = {
+          Appearance = {
+            style = "Fusion";
+            custom_palette = true;
+            color_scheme_path = "${pkgs.libsForQt5.qt5ct}/share/qt5ct/colors/darker.conf";
+            standard_dialogs = "xdgdesktopportal";
+          };
+        };
+
+        qt6ctSettings = {
+          Appearance = {
+            style = "Fusion";
+            custom_palette = true;
+            color_scheme_path = "${pkgs.kdePackages.qt6ct}/share/qt6ct/colors/darker.conf";
+            standard_dialogs = "xdgdesktopportal";
+          };
+        };
       };
 
       programs = {
