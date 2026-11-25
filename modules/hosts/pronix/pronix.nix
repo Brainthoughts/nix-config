@@ -30,6 +30,7 @@ in
         self.nixosModules.regreet
         self.nixosModules.hyprland
         self.nixosModules."1password"
+        self.nixosModules.wireshark
       ];
 
       home-manager.users.${config.my.username} = self.homeModules.pronix;
