@@ -54,6 +54,13 @@
       "limit": {
         "context": 262144
       },
+      "body": {
+        "chat_template_kwargs": {
+          "enable_thinking": true,
+          "preserve_thinking": true
+        },
+        "reasoning_effort": "xhigh"
+      },
       "variants": [
         {
           "id": "off",
@@ -81,16 +88,6 @@
               "preserve_thinking": true
             },
             "reasoning_effort": "medium"
-          }
-        },
-        {
-          "id": "xhigh",
-          "body": {
-            "chat_template_kwargs": {
-              "enable_thinking": true,
-              "preserve_thinking": true
-            },
-            "reasoning_effort": "xhigh"
           }
         }
       ]
