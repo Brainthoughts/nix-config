@@ -9,8 +9,6 @@
     {
       imports = [ self.nixosModules.bare ];
 
-      security.sudo.wheelNeedsPassword = false;
-
       services.openssh = {
         enable = true;
         hostKeys = [
@@ -28,6 +26,11 @@
           "size=8G"
         ];
         neededForBoot = true;
+      };
+
+      zramSwap = {
+        enable = true;
+        memoryPercent = 100;
       };
 
       microvm = {
