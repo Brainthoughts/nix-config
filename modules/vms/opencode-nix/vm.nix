@@ -35,9 +35,6 @@
 
             "d    /home/${config.my.username}/.local/share/opencode 0755  ${config.my.username} users  -"
             "z    /home/${config.my.username}/.local/share/opencode 0755  ${config.my.username} users  -"
-
-            # "d    /home/${config.my.username}/.local/share/opencode/mcp-memory 0755  ${config.my.username} users  -"
-            # "z    /home/${config.my.username}/.local/share/opencode/mcp-memory 0755  ${config.my.username} users  -"
           ];
 
           # Writable overlay over the read-only workspace share. The host export

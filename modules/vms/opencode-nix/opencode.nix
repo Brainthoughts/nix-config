@@ -41,6 +41,8 @@
       # that changes every rebuild; the symlink is refreshed on every activation.
       chromiumClangd = "${config.xdg.dataHome}/opencode/clangd-chromium";
 
+      javaPackage = pkgs.jdk25;
+
       # Serena writes runtime state (project registry, auth secret, logs) into
       # SERENA_HOME and rewrites this file itself, so it is seeded by
       # home.activation rather than managed as a symlinked xdg file.
@@ -82,8 +84,8 @@
           # start their application on anything older.
           java:
             jdtls_path: ${config.xdg.dataHome}/opencode/jdtls
-            lombok_path: ${pkgs.lombok}
-            java_home: ${pkgs.jdk25}
+            lombok_path: ${pkgs.lombok.override { jdk = javaPackage; }}/share/java/lombok.jar
+            java_home: ${javaPackage}
         # lua-language-server resolves via PATH (home.packages), not ls_path
         trusted_project_path_patterns:
           - ${config.home.homeDirectory}
@@ -106,7 +108,6 @@
       home.packages = [
         pkgs.ast-grep
         pkgs.ast-grep-mcp
-        # pkgs.mcp-server-memory
         # Serena's lua support finds its language server via PATH lookup
         pkgs.lua-language-server
         serena
@@ -186,12 +187,6 @@
             env.AST_GREP_PATH = lib.getExe pkgs.ast-grep;
           };
 
-          # memory = {
-          #   command = lib.getExe pkgs.mcp-server-memory;
-          #   # lives on the persistent opencode state volume
-          #   env.MEMORY_FILE_PATH = "${config.xdg.dataHome}/opencode/mcp-memory/knowledge-graph.json";
-          # };
-
           nixos = {
             command = lib.getExe pkgs.mcp-nixos;
           };
@@ -229,7 +224,6 @@
         };
         skills = {
           ast-grep = ./_/skills/ast-grep;
-          # memory = ./_/skills/memory;
           serena = ./_/skills/serena;
         };
       };

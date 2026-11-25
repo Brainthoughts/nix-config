@@ -6,19 +6,11 @@
       inherit (final) lib python3Packages;
     in
     {
-      # Lombok annotation-processing jar, needed by Serena's Java language
-      # server (upstream JDTLS mode requires a lombok javaagent path). Not
-      # packaged standalone in nixpkgs; it is a single self-contained jar.
-      lombok = final.fetchurl {
-        url = "https://projectlombok.org/downloads/lombok-1.18.48.jar";
-        hash = "sha256-hUd6RlXrssB0qQmc+3Sb5FREn+5WTUKCYQ3xuF98UIs=";
-      };
-
       # MCP server exposing ast-grep's structural code search tools
       # (https://github.com/ast-grep/ast-grep-mcp). Not packaged in nixpkgs,
       # so build the upstream Python server here. It shells out to the
       # ast-grep CLI, which callers pass via AST_GREP_PATH (pkgs.ast-grep).
-      ast-grep-mcp = python3Packages.buildPythonApplication rec {
+      ast-grep-mcp = python3Packages.buildPythonApplication {
         pname = "ast-grep-mcp";
         version = "unstable-2026-10-28";
         format = "pyproject";
@@ -56,9 +48,6 @@
           pydantic
           pyyaml
         ];
-
-        # tests use pytest-cov, which is heavier than the checks are worth here
-        doCheck = false;
 
         meta = {
           description = "MCP server providing ast-grep structural code search tools";
